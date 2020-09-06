@@ -22,23 +22,6 @@ const commentSchema = new Schema({
         timestamps: true
 });
 
-const imageSchema = new Schema({
-    major: {
-        type: String,
-        required: true,
-    },
-    firstMinor: {
-        type: String,
-        required: true
-    },
-    secondMinor: {
-        type: String,
-        required: true
-    },
-}, { 
-        timestamps: true
-});
-
 const itemSchema = new Schema({
     name: {
         type: String,
@@ -55,7 +38,7 @@ const itemSchema = new Schema({
         required: true
     },
     subCategory: {
-        type: String,
+        type: [String],
         required: true
     },
     favoriteCount: {
@@ -99,7 +82,10 @@ const itemSchema = new Schema({
         ref: 'User'
     },
     comments: [commentSchema],
-    images: [imageSchema]
+    images: {
+        type: [String],
+        required: true
+    }
 }, {
     timestamps: true
 });
