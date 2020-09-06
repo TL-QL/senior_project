@@ -32,7 +32,7 @@ var User = new Schema({
         default: ''
     },
     credit: {
-        type: Double,
+        type: Number,
         min: 0.0,
         max: 10.0
     },
