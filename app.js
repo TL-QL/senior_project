@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const port = 5000; //Node.js uses port 5000 for development server
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,6 +37,13 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+/**
+ * Should be listening to port 5000, will tell us if not
+ */
+app.listen(port, () => {
+  console.log(`Development server is running on port: ${port}`);
 });
 
 module.exports = app;
