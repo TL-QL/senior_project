@@ -61,6 +61,26 @@ const itemSchema = new Schema({
         type: String,
         required: true
     },
+    sizeInfo: {
+        type: String,
+        default: ''
+    },
+    detachable: {
+        type: String,
+        default: ''
+    },
+    careIns: {
+        type: String,
+        default: ''
+    },
+    productInsurance: {
+        type: String,
+        default: ''
+    },
+    damage: {
+        type: String,
+        default: ''
+    },
     sellerInfo: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
