@@ -5,6 +5,7 @@ import About from './AboutComponent';
 import Contact from './ContactComponent';
 import ProfileSeller from './ProfileSellerComponent';
 import ProfileBuyer from './ProfileBuyerComponent';
+import Search from './SearchComponent';
 import Footer from './FooterComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 
@@ -20,6 +21,7 @@ class Main extends Component {
                     <Route exact path="/contactus" component={Contact}/>
                     <Route exact path="/profileseller" component={ProfileSeller}/>
                     <Route exact path="/profilebuyer" component={ProfileBuyer}/>
+                    <Route exact path="/search" component={Search}/>
                     <Redirect to="/home" />
                 </Switch>
                 <Footer />

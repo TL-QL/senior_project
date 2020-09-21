@@ -240,7 +240,7 @@ input[type=checkbox].radio-custom-pets:checked ~ label:before {
 
 /* Home page*/
 .search-bar {
-  width: 100%;
+  width: 110%;
   box-sizing: border-box;
   border: 2px solid #D7D7D7;
   border-radius: 5px;
@@ -274,7 +274,7 @@ input[type=checkbox].radio-custom-pets:checked ~ label:before {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   border: 0;
   font-family: Arial Black;
-  margin-top: 19px;
+  margin-top: 20px;
   width: 100%;
 }
 
