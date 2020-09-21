@@ -46,6 +46,9 @@ var User = new Schema({
         type: String,
         default: ''
     },
+    interests: {
+        type: [String]
+    },
     seller:   {
         type: Boolean,
         default: false
