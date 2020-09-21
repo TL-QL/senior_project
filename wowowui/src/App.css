@@ -11,15 +11,18 @@
 }
 
 .footer{
-  background-color: #D1C4E9;
+  background-color:rgba(132,0,255,0.29);
   margin:0px auto;
   padding: 20px 0px 20px 0px;
+  font-family: Arial Black;
+  color: black;
 }
 .jumbotron {
   padding:70px 30px 70px 30px;
   margin:0px auto;
-  background: #9575CD ;
+  background:rgba(132,0,255,0.29);
   color:floralwhite;
+  font-family: Arial Black;
 }
 
 address{
@@ -28,8 +31,10 @@ address{
   color:#0f0f0f;
 }
 
-.navbar-dark {
-  background-color: #512DA8;
+.navbar-dark{
+  background: rgba(132,0,255,0.5);
+  font-family: Arial Black;
+  color: white;
 }
 
 .button-mr{
