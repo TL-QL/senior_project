@@ -98,7 +98,7 @@ address{
   width: 100px;
 }
 
-
+/* profile for buyer */
 .radio-border {
   border: 1px solid black;
   border-radius: 5px;
@@ -232,6 +232,49 @@ input[type=checkbox].radio-custom-pets ~ label:before {
 input[type=checkbox].radio-custom-pets:checked ~ label:before {
   content: "\f1b0";
 }
+
+/* Home page*/
+input[type=text].search-bar {
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #D7D7D7;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  width: 80%;
+  margin-top: 18px;
+  padding: 10px; 
+  text-align: left; 
+}
+
+.input-container {
+  width: 100%; 
+  margin-bottom: 10px;
+}
+
+.icon {
+  color:#AAAAAA;
+  padding: 10px; 
+  min-width: 40px; 
+}
+
+.searchButton {
+  margin-left: 5px;
+  width: 15%;
+  height: 42px;
+  border-radius: 5px;
+  background-color: #8400FF;
+  color: white;
+  opacity: 0.57;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  border: 0;
+  font-family: Arial Black;
+}
+
+
 
 
 
