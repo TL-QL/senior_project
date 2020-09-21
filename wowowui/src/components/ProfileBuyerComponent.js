@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
-class ProfileSeller extends Component {
+class ProfileBuyer extends Component {
 
     constructor(props){
         super(props);
@@ -13,11 +14,13 @@ class ProfileSeller extends Component {
             nickname: '',
             telnum:'',
             email: '',
-            credit:'',
             address:'',
             city:'',
             theState:'',
-            zipcode:''
+            zipcode:'',
+            transportation:'',
+            care:'',
+            interests:''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -140,12 +143,6 @@ class ProfileSeller extends Component {
                                         <FormFeedback>{errors.email}</FormFeedback>
                                     </FormGroup>
                                 </Col>
-                                <Col md={6}>
-                                    <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="credit" className="form-style-label">Credit Score</Label>
-                                        <Input type="text" id="credit" name="credit" className="form-style-input" placeholder="Credit Score" value={this.state.credit} valid={errors.credit === ''} invalid={errors.credit !== ''} onChange={this.handleInputChange}/>
-                                    </FormGroup>
-                                </Col>
                             </Row>
                             <Row>
                                 <Col md={5}>
@@ -174,8 +171,103 @@ class ProfileSeller extends Component {
                                     </FormGroup>
                                 </Col>
                             </Row>
+                            <div className="col-12">
+                                <h3>Preferences</h3>
+                                <hr className="seperation" />
+                            </div>
+                            <div className="col-12">
+                                <h6><b>What kind of transportation do you prefer?</b></h6>
+                            </div>
+                            <FormGroup row>
+                                <div className="col-2 offset-1 radio-border">
+                                    <center>
+                                        <input className="radio-custom radio-custom-drive" type="radio" id="Drive" name="transportation" value="Drive" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Drive">Drive</label>
+                                    </center>
+                                </div>
+                                <div className="col-2 radio-border" style={{marginLeft: "20px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-transit" type="radio" id="Transit" name="transportation" value="Transit" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Transit">Transit</label>
+                                    </center>
+                                </div>
+                                <div className="col-2 radio-border" style={{marginLeft: "20px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-bike" type="radio" id="Bike" name="transportation" value="Bike" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Bike">Bike</label>
+                                    </center>
+                                </div>
+                                <div className="col-2 radio-border" style={{marginLeft: "20px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-walk" type="radio" id="Walk" name="transportation" value="Walk" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Walk">Walk</label>
+                                    </center>
+                                </div>
+                            </FormGroup>
+                            <div className="col-12">
+                                <h6><b>You care more about</b></h6>
+                            </div>
+                            <FormGroup row>
+                                <div className="col-4 offset-1 radio-border">
+                                    <center>
+                                        <input className="radio-custom radio-custom-bingo" type="radio" id="Price" name="care" value="Price" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Price">Having the cheapest price</label>
+                                    </center>
+                                </div>
+                                <div className="col-4 radio-border" style={{marginLeft: "30px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-bingo" type="radio" id="Feature" name="care" value="Feature" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Feature">Getting all my features</label>
+                                    </center>
+                                </div>
+                            </FormGroup>
+                            <div className="col-12">
+                                <h6><b>What kinds of goods are you interested in?</b></h6>
+                            </div>
+                            <FormGroup>
+                                <Row>
+                                <div className="col-2 offset-1 radio-border">
+                                    <center>
+                                        <input className="radio-custom radio-custom-home" type="checkbox" id="Home" name="interests" value="Home" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Home">Home</label>
+                                    </center>
+                                </div>
+                                <div className="col-2 radio-border" style={{marginLeft: "10px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-books" type="checkbox" id="Books" name="interests" value="Books" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Books">Books</label>
+                                    </center>
+                                </div>
+                                <div className="col-2 radio-border" style={{marginLeft: "10px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-stationery" type="checkbox" id="Stationery" name="interests" value="Stationery" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Stationery">Stationery</label>
+                                    </center>
+                                </div>
+                                </Row>
+                                <Row>
+                                <div className="col-2 offset-1 radio-border" style={{marginTop: "5px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-electronics" type="checkbox" id="Electronics" name="interests" value="Electronics" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Electronics">Electronics</label>
+                                    </center>
+                                </div>
+                                <div className="col-2 radio-border" style={{marginLeft: "10px", marginTop: "5px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-motors" type="checkbox" id="Motors" name="interests" value="Motors" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Motors">Motors</label>
+                                    </center>
+                                </div>
+                                <div className="col-2 radio-border" style={{marginLeft: "10px", marginTop: "5px"}}>
+                                    <center>
+                                        <input className="radio-custom radio-custom-pets" type="checkbox" id="Pets" name="interests" value="Pets" onChange={this.handleInputChange}/> 
+                                        <label htmlFor="Pets">Pets</label>
+                                    </center>
+                                </div>
+                                </Row>
+                            </FormGroup>
                             <Row>
-                                <FormGroup>
+                                <FormGroup style={{marginTop: "20px"}}>
                                     <Button type="submit" className="button-width button-mr" color="primary">
                                         Save
                                     </Button>
@@ -192,4 +284,4 @@ class ProfileSeller extends Component {
     }
 }
 
-export default ProfileSeller;
+export default ProfileBuyer;

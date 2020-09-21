@@ -32,7 +32,7 @@ address{
   background-color: #512DA8;
 }
 
-.button-header {
+.button-mr{
   margin-right: 8px;
 }
 
@@ -51,3 +51,188 @@ address{
 .seperation {
   color: #d7d7d7;
 }
+
+.form-style{
+	max-width:400px;
+	margin:50px auto;
+	background:#fff;
+	border-radius:2px;
+	padding:20px;
+}
+
+.form-style-label{
+	display: block;
+	float: left;
+	margin-top: -19px;
+	background: #FFFFFF;
+	height: 14px;
+	padding: 2px 5px 2px 5px;
+	color: #B9B9B9;
+	font-size: 12px;
+
+}
+
+.form-style-form-group{
+	display: block;
+	padding: 9px;
+	border:1px solid #DDDDDD;
+	margin-bottom: 30px;
+	border-radius: 3px;
+}
+
+.form-style-input {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	display: block;
+	outline: none;
+	border: none;
+	height: 25px;
+	line-height: 25px;
+	font-size: 16px;
+	padding: 0;
+}
+
+.button-width {
+  width: 100px;
+}
+
+
+.radio-border {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+input[type=radio].radio-custom{
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+input[type=radio].radio-custom ~ label:before{
+    font-family: FontAwesome;
+    display: inline-block;
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}
+
+input[type=radio].radio-custom:checked ~ label:before {
+    font-size: 1.2em;
+    color: #8400FF;
+    letter-spacing: 5px;
+}
+
+input[type=radio].radio-custom-drive ~ label:before {
+  content: "\f1b9";
+}
+input[type=radio].radio-custom-drive:checked ~ label:before {
+  content: "\f1b9";
+}
+
+input[type=radio].radio-custom-transit ~ label:before{
+  content: "\f207";
+}
+input[type=radio].radio-custom-transit:checked ~ label:before{
+  content: "\f207";
+}
+
+input[type=radio].radio-custom-bike ~ label:before{
+  content: "\f206";
+}
+input[type=radio].radio-custom-bike:checked ~ label:before{
+  content: "\f206";
+}
+
+input[type=radio].radio-custom-walk ~ label:before{
+  content: "\f1ae";
+}
+input[type=radio].radio-custom-walk:checked ~ label:before{
+  content: "\f1ae";
+}
+
+input[type=radio].radio-custom-bingo ~ label:before {
+  content: "\f00c";
+}
+input[type=radio].radio-custom-bingo:checked ~ label:before {
+  content: "\f00c";
+}
+
+input[type=checkbox].radio-custom{
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+input[type=checkbox].radio-custom ~ label:before{
+  font-family: FontAwesome;
+  display: inline-block;
+  letter-spacing: 10px;
+  font-size: 1.2em;
+  color: #535353;
+  width: 1.4em;
+}
+
+input[type=checkbox].radio-custom:checked ~ label:before {
+  font-size: 1.2em;
+  color: #8400FF;
+  letter-spacing: 5px;
+}
+
+input[type=checkbox].radio-custom-home ~ label:before {
+  content: "\f015";
+}
+input[type=checkbox].radio-custom-home:checked ~ label:before {
+  content: "\f015";
+}
+
+input[type=checkbox].radio-custom-books ~ label:before {
+  content: "\f02d";
+}
+input[type=checkbox].radio-custom-books:checked ~ label:before {
+  content: "\f02d";
+}
+
+input[type=checkbox].radio-custom-stationery ~ label:before {
+  content: "\f040";
+}
+input[type=checkbox].radio-custom-stationery:checked ~ label:before {
+  content: "\f040";
+}
+
+input[type=checkbox].radio-custom-electronics ~ label:before {
+  content: "\f109";
+}
+input[type=checkbox].radio-custom-electronics:checked ~ label:before {
+  content: "\f109";
+}
+
+input[type=checkbox].radio-custom-motors ~ label:before {
+  content: "\f1b9";
+}
+input[type=checkbox].radio-custom-motors:checked ~ label:before {
+  content: "\f1b9";
+}
+
+input[type=checkbox].radio-custom-pets ~ label:before {
+  content: "\f1b0";
+}
+input[type=checkbox].radio-custom-pets:checked ~ label:before {
+  content: "\f1b0";
+}
+
+
+
+

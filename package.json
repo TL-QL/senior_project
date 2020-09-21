@@ -10,6 +10,7 @@
     "dev": "concurrently \"npm run server\" \"cd wowowui && npm start\""
   },
   "dependencies": {
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -20,7 +21,7 @@
     "cross-fetch": "2.1.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "font-awesome": "4.7.0",
+    "font-awesome": "^4.7.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
@@ -28,6 +29,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-popper": "0.9.2",
+    "react-radio-buttons": "^1.2.2",
     "react-redux": "5.0.7",
     "react-redux-form": "1.16.8",
     "react-router-dom": "4.2.2",
