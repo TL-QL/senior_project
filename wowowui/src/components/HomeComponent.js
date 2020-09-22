@@ -56,7 +56,7 @@ class Home extends Component{
                         <Row>
                             <Col md={2}>
                                 <FormGroup style={{marginLeft:"30px"}}>
-                                    <select name="category">
+                                    <select name="category" className="select-list">
                                         <option selected disabled>Category</option>
                                         <option value ="Home">Home</option>
                                         <option value ="Books">Books</option>
@@ -69,7 +69,7 @@ class Home extends Component{
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <select name="condition">
+                                    <select name="condition" className="select-list">
                                         <option selected disabled>Condition</option>
                                         <option value ="99">Package has been opened but not used</option>
                                         <option value ="90">Slightly used or color faded</option>
@@ -80,8 +80,8 @@ class Home extends Component{
                             </Col>
                             <Col md={2} className="mr-auto">
                                 <FormGroup>
-                                    <select name="delivery">
-                                        <option selected disabled>Delivery</option>
+                                    <select name="delivery" className="select-list">
+                                        <option selected disabled>Delivery Option</option>
                                         <option value ="pickup">Pick up</option>
                                         <option value ="delivery">Delivery</option>
                                         <option value ="both">Both</option>
@@ -93,7 +93,7 @@ class Home extends Component{
                             </Col>
                             <Col md={2} style={{marginLeft:"-100px", marginRight:"-10px"}}>
                                 <FormGroup>
-                                    <select name="sort">
+                                    <select name="sort" className="select-list">
                                         <option value ="none">Our Choice</option>
                                         <option value ="price-high">Price High to Low</option>
                                         <option value ="price-low">Price Low to High</option>

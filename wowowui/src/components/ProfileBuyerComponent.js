@@ -225,19 +225,19 @@ class ProfileBuyer extends Component {
                             </div>
                             <FormGroup>
                                 <Row>
-                                <div className="col-2 offset-1 radio-border">
+                                <div className="col-12 col-sm-3 col-md-2 offset-1 radio-border">
                                     <center>
                                         <input className="radio-custom radio-custom-home" type="checkbox" id="Home" name="interests" value="Home" onChange={this.handleInputChange}/> 
                                         <label htmlFor="Home">Home</label>
                                     </center>
                                 </div>
-                                <div className="col-2 radio-border" style={{marginLeft: "10px"}}>
+                                <div className="col-12 col-sm-3 col-md-2 offset-1 radio-border">
                                     <center>
                                         <input className="radio-custom radio-custom-books" type="checkbox" id="Books" name="interests" value="Books" onChange={this.handleInputChange}/> 
                                         <label htmlFor="Books">Books</label>
                                     </center>
                                 </div>
-                                <div className="col-2 radio-border" style={{marginLeft: "10px"}}>
+                                <div className="col-12 col-sm-3 col-md-2 offset-1 radio-border">
                                     <center>
                                         <input className="radio-custom radio-custom-stationery" type="checkbox" id="Stationery" name="interests" value="Stationery" onChange={this.handleInputChange}/> 
                                         <label htmlFor="Stationery">Stationery</label>
@@ -245,19 +245,19 @@ class ProfileBuyer extends Component {
                                 </div>
                                 </Row>
                                 <Row>
-                                <div className="col-2 offset-1 radio-border" style={{marginTop: "5px"}}>
+                                <div className="col-12 col-sm-3 col-md-2 offset-1 radio-border" style={{marginTop: "5px"}}>
                                     <center>
                                         <input className="radio-custom radio-custom-electronics" type="checkbox" id="Electronics" name="interests" value="Electronics" onChange={this.handleInputChange}/> 
                                         <label htmlFor="Electronics">Electronics</label>
                                     </center>
                                 </div>
-                                <div className="col-2 radio-border" style={{marginLeft: "10px", marginTop: "5px"}}>
+                                <div className="col-12 col-sm-3 col-md-2 offset-1 radio-border" style={{marginTop: "5px"}}>
                                     <center>
                                         <input className="radio-custom radio-custom-motors" type="checkbox" id="Motors" name="interests" value="Motors" onChange={this.handleInputChange}/> 
                                         <label htmlFor="Motors">Motors</label>
                                     </center>
                                 </div>
-                                <div className="col-2 radio-border" style={{marginLeft: "10px", marginTop: "5px"}}>
+                                <div className="col-12 col-sm-3 col-md-2 offset-1 radio-border" style={{marginTop: "5px"}}>
                                     <center>
                                         <input className="radio-custom radio-custom-pets" type="checkbox" id="Pets" name="interests" value="Pets" onChange={this.handleInputChange}/> 
                                         <label htmlFor="Pets">Pets</label>

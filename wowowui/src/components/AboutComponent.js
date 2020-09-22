@@ -25,7 +25,7 @@ function About(props){
                         <CardHeader className="bg-primary text-white"><b>Our Team</b></CardHeader>
                         <CardBody>
                             <dl className="row p-1">
-                                <dt className="col-7">Full Stack Web Designer</dt>
+                                <dt className="col-7">Full Stack Web Developer</dt>
                                 <dd className="col-5">Qiwen Luo</dd>
                                 <dt className="col-7">Recommendation System Designer</dt>
                                 <dd className="col-5">Peifeng Hu</dd>
