@@ -1,4 +1,10 @@
-# Senior_project
+# Senior Project
+
+## Team members
+- Qiwen Luo: Full Stack Web Developer
+- Peifeng Hu: Recommendation System Designer
+- Lina Dong & Ruyuan Zuo: Credit Model Designers
+- Tianxin Jiang: Chatbot Designer
 
 ## Folders
 - Folder models stores all DB collections' schema 
