@@ -261,7 +261,8 @@ input[type=checkbox].radio-custom-pets:checked ~ label:before {
 .icon {
   color:#AAAAAA; 
   margin-top:35px;
-  margin-right: 10px
+  position: absolute;
+  margin-left: 10px;
 }
 
 .searchButton {

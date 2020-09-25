@@ -99,27 +99,24 @@ class Contact extends Component {
                     <div className="col-12">
                     <h3>Location Information</h3>
                     </div>
-                    <div className="col-12 col-sm-4 offset-sm-1">
+                    <div className="col-12 col-md-4 offset-sm-1">
                             <h5>Our Address</h5>
                             <address>
-                            10900 Euclid Ave<br />
-		                    Cleveland, OH 44106<br />
-		                    United States<br />
-                            <i className="fa fa-phone"></i>: +852 1234 5678<br />
-                            <i className="fa fa-fax"></i>: +852 8765 4321<br />
-                            <i className="fa fa-envelope"></i>: <a href="mailto:confusion@food.net">confusion@food.net</a>
+                                10900 Euclid Ave<br />
+                                Cleveland, OH 44106<br />
+                                United States<br />
+                                <br />
+                                <div className="btn-group" role="group">
+                                    <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
+                                    <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
+                                    <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
+                                </div>
+                                <br />
                             </address>
                     </div>
-                    <div className="col-12 col-sm-6 offset-sm-1">
+                    <div className="col-12 col-md-6 offset-sm-1">
                         <h5>Our Location</h5>
-                        <img src={baseUrl+'/images/cwru.jpg'} alt="CWRU" className="col-12" />
-                    </div>
-                    <div className="col-12 col-sm-11 offset-sm-1">
-                        <div className="btn-group" role="group">
-                            <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
-                            <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
-                            <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
-                        </div>
+                        <img src={baseUrl+'/images/cwru.jpg'} alt="CWRU" style={{width:"80%"}}/>
                     </div>
                 </div>
 

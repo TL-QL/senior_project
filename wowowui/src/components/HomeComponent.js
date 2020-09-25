@@ -41,21 +41,21 @@ class Home extends Component{
                 <div className="col-12">
                     <Form onSubmit={this.handleSubmit}>
                         <Row>
-                            <i className="fa fa-search fa-lg icon"></i>
-                            <Col md={9} className="mr-auto">
+                            <Col sm={12} md={9} className="mr-auto">
+                                <i className="fa fa-search fa-lg icon"></i>
                                 <FormGroup>
                                     <Input type="text" className="search-bar" name="search" placeholder="Search.." />
                                 </FormGroup>
                             </Col>
-                            <Col md={2}>
+                            <Col sm={6} md={2}>
                                 <FormGroup>
                                     <Button type="submit" className="searchButton"><b><center>Search</center></b></Button>
                                 </FormGroup>
                             </Col>
                         </Row>
                         <Row>
-                            <Col md={2}>
-                                <FormGroup style={{marginLeft:"30px"}}>
+                            <Col sm={12} md={2}>
+                                <FormGroup>
                                     <select name="category" className="select-list">
                                         <option selected disabled>Category</option>
                                         <option value ="Home">Home</option>
@@ -67,7 +67,7 @@ class Home extends Component{
                                     </select> 
                                 </FormGroup>
                             </Col>
-                            <Col md={4}>
+                            <Col sm= {12} md={4}>
                                 <FormGroup>
                                     <select name="condition" className="select-list">
                                         <option selected disabled>Condition</option>
@@ -78,7 +78,7 @@ class Home extends Component{
                                     </select> 
                                 </FormGroup>
                             </Col>
-                            <Col md={2} className="mr-auto">
+                            <Col sm={12} md={2} className="mr-auto">
                                 <FormGroup>
                                     <select name="delivery" className="select-list">
                                         <option selected disabled>Delivery Option</option>
@@ -88,10 +88,8 @@ class Home extends Component{
                                     </select> 
                                 </FormGroup>
                             </Col>
-                            <Col md={2}>
-                                <p>Sorted by</p>
-                            </Col>
-                            <Col md={2} style={{marginLeft:"-100px", marginRight:"-10px"}}>
+                            <p style={{marginLeft:"15px"}}>Sorted by</p>
+                            <Col xs={12} sm={6} md={2}>
                                 <FormGroup>
                                     <select name="sort" className="select-list">
                                         <option value ="none">Our Choice</option>
