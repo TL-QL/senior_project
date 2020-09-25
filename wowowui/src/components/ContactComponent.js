@@ -114,7 +114,7 @@ class Contact extends Component {
                                 <br />
                             </address>
                     </div>
-                    <div className="col-12 col-md-6 offset-sm-1">
+                    <div className="col-12 col-sm-6 offset-sm-1">
                         <h5>Our Location</h5>
                         <img src={baseUrl+'/images/cwru.jpg'} alt="CWRU" style={{width:"80%"}}/>
                     </div>

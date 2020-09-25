@@ -116,11 +116,11 @@ class Header extends Component{
                     <ModalBody>
                         <div className="row">
                             <div class="col-12 col-sm-1"></div>
-                            <form action="home.html" className= "col-12 col-sm-4">
+                            <form action="/signupbuyer" className= "col-12 col-sm-4">
                                 <Button type="submit" value="submit" color="primary">Sign up as buyer</Button>
                             </form>
                                 <div class="col-12 col-sm-2"></div>
-                            <form action="home.html" className= "col-12 col-sm-4">
+                            <form action="/signupseller" className= "col-12 col-sm-4">
                                 <Button type="submit" value="submit" color="primary">Sign up as seller</Button>
                             </form>
                             <div class="col-12 col-sm-1"></div>
