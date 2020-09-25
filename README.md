@@ -26,3 +26,6 @@
 - /signupseller
 - /signupbuyer
 - /adminverify
+
+## Notes
+Since back-end has not finished, expect for home, aboutus and contactus pages, please type full URLs (Ex. http://localhost:3000/profileseller) to visit these pages.
