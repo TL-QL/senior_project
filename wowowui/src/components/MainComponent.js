@@ -8,6 +8,8 @@ import ProfileBuyer from './ProfileBuyerComponent';
 import Search from './SearchComponent';
 import Favorite from './FavoriteComponent';
 import Shoppingcart from './ShoppingcartComponent';
+import Postsub from './PostsubComponent';
+import Submissions from './SubmissionsComponent';
 import Footer from './FooterComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 
@@ -26,6 +28,8 @@ class Main extends Component {
                     <Route exact path="/search" component={Search}/>
                     <Route exact path="/favorite" component={Favorite}/>
                     <Route exact path="/shoppingcart" component={Shoppingcart}/>
+                    <Route exact path="/postsub" component={Postsub}/>
+                    <Route exact path="/submissions" component={Submissions}/>
                     <Redirect to="/home" />
                 </Switch>
                 <Footer />
