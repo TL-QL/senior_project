@@ -197,21 +197,18 @@ class Postsub extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={6} md={{size:6, offset:4}}>
-                                    <FormGroup>
-                                        <select name="detachable" className="select-list">
-                                            <option selected disabled>Detachable</option>
-                                            <option value ="detach">Yes</option>
-                                            <option value ="nonDetach">No</option>
-                                        </select> 
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
                                 <Col sm={12} md={{size:6, offset:4}}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="productInsurance" className="form-style-label">Product Insurance</Label>
                                         <Input type="text" id="productInsurance" name="productInsurance" className="form-style-input" placeholder="Ex. No insurance" value={this.state.productInsurance} onChange={this.handleInputChange}/>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={6} md={{size:6, offset:4}}>
+                                    <FormGroup className="form-style-form-group">
+                                        <Label htmlFor="detachable" className="form-style-label">Detaching Info</Label>
+                                        <Input type="textarea" rows="5" id="detachable" name="detachable" value={this.state.detachable} onChange={this.handleInputChange}/>
                                     </FormGroup>
                                 </Col>
                             </Row>
