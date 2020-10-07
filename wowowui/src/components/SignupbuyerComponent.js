@@ -94,15 +94,17 @@ class Signupbuyer extends Component{
           ]
         return(
             <div className="container">
-                <div className="col-5 col-md-2">
-                    <Breadcrumb>
+                <div className="row">
+                    <Breadcrumb className="col-5 col-sm-5 col-md-3 col-lg-2">
                         <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Sign up</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
-                <div className="col-12 col-md-6 offset-md-3">
-                    <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Sign up</h5>
-                    <hr className="seperation" />
+                <div className="row">
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Sign up</h5>
+                        <hr className="seperation" />
+                    </div>
                 </div>
                 <Form onSubmit={this.handleLogin}>
                     <Row>

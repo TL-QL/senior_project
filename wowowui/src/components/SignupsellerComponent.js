@@ -82,8 +82,8 @@ class Signupseller extends Component{
         const errors = this.validate(this.state.username, this.state.password, this.state.nickname, this.state.phone, this.state.email, this.state.zipcode);
         return(
             <div className="container">
-                <div className="col-5 col-md-2">
-                    <Breadcrumb>
+                <div className="row">
+                    <Breadcrumb className="col-5 col-sm-5 col-md-3 col-lg-2">
                         <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Sign up</BreadcrumbItem>
                     </Breadcrumb>
