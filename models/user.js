@@ -46,6 +46,7 @@ var User = new Schema({
         type: String,
         default: ''
     },
+    // what kind(s) of goods are you interested in
     interests: {
         type: [String]
     },

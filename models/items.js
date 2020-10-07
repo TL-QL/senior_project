@@ -85,6 +85,7 @@ const itemSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    // whether the item is approved by admin
     post: {
         type: Boolean,
         default: false
