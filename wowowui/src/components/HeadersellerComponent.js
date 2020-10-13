@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, 
 import {NavLink} from 'react-router-dom';
 import {baseUrl} from '../shared/baseUrl';
 
-class Header extends Component{
+class Headerseller extends Component{
 
     constructor(props){
         super(props);
@@ -89,12 +89,6 @@ class Header extends Component{
                                         <span className="fa fa-sign-out fa-lg"></span> Logout
                                     </Button>
                                 </NavItem>
-                                <NavItem>
-                                    <span className="fa fa-heart-o fa-lg fa-cog fa-margin-right fa-margin-top"></span>
-                                </NavItem>
-                                <NavItem>
-                                    <span className="fa fa-shopping-cart fa-lg fa-cog fa-margin-top"></span>
-                                </NavItem>
                             </Nav>
                         </Collapse>
                     </div>
@@ -150,4 +144,4 @@ class Header extends Component{
     }
 }
 
-export default Header;
+export default Headerseller;
