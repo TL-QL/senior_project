@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback} from 'reactstrap';
 import {Link} from 'react-router-dom';
+var config = require('../config');
 
 class Signupseller extends Component{
 
@@ -16,11 +17,19 @@ class Signupseller extends Component{
             address:'',
             city:'',
             theState:'',
-            zipcode:''
+            zipcode:'',
+            touched: {
+                username: false,
+                password: false,
+                nickname: false,
+                phone: false,
+                email: false
+            }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
     handleInputChange(event){
@@ -34,52 +43,74 @@ class Signupseller extends Component{
     }
 
     handleSubmit(event){
-        console.log("Current State is: "+JSON.stringify(this.state));
-        alert("Current State is: "+JSON.stringify(this.state));
-        event.preventDefault();
+        let databody = {
+            "username": this.state.username,
+            "password": this.state.password,
+            "nickname": this.state.nickname,
+            "phone": this.state.phone,
+            "email": this.state.email,
+            "address": this.state.address,
+            "city": this.state.city,
+            "theState": this.state.theState,
+            "zipcode": this.state.zipcode
+        }
+        fetch(config.serverUrl+'/users/signupseller', {
+            method: 'POST',
+            body: JSON.stringify(databody),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(data => console.log("Current State is: "+JSON.stringify(this.state))); 
+        this.props.history.push('/homeseller');
     }
 
-    validate(username, password, nickname, phone, email, zipcode) {
+    handleBlur = (field) => (evt) => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true },
+        });
+    }
+
+    validate(username, password, nickname, phone, email) {
 
         const errors = {
             username: '',
             password: '',
             nickname: '',
-            telnum: '',
-            email: '',
-            zipcode: ''
+            phone: '',
+            email: ''
         };
 
-        if (username.length < 1)
-            errors.username = 'First Name should be >= 1 characters';
-        else if (username.length > 10)
+        if (this.state.touched.username && username.length < 1)
+            errors.username = 'Username should be >= 1 characters';
+        else if (this.state.touched.username && username.length > 10)
             errors.username = 'Userame should be <= 10 characters';
 
-        if (nickname.length < 1)
+        if (this.state.touched.nickname && nickname.length < 1)
             errors.nickname = 'Nickname should be >= 1 characters';
-        else if (nickname.length > 10)
+        else if (this.state.touched.nickname && nickname.length > 10)
             errors.nickname = 'Nickname should be <= 10 characters';
 
-        if (password.length < 6)
+        if (this.state.touched.password && password.length < 6)
             errors.password = 'Password should be >= 6 characters';
-        else if (password.length > 20)
+        else if (this.state.touched.password && password.length > 20)
             errors.password = 'Password should be <= 20 characters';
 
         const reg = /^\d+$/;
-        if (!reg.test(phone))
+        if (this.state.touched.phone && !reg.test(phone))
             errors.phone = 'Phone Number should contain only numbers';
             
-        if (email.split('').filter(x => x === '@').length !== 1) 
-            errors.email = 'Email should contain a @';
+        if (this.state.touched.email && email.includes("@case.edu") !== true) 
+            errors.email = 'Please use your Case email for sign up';
 
-        if (zipcode.length !== 5)
-            errors.zipcode = 'First Name should be 5 characters';
+
 
         return errors;
     }
 
     render(){
-        const errors = this.validate(this.state.username, this.state.password, this.state.nickname, this.state.phone, this.state.email, this.state.zipcode);
+        const errors = this.validate(this.state.username, this.state.password, this.state.nickname, this.state.phone, this.state.email);
         return(
             <div className="container">
                 <div className="row">
@@ -96,45 +127,45 @@ class Signupseller extends Component{
                     <Row>
                         <Col xs={12} md={{size: 6, offset:3}}>
                             <FormGroup>
-                                <Label htmlFor="username">Username</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
+                                <Label htmlFor="username">Username (Required)</Label>
+                                <Input type="text" id="username" name="username" value={this.state.username} valid={errors.username === ''} invalid={errors.username !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('username')}/>
+                                <FormFeedback>{errors.username}</FormFeedback>
                             </FormGroup>
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={12} md={{size: 6, offset:3}}>
                             <FormGroup>
-                                <Label htmlFor="password">Password</Label>
-                                <Input type="password" id="password" name="password"
-                                    innerRef={(input) => this.password = input}  />
+                                <Label htmlFor="password">Password (Required)</Label>
+                                <Input type="password" id="password" name="password" value={this.state.password} valid={errors.password === ''} invalid={errors.password !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('password')}/>
+                                <FormFeedback>{errors.password}</FormFeedback>
                             </FormGroup>
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={12} md={{size: 6, offset:3}}>
                             <FormGroup>
-                                <Label htmlFor="nickname">Nickname</Label>
-                                <Input type="text" id="nickname" name="nickname"
-                                    innerRef={(input) => this.nickname = input}  />
+                                <Label htmlFor="nickname">Nickname (Required)</Label>
+                                <Input type="text" id="nickname" name="nickname" value={this.state.nickname} valid={errors.nickname === ''} invalid={errors.nickname !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('nickname')}/>
+                                <FormFeedback>{errors.nickname}</FormFeedback>
                             </FormGroup>
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={12} md={{size: 6, offset:3}}>
                             <FormGroup>
-                                <Label htmlFor="phone">Phone</Label>
-                                <Input type="text" id="phone" name="phone"
-                                    innerRef={(input) => this.phone = input}  />
+                                <Label htmlFor="phone">Phone (Required)</Label>
+                                <Input type="text" id="phone" name="phone" value={this.state.phone} valid={errors.phone === ''} invalid={errors.phone !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('phone')}/>
+                                <FormFeedback>{errors.phone}</FormFeedback>
                             </FormGroup>
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={12} md={{size: 6, offset:3}}>
                             <FormGroup>
-                                <Label htmlFor="email">Email</Label>
-                                <Input type="text" id="email" name="email"
-                                    innerRef={(input) => this.email = input}  />
+                                <Label htmlFor="email">Email (Required)</Label>
+                                <Input type="text" id="email" name="email" value={this.state.email} valid={errors.email === ''} invalid={errors.email !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('email')}/>
+                                <FormFeedback>{errors.email}</FormFeedback>
                             </FormGroup>
                         </Col>
                     </Row>
@@ -142,8 +173,7 @@ class Signupseller extends Component{
                         <Col xs={12} md={{size: 6, offset:3}}>
                             <FormGroup>
                                 <Label htmlFor="address">Address</Label>
-                                <Input type="text" id="address" name="address"
-                                    innerRef={(input) => this.address = input}  />
+                                <Input type="text" id="address" name="address" value={this.state.address} />
                             </FormGroup>
                         </Col>
                     </Row>
@@ -151,22 +181,19 @@ class Signupseller extends Component{
                         <Col xs={12} md={{size: 2, offset:3}}>
                             <FormGroup>
                                 <Label htmlFor="city">City</Label>
-                                <Input type="text" id="city" name="city"
-                                    innerRef={(input) => this.city = input}  />
+                                <Input type="text" id="city" name="city" value={this.state.city} />
                             </FormGroup>
                         </Col>
                         <Col xs={12} md={2}>
                             <FormGroup>
                                 <Label htmlFor="theState">State</Label>
-                                <Input type="text" id="theState" name="theState"
-                                    innerRef={(input) => this.theState = input}  />
+                                <Input type="text" id="theState" name="theState" value={this.state.theState} />
                             </FormGroup>
                         </Col>
                         <Col xs={12} md={2}>
                             <FormGroup>
                                 <Label htmlFor="zipcode">Zipcode</Label>
-                                <Input type="text" id="zipcode" name="zipcode"
-                                    innerRef={(input) => this.zipcode = input}  />
+                                <Input type="text" id="zipcode" name="zipcode" value={this.state.zipcode}/>
                             </FormGroup>
                         </Col>
                     </Row>
