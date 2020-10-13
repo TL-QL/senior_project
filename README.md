@@ -43,4 +43,5 @@
 - /adminverify (backend incomplete)
 
 ## Notes
-To access the pages with incomplete back-end implementation, please type full URLs (Ex. http://localhost:3000/profileseller) to visit these pages.
+- To access the pages with incomplete back-end implementation, please type full URLs (Ex. http://localhost:3000/profileseller) to visit these pages.
+- User Manual & Function Specification: https://docs.google.com/document/d/1U9XByjcjFJJ60AYanxge_nRDpEeNZTyfXa8YF1j33xI/edit?usp=sharing
