@@ -43,6 +43,7 @@ class Signupseller extends Component{
     }
 
     handleSubmit(event){
+        event.preventDefault();
         let databody = {
             "username": this.state.username,
             "password": this.state.password,
@@ -62,7 +63,7 @@ class Signupseller extends Component{
             },
         })
         .then(res => res.json())
-        .then(data => console.log("Current State is: "+JSON.stringify(this.state))); 
+        .then(data => console.log("Current State is: "+JSON.stringify(this.state)))
         this.props.history.push('/homeseller');
     }
 
@@ -100,8 +101,11 @@ class Signupseller extends Component{
         const reg = /^\d+$/;
         if (this.state.touched.phone && !reg.test(phone))
             errors.phone = 'Phone Number should contain only numbers';
+
+        if (this.state.touched.phone && phone.length !== 10)
+            errors.phone = 'Phone Number should have 10 digits';
             
-        if (this.state.touched.email && email.includes("@case.edu") !== true) 
+        if (this.state.touched.email && email.includes("@case.edu") !== true && email.includes("@CASE.EDU") !== true)  
             errors.email = 'Please use your Case email for sign up';
 
 
@@ -199,7 +203,7 @@ class Signupseller extends Component{
                     </Row>
                     <Row>
                         <FormGroup className="col-12 col-md-2 offset-md-3">
-                            <Button type="submit" value="submit" color="primary" style={{width:"100%", marginBottom:"25px", marginTop:"10px"}}>Sign up</Button>
+                            <Button disabled={errors.username !== ''||errors.password!==''||errors.nickname!==''||errors.phone!==''||errors.email!==''||this.state.username===''||this.state.password===''||this.state.nickname===''||this.state.phone===''||this.state.email===''} type="submit" value="submit" color="primary" style={{width:"100%", marginBottom:"25px", marginTop:"10px"}}>Sign up</Button>
                         </FormGroup>
                     </Row>
                 </Form>
