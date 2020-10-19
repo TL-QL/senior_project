@@ -39,7 +39,7 @@
 - /sellersubmission (backend incomplete)
 - /itemdetail (backend incomplete)
 - /users/signupseller
-- /users/signupbuyer (backend incomplete)
+- /users/signupbuyer
 - /users/login
 - /adminverify (backend incomplete)
 
