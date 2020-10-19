@@ -40,6 +40,7 @@
 - /itemdetail (backend incomplete)
 - /users/signupseller
 - /users/signupbuyer (backend incomplete)
+- /users/login
 - /adminverify (backend incomplete)
 
 ## Notes
