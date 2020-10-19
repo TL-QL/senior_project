@@ -5,6 +5,7 @@ import Home from './HomeComponent';
 import Homeseller from './HomesellerComponent';
 import Signupseller from './SignupsellerComponent';
 import Signupbuyer from './SignupbuyerComponent';
+import Login from './LoginComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
 import ProfileSeller from './ProfileSellerComponent';
@@ -36,6 +37,7 @@ const Main = ({location}) => (
             <Route exact path="/homeseller" component={Homeseller} />
             <Route exact path="/users/signupseller" component={Signupseller}/>
             <Route exact path="/signupbuyer" component={Signupbuyer}/>
+            <Route exact path="/users/login" component={Login} />
             <Route exact path="/aboutus" component={About}/>
             <Route exact path="/contactus" component={Contact}/>
             <Route exact path="/profileseller" component={ProfileSeller}/>
