@@ -85,7 +85,7 @@ class ProfileSeller extends Component {
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to='/homeseller'>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Profile</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
