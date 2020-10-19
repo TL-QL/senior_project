@@ -15,8 +15,6 @@ class Headerseller extends Component{
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModalSignUp = this.toggleModalSignUp.bind(this);
         this.toggleModalLogin = this.toggleModalLogin.bind(this);
-        this.handleSignup = this.handleSignup.bind(this);
-        this.handleLogin = this.handleLogin.bind(this);
     }
 
     toggleNav(){
@@ -35,18 +33,6 @@ class Headerseller extends Component{
         this.setState({
             isModalLoginOpen: !this.state.isModalLoginOpen,
         });
-    }
-
-    handleSignup(event){
-        this.toggleModalSignUp();
-        alert("Username: "+this.username.value + " Password: "+this.password.value+" Remember: "+this.remember.checked);
-        event.preventDefault();
-    }
-
-    handleLogin(event){
-        this.toggleModalLogin();
-        alert("Username: "+this.username.value + " Password: "+this.password.value+" Remember: "+this.remember.checked);
-        event.preventDefault();
     }
 
     render(){
@@ -124,19 +110,11 @@ class Headerseller extends Component{
                 <Modal isOpen={this.state.isModalLoginOpen} toggle={this.toggleModalLogin}>
                     <ModalHeader toggle={this.toggleModalLogin}>Login</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={this.handleLogin}>
-                            <FormGroup>
-                                <Label htmlFor="username">Username</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="password">Password</Label>
-                                <Input type="password" id="password" name="password"
-                                    innerRef={(input) => this.password = input}  />
-                            </FormGroup>
-                            <Button type="submit" value="submit" color="primary">Login</Button>
-                        </Form>
+                    <div className="row">
+                            <form action="/users/login" className= "col-12 col-sm-4 offset-sm-4">
+                                <Button type="submit" value="submit" color="primary">Go to Login Page</Button>
+                            </form>
+                    </div>
                     </ModalBody>
                 </Modal>
             </>

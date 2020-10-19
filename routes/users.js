@@ -50,6 +50,49 @@ router.post('/signupseller', (req, res, next) => {
   });
 });
 
+router.post('/signupbuyer', (req, res, next) => {
+  User.register(new User({username: req.body.username, nickname: req.body.nickname, phone: req.body.phone, email: req.body.email}), req.body.password, (err, user) =>{
+    if(err) {
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({err: err});
+    }
+    else {
+      user.username = req.body.username;
+      user.nickname = req.body.nickname;
+      user.phone = req.body.phone;
+      user.email = req.body.email;
+      if(req.body.address)
+        user.address = req.body.address;
+      if(req.body.city)
+        user.city = req.body.city;
+      if(req.body.theState)
+        user.theState = req.body.theState;
+      if(req.body.zipcode)
+        user.zipcode = req.body.zipcode;
+      if(req.body.transportation)
+        user.transportation = req.body.transportation;
+      if(req.body.care)
+        user.care = req.body.care;
+      if(req.body.interests)
+        user.interests = req.body.interests;
+      user.save((err, user) => {
+        if(err) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.json({err: err});
+          return ;
+        }
+        passport.authenticate('local')(req, res, () => {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.json({success: true, status: 'Registration Successful!'});
+        });
+      })
+    }
+  });
+});
+
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err)

@@ -63,8 +63,11 @@ class Signupseller extends Component{
             },
         })
         .then(res => res.json())
-        .then(data => console.log("Current State is: "+JSON.stringify(this.state)))
-        this.props.history.push('/homeseller');
+        .then(data => {
+            if(data.success) this.props.history.push('/homeseller');
+            else
+                alert(JSON.stringify(data.err));
+        })
     }
 
     handleBlur = (field) => (evt) => {
@@ -177,7 +180,7 @@ class Signupseller extends Component{
                         <Col xs={12} md={{size: 6, offset:3}}>
                             <FormGroup>
                                 <Label htmlFor="address">Address</Label>
-                                <Input type="text" id="address" name="address" value={this.state.address} />
+                                <Input type="text" id="address" name="address" value={this.state.address} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                     </Row>
@@ -185,19 +188,19 @@ class Signupseller extends Component{
                         <Col xs={12} md={{size: 2, offset:3}}>
                             <FormGroup>
                                 <Label htmlFor="city">City</Label>
-                                <Input type="text" id="city" name="city" value={this.state.city} />
+                                <Input type="text" id="city" name="city" value={this.state.city} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs={12} md={2}>
                             <FormGroup>
                                 <Label htmlFor="theState">State</Label>
-                                <Input type="text" id="theState" name="theState" value={this.state.theState} />
+                                <Input type="text" id="theState" name="theState" value={this.state.theState} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs={12} md={2}>
                             <FormGroup>
                                 <Label htmlFor="zipcode">Zipcode</Label>
-                                <Input type="text" id="zipcode" name="zipcode" value={this.state.zipcode}/>
+                                <Input type="text" id="zipcode" name="zipcode" value={this.state.zipcode} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                     </Row>

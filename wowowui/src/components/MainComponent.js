@@ -36,7 +36,7 @@ const Main = ({location}) => (
             <Route exact path="/home" component={Home} />
             <Route exact path="/homeseller" component={Homeseller} />
             <Route exact path="/users/signupseller" component={Signupseller}/>
-            <Route exact path="/signupbuyer" component={Signupbuyer}/>
+            <Route exact path="/users/signupbuyer" component={Signupbuyer}/>
             <Route exact path="/users/login" component={Login} />
             <Route exact path="/aboutus" component={About}/>
             <Route exact path="/contactus" component={Contact}/>
