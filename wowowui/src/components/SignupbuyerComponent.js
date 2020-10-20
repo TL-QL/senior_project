@@ -81,7 +81,7 @@ class Signupbuyer extends Component{
         })
         .then(res => res.json())
         .then(data => {
-            if(data.success) this.props.history.push('/home');
+            if(data.success) this.props.history.push('/users/login');
             else
                 alert(JSON.stringify(data.err));
         })

@@ -29,8 +29,6 @@ class Login extends Component{
 
     handleLogin(event){
         event.preventDefault();
-        var seller = false;
-        var admin = false;
         let databody = {
             "username": this.state.username,
             "password": this.state.password

@@ -19,39 +19,58 @@ import Adminverify from './AdminverifyComponent';
 import Footer from './FooterComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 
-const exclusionArray = [
-    '/users/signupseller',
-    '/profileseller',
-    '/homeseller',
-    '/postsub',
-    '/submissions',
-    '/adminverify'
-]
+const UsernameContext = React.createContext('');
 
-const Main = ({location}) => (
-    <div>
-        {exclusionArray.indexOf(location.pathname) < 0 && <Header />}
-        {exclusionArray.indexOf(location.pathname) >= 0 && <Headerseller />}
-        <Switch>
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/homeseller" component={Homeseller} />
-            <Route exact path="/users/signupseller" component={Signupseller}/>
-            <Route exact path="/users/signupbuyer" component={Signupbuyer}/>
-            <Route exact path="/users/login" component={Login} />
-            <Route exact path="/aboutus" component={About}/>
-            <Route exact path="/contactus" component={Contact}/>
-            <Route exact path="/profileseller" component={ProfileSeller}/>
-            <Route exact path="/profilebuyer" component={ProfileBuyer}/>
-            <Route exact path="/search" component={Search}/>
-            <Route exact path="/favorite" component={Favorite}/>
-            <Route exact path="/shoppingcart" component={Shoppingcart}/>
-            <Route exact path="/postsub" component={Postsub}/>
-            <Route exact path="/submissions" component={Submissions}/>
-            <Route exact path="/adminverify" component={Adminverify}/>
-            <Redirect to="/home" />
-        </Switch>
-        <Footer />
-    </div>
-)
+class Main extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = { username: '' };
+    }
+
+    onUsernameChange = (username) => {
+        this.setState({ 
+            username: username
+        });
+    }
+
+    render(){
+        const exclusionArray = [
+            '/users/signupseller',
+            '/profileseller',
+            '/homeseller',
+            '/postsub',
+            '/submissions',
+            '/adminverify'
+        ]
+        return(
+            <div>
+                <UsernameContext.Provider value={this.state.username}>
+                    {exclusionArray.indexOf(this.props.location.pathname) < 0 && <Header />}
+                    {exclusionArray.indexOf(this.props.location.pathname) >= 0 && <Headerseller />}
+                    <Switch>
+                        <Route exact path="/home" component={Home} />
+                        <Route exact path="/homeseller" component={Homeseller} />
+                        <Route exact path="/users/signupseller" component={Signupseller}/>
+                        <Route exact path="/users/signupbuyer" component={Signupbuyer}/>
+                        <Route exact path="/users/login" component={(props)=><Login history={this.props.history} onUsernameChange={this.props.onUsernameChange}/>} />
+                        <Route exact path="/aboutus" component={About}/>
+                        <Route exact path="/contactus" component={Contact}/>
+                        <Route exact path="/profileseller" component={ProfileSeller}/>
+                        <Route exact path="/profilebuyer" component={ProfileBuyer}/>
+                        <Route exact path="/search" component={Search}/>
+                        <Route exact path="/favorite" component={Favorite}/>
+                        <Route exact path="/shoppingcart" component={Shoppingcart}/>
+                        <Route exact path="/postsub" component={Postsub}/>
+                        <Route exact path="/submissions" component={Submissions}/>
+                        <Route exact path="/adminverify" component={Adminverify}/>
+                        <Redirect to="/home" />
+                    </Switch>
+                    <Footer />
+                </UsernameContext.Provider>
+            </div>
+        );
+    }
+}
 
 export default withRouter(Main);

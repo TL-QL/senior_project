@@ -47,11 +47,10 @@ class Headerseller extends Component{
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/homeseller
-                                    "><span className="fa fa-home fa-lg"></span> Home</NavLink>
+                                    <NavLink className="nav-link" to="/homeseller"><span className="fa fa-home fa-lg"></span> Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/profile"><span className="fa fa-user-circle-o fa-lg"></span> Profile</NavLink>
+                                    <NavLink className="nav-link" to="/profileseller"><span className="fa fa-user-circle-o fa-lg"></span> Profile</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link" to='/aboutus'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
