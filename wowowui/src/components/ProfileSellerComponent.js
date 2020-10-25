@@ -148,7 +148,7 @@ class ProfileSeller extends Component {
                         <BreadcrumbItem active>Profile</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
-                        <h3><b>Profile for <em>Nickname</em></b></h3>
+                        <h3><b>Profile for <em>{this.state.nickname}</em></b></h3>
                     </div>
                 </div>
 
