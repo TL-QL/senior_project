@@ -72,11 +72,6 @@ class Header extends Component{
                                     </Button>
                                 </NavItem>
                                 <NavItem>
-                                    <Button outline className="button-mr">
-                                        <span className="fa fa-sign-out fa-lg"></span> Logout
-                                    </Button>
-                                </NavItem>
-                                <NavItem>
                                     <span className="fa fa-heart-o fa-lg fa-cog fa-margin-right fa-margin-top"></span>
                                 </NavItem>
                                 <NavItem>

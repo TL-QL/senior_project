@@ -37,6 +37,7 @@ var User = new Schema({
     },
     credit: {
         type: Number,
+        default: 5.5,
         min: 0.0,
         max: 10.0
     },

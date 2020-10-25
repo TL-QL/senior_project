@@ -51,7 +51,8 @@ class ProfileSeller extends Component {
                 address: data.address,
                 city: data.city,
                 theState: data.theState,
-                zipcode: data.zipcode
+                zipcode: data.zipcode,
+                credit: data.credit
             })
         })
 
@@ -202,7 +203,7 @@ class ProfileSeller extends Component {
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="credit" className="form-style-label">Credit Score</Label>
-                                        <Input type="text" id="credit" name="credit" className="form-style-input" placeholder={this.state.credit} value={this.state.credit} onChange={this.handleInputChange} />
+                                        <Input disabled type="text" id="credit" name="credit" className="form-style-input" placeholder={this.state.credit} value={this.state.credit} onChange={this.handleInputChange} />
                                     </FormGroup>
                                 </Col>
                             </Row>

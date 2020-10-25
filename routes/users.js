@@ -108,7 +108,6 @@ router.post('/login', (req, res, next) => {
         res.setHeader('Content-Type', 'application/json');
         res.json({success: false, status: 'Login Unsuccessful!', err: 'Could not log in user!'});          
       }
-
       var token = authenticate.getToken({_id: req.user._id});
       var seller = req.user.seller;
       var admin = req.user.admin;
@@ -118,19 +117,5 @@ router.post('/login', (req, res, next) => {
     });
   }) (req, res, next);
 });
-
-router.get('/logout', (req, res) => {
-  if (req.session) {
-    req.session.destroy();
-    res.clearCookie('session-id');
-    res.redirect('/');
-  }
-  else {
-    var err = new Error('You are not logged in!');
-    err.status = 403;
-    next(err);
-  }
-});
-
 
 module.exports = router;

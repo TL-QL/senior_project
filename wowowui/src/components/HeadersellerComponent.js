@@ -70,11 +70,6 @@ class Headerseller extends Component{
                                         <span className="fa fa-sign-in fa-lg"></span> Login
                                     </Button>
                                 </NavItem>
-                                <NavItem>
-                                    <Button outline className="button-mr">
-                                        <span className="fa fa-sign-out fa-lg"></span> Logout
-                                    </Button>
-                                </NavItem>
                             </Nav>
                         </Collapse>
                     </div>
