@@ -58,7 +58,7 @@ class Main extends Component{
                         <Route exact path="/aboutus" component={About}/>
                         <Route exact path="/contactus" component={Contact}/>
                         <Route exact path="/profileseller" component={()=><ProfileSeller history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
-                        <Route exact path="/profilebuyer" component={ProfileBuyer}/>
+                        <Route exact path="/profilebuyer" component={()=><ProfileBuyer history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
                         <Route exact path="/search" component={Search}/>
                         <Route exact path="/favorite" component={Favorite}/>
                         <Route exact path="/shoppingcart" component={Shoppingcart}/>
