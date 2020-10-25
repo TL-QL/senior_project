@@ -41,7 +41,7 @@ class Headerseller extends Component{
                 <Navbar dark bg-primary expand="lg">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/">
+                        <NavbarBrand className="mr-auto" href="/homeseller">
                             <img src={baseUrl+'/images/logo.png'} height="30" width="41" alt="Wow" />
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
