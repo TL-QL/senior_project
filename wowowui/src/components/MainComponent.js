@@ -61,8 +61,8 @@ class Main extends Component{
                         <Route exact path="/users/login" component={()=><Login history={this.props.history} onUsernameChange={this.onUsernameChange}/>} />
                         <Route exact path="/aboutus" component={About}/>
                         <Route exact path="/aboutusseller" component={Aboutseller}/>
-                        <Route exact path="/contactus" component={Contact}/>
-                        <Route exact path="/contactusseller" component={Contactseller}/>
+                        <Route exact path="/contactus" component={()=><Contact history={this.props.history} token={this.state.token}/>}/>
+                        <Route exact path="/contactusseller" component={()=><Contactseller history={this.props.history} token={this.state.token}/>}/>
                         <Route exact path="/profileseller" component={()=><ProfileSeller history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
                         <Route exact path="/profilebuyer" component={()=><ProfileBuyer history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
                         <Route exact path="/search" component={Search}/>

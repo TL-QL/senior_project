@@ -2,30 +2,36 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const feedbackSchema = new Schema({
-    firstname: {
+    feedback_id:{
         type: String,
         required: true,
         unique: true
+    },
+    firstname: {
+        type: String,
+        required: true
     },
     lastname: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     phone: {
         type: String,
-        default: ''
+        required: true
     },
     email: {
         type: String,
-        default: ''
-    },
-    contact: {
-        type: Boolean,
-        defalut: false,
         required: true
     },
-    cfeedback: {
+    agree: {
+        type: Boolean,
+        defalut: false,
+    },
+    contactType: {
+        type: String,
+        default: ''
+    },
+    message: {
         type: String,
         default: ''
     }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {baseUrl} from '../shared/baseUrl';
+var config = require('../config');
 
 class Contactseller extends Component {
 
@@ -11,7 +12,7 @@ class Contactseller extends Component {
         this.state = {
             firstname: '',
             lastname: '',
-            telnum:'',
+            phone:'',
             email: '',
             agree: false,
             contactType: 'Tel.',
@@ -19,7 +20,7 @@ class Contactseller extends Component {
             touched: {
                 firstname: false,
                 lastname: false,
-                telnum: false,
+                phone: false,
                 email: false
             }
         }
@@ -40,9 +41,30 @@ class Contactseller extends Component {
     }
 
     handleSubmit(event){
-        console.log("Current State is: "+JSON.stringify(this.state));
-        alert("Current State is: "+JSON.stringify(this.state));
         event.preventDefault();
+        let databody = {
+            "firstname": this.state.firstname,
+            "lastname": this.state.lastname,
+            "phone": this.state.phone,
+            "email": this.state.email,
+            "agree": this.state.agree,
+            "contactType": this.state.contactType,
+            "message": this.state.message
+        }
+        fetch(config.serverUrl+'/contactus', {
+            method: 'POST',
+            body: JSON.stringify(databody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'bearer '+this.props.token
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success) this.props.history.push('/homeseller');
+            else
+                alert(JSON.stringify(data));
+        })
     }
 
     handleBlur = (field) => (evt) => {
@@ -51,12 +73,12 @@ class Contactseller extends Component {
         });
     }
 
-    validate(firstname, lastname, telnum, email) {
+    validate(firstname, lastname, phone, email) {
 
         const errors = {
             firstname: '',
             lastname: '',
-            telnum: '',
+            phone: '',
             email: ''
         };
 
@@ -71,8 +93,8 @@ class Contactseller extends Component {
             errors.lastname = 'Last Name should be <= 10 characters';
 
         const reg = /^\d+$/;
-        if (this.state.touched.telnum && !reg.test(telnum))
-            errors.telnum = 'Tel. Number should contain only numbers';
+        if (this.state.touched.phone && !reg.test(phone))
+            errors.phone = 'Tel. Number should contain only numbers';
             
         if (this.state.touched.email && email.split('').filter(x => x === '@').length !== 1) 
             errors.email = 'Email should contain a @';
@@ -81,7 +103,7 @@ class Contactseller extends Component {
     }
 
     render() {
-        const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
+        const errors = this.validate(this.state.firstname, this.state.lastname, this.state.phone, this.state.email);
         return(
             <div className="container">
                 <div className="row">
@@ -141,10 +163,10 @@ class Contactseller extends Component {
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
-                                <Label htmlFor="telnum" md={2}>Contact Tel.</Label>
+                                <Label htmlFor="phone" md={2}>Contact Tel.</Label>
                                 <Col md={10}>
-                                    <Input type="tel" id="telnum" name="telnum" placeholder="Tel. Number" value={this.state.telnum} valid={errors.telnum === ''} invalid={errors.telnum !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('telnum')}/>
-                                    <FormFeedback>{errors.telnum}</FormFeedback>
+                                    <Input type="tel" id="phone" name="phone" placeholder="Tel. Number" value={this.state.phone} valid={errors.phone === ''} invalid={errors.phone !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('phone')}/>
+                                    <FormFeedback>{errors.phone}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -177,7 +199,7 @@ class Contactseller extends Component {
                             </FormGroup>
                             <FormGroup row>
                                 <Col md={{size:10, offset:2}}>
-                                    <Button type="submit" color="primary">
+                                    <Button disabled={errors.firstname !== ''||errors.lastname!==''||errors.phone!==''||errors.email!==''||this.state.firstname===''||this.state.lastname===''||this.state.phone===''||this.state.email===''} type="submit" color="primary">
                                         Send Feedback
                                     </Button>
                                 </Col>
@@ -189,5 +211,4 @@ class Contactseller extends Component {
         );
     }
 }
-
 export default Contactseller;

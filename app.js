@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var profilesellerRouter = require('./routes/profilesellerRouter');
 var profilebuyerRouter = require('./routes/profilebuyerRouter');
+var contactusRouter = require('./routes/contactusRouter');
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/profileseller', profilesellerRouter);
 app.use('/profilebuyer', profilebuyerRouter);
+app.use('/contactus', contactusRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
