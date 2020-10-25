@@ -53,10 +53,10 @@ class Headerseller extends Component{
                                     <NavLink className="nav-link" to="/profileseller"><span className="fa fa-user-circle-o fa-lg"></span> Profile</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to='/aboutus'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
+                                    <NavLink className="nav-link" to='/aboutusseller'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
+                                    <NavLink className="nav-link" to='/contactusseller'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
                                 </NavItem>
                             </Nav>
                             <Nav className="ml-auto" navbar>

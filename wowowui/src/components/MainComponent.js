@@ -7,7 +7,9 @@ import Signupseller from './SignupsellerComponent';
 import Signupbuyer from './SignupbuyerComponent';
 import Login from './LoginComponent';
 import About from './AboutComponent';
+import Aboutseller from './AboutsellerComponent';
 import Contact from './ContactComponent';
+import Contactseller from './ContactsellerComponent';
 import ProfileSeller from './ProfileSellerComponent';
 import ProfileBuyer from './ProfileBuyerComponent';
 import Search from './SearchComponent';
@@ -40,6 +42,8 @@ class Main extends Component{
             '/users/signupseller',
             '/profileseller',
             '/homeseller',
+            '/contactusseller',
+            '/aboutusseller',
             '/postsub',
             '/submissions',
             '/adminverify'
@@ -56,7 +60,9 @@ class Main extends Component{
                         <Route exact path="/users/signupbuyer" component={Signupbuyer}/>
                         <Route exact path="/users/login" component={()=><Login history={this.props.history} onUsernameChange={this.onUsernameChange}/>} />
                         <Route exact path="/aboutus" component={About}/>
+                        <Route exact path="/aboutusseller" component={Aboutseller}/>
                         <Route exact path="/contactus" component={Contact}/>
+                        <Route exact path="/contactusseller" component={Contactseller}/>
                         <Route exact path="/profileseller" component={()=><ProfileSeller history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
                         <Route exact path="/profilebuyer" component={()=><ProfileBuyer history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
                         <Route exact path="/search" component={Search}/>
