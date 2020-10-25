@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback} from 'reactstrap';
+import {Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import {baseUrl} from '../shared/baseUrl';
+
 
 class Homeseller extends Component{
 
@@ -39,9 +42,21 @@ class Homeseller extends Component{
         return(
             <div className="container">
                 <div className="row">
-                    <div className="col-12">
-                        <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Wowwww</h5>
-                        <hr className="seperation" />
+                    <div className="col-6">
+                        <Link to={'/postsub'}>
+                            <CardImg style={{width:"60%",marginTop:"5%"}} src={baseUrl+"/images/post.png"} alt="Post your goods" />
+                            <CardImgOverlay>
+                                <CardTitle>Post Your Goods</CardTitle>
+                            </CardImgOverlay>
+                        </Link>
+                    </div>
+                    <div className="col-6">
+                        <Link to={'/submissions'}>
+                            <CardImg style={{width:"60%",height:"80%",marginTop:"10%"}} src={baseUrl+"/images/submissions.png"} alt="Your submissions" />
+                            <CardImgOverlay>
+                                <CardTitle>Your Submissions</CardTitle>
+                            </CardImgOverlay>	
+                        </Link>
                     </div>
                 </div>
             </div>
