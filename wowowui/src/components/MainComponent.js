@@ -25,12 +25,13 @@ class Main extends Component{
 
     constructor(props){
         super(props);
-        this.state = { username: '' };
+        this.state = { username: '', token: ''};
     }
 
-    onUsernameChange = (username) => {
+    onUsernameChange = (username, token) => {
         this.setState({ 
-            username: username
+            username: username,
+            token: token
         });
     }
 
@@ -45,7 +46,7 @@ class Main extends Component{
         ]
         return(
             <div>
-                <UsernameContext.Provider value={this.state.username}>
+                <UsernameContext.Provider value={{state: this.state}}>
                     {exclusionArray.indexOf(this.props.location.pathname) < 0 && <Header />}
                     {exclusionArray.indexOf(this.props.location.pathname) >= 0 && <Headerseller />}
                     <Switch>
@@ -53,10 +54,10 @@ class Main extends Component{
                         <Route exact path="/homeseller" component={Homeseller} />
                         <Route exact path="/users/signupseller" component={Signupseller}/>
                         <Route exact path="/users/signupbuyer" component={Signupbuyer}/>
-                        <Route exact path="/users/login" component={(props)=><Login history={this.props.history} onUsernameChange={this.props.onUsernameChange}/>} />
+                        <Route exact path="/users/login" component={()=><Login history={this.props.history} onUsernameChange={this.onUsernameChange}/>} />
                         <Route exact path="/aboutus" component={About}/>
                         <Route exact path="/contactus" component={Contact}/>
-                        <Route exact path="/profileseller" component={ProfileSeller}/>
+                        <Route exact path="/profileseller" component={()=><ProfileSeller history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
                         <Route exact path="/profilebuyer" component={ProfileBuyer}/>
                         <Route exact path="/search" component={Search}/>
                         <Route exact path="/favorite" component={Favorite}/>

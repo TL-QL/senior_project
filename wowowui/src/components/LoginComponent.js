@@ -42,6 +42,7 @@ class Login extends Component{
         })
         .then(res => res.json())
         .then(data => {
+            this.props.onUsernameChange(this.state.username, data.token);
             if(data.seller) this.props.history.push('/homeseller');
             else if(data.admin) this.props.history.push('/adminverify');
             else

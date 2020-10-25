@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback} from 'reactstrap';
 import {Link} from 'react-router-dom';
+var config = require('../config');
 
 class ProfileSeller extends Component {
 
@@ -11,17 +12,49 @@ class ProfileSeller extends Component {
             username: '',
             password: '',
             nickname: '',
-            telnum:'',
+            phone:'',
             email: '',
-            credit:'',
             address:'',
             city:'',
             theState:'',
-            zipcode:''
+            zipcode:'',
+            touched: {
+                username: false,
+                password: false,
+                nickname: false,
+                phone: false,
+                email: false
+            }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+    }
+
+    componentDidMount() {
+        fetch(config.serverUrl+'/profileseller/'+this.props.username, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'bearer '+this.props.token
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                username: data.username,
+                password: data.password,
+                nickname: data.nickname,
+                phone: data.phone,
+                email: data.email,
+                address: data.address,
+                city: data.city,
+                theState: data.theState,
+                zipcode: data.zipcode
+            })
+        })
+
     }
 
     handleInputChange(event){
@@ -35,52 +68,78 @@ class ProfileSeller extends Component {
     }
 
     handleSubmit(event){
-        console.log("Current State is: "+JSON.stringify(this.state));
-        alert("Current State is: "+JSON.stringify(this.state));
         event.preventDefault();
+        let databody = {
+            "nickname": this.state.nickname,
+            "phone": this.state.phone,
+            "email": this.state.email,
+            "address": this.state.address,
+            "city": this.state.city,
+            "theState": this.state.theState,
+            "zipcode": this.state.zipcode
+        }
+        fetch(config.serverUrl+'/profileseller/'+this.props.username, {
+            method: 'PUT',
+            body: JSON.stringify(databody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'bearer '+this.props.token
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success) this.props.history.push('/profileseller');
+            else
+                alert(JSON.stringify(data));
+        })
     }
 
-    validate(username, password, nickname, telnum, email, zipcode) {
+    handleBlur = (field) => (evt) => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true },
+        });
+    }
+
+    validate(username, password, nickname, phone, email) {
 
         const errors = {
             username: '',
             password: '',
             nickname: '',
-            telnum: '',
-            email: '',
-            zipcode: ''
+            phone: '',
+            email: ''
         };
 
-        if (username.length < 1)
-            errors.username = 'First Name should be >= 1 characters';
-        else if (username.length > 10)
+        if (this.state.touched.username && username.length < 1)
+            errors.username = 'Username should be >= 1 characters';
+        else if (this.state.touched.username && username.length > 10)
             errors.username = 'Userame should be <= 10 characters';
 
-        if (nickname.length < 1)
+        if (this.state.touched.nickname && nickname.length < 1)
             errors.nickname = 'Nickname should be >= 1 characters';
-        else if (nickname.length > 10)
+        else if (this.state.touched.nickname && nickname.length > 10)
             errors.nickname = 'Nickname should be <= 10 characters';
 
-        if (password.length < 6)
+        if (this.state.touched.password && password.length < 6)
             errors.password = 'Password should be >= 6 characters';
-        else if (password.length > 20)
+        else if (this.state.touched.password && password.length > 20)
             errors.password = 'Password should be <= 20 characters';
 
         const reg = /^\d+$/;
-        if (!reg.test(telnum))
-            errors.telnum = 'Phone Number should contain only numbers';
-            
-        if (email.split('').filter(x => x === '@').length !== 1) 
-            errors.email = 'Email should contain a @';
+        if (this.state.touched.phone && !reg.test(phone))
+            errors.phone = 'Phone Number should contain only numbers';
 
-        if (zipcode.length !== 5)
-            errors.zipcode = 'First Name should be 5 characters';
+        if (this.state.touched.phone && phone.length !== 10)
+            errors.phone = 'Phone Number should have 10 digits';
+            
+        if (this.state.touched.email && email.includes("@case.edu") !== true && email.includes("@CASE.EDU") !== true)  
+            errors.email = 'Please use your Case email for sign up';
 
         return errors;
     }
 
     render() {
-        const errors = this.validate(this.state.username, this.state.password, this.state.nickname, this.state.telnum, this.state.email, this.state.zipcode);
+        const errors = this.validate(this.state.username, this.state.password, this.state.nickname, this.state.phone, this.state.email);
         return(
             <div className="container">
                 <div className="row">
@@ -104,14 +163,14 @@ class ProfileSeller extends Component {
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="username" className="form-style-label">Username</Label>
-                                        <Input type="text" id="username" name="username" className="form-style-input" placeholder="Username" value={this.state.username} valid={errors.username === ''} invalid={errors.username !== ''} onChange={this.handleInputChange}/>
+                                        <Input disabled type="text" id="username" name="username" className="form-style-input" placeholder={this.state.username} value={this.state.username} valid={errors.username === ''} invalid={errors.username !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('username')}/>
                                         <FormFeedback>{errors.username}</FormFeedback>
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="password" className="form-style-label">Password</Label>
-                                        <Input type="text" id="password" name="password" className="form-style-input" placeholder="Password" value={this.state.password} valid={errors.password === ''} invalid={errors.password !== ''} onChange={this.handleInputChange}/>
+                                        <Input disabled type="text" id="password" name="password" className="form-style-input" placeholder={this.state.password} value={this.state.password} valid={errors.password === ''} invalid={errors.password !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('password')}/>
                                         <FormFeedback>{errors.password}</FormFeedback>
                                     </FormGroup>
                                 </Col>
@@ -120,14 +179,14 @@ class ProfileSeller extends Component {
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="nickname" className="form-style-label">Nickname</Label>
-                                        <Input type="text" id="nickname" name="nickname" className="form-style-input" placeholder="Nickname" value={this.state.nickname} valid={errors.nickname === ''} invalid={errors.nickname !== ''} onChange={this.handleInputChange}/>
+                                        <Input type="text" id="nickname" name="nickname" className="form-style-input" placeholder={this.state.nickname} value={this.state.nickname} valid={errors.nickname === ''} invalid={errors.nickname !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('nickname')}/>
                                         <FormFeedback>{errors.nickname}</FormFeedback>
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="phone" className="form-style-label">Phone</Label>
-                                        <Input type="text" id="phone" name="phone" className="form-style-input" placeholder="Phone" value={this.state.phone} valid={errors.phone === ''} invalid={errors.phone !== ''} onChange={this.handleInputChange}/>
+                                        <Input type="text" id="phone" name="phone" className="form-style-input" placeholder={this.state.phone} value={this.state.phone} valid={errors.phone === ''} invalid={errors.phone !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('phone')}/>
                                         <FormFeedback>{errors.phone}</FormFeedback>
                                     </FormGroup>
                                 </Col>
@@ -136,14 +195,14 @@ class ProfileSeller extends Component {
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="email" className="form-style-label">Email</Label>
-                                        <Input type="text" id="email" name="email" className="form-style-input" placeholder="Email" value={this.state.email} valid={errors.email === ''} invalid={errors.email !== ''} onChange={this.handleInputChange}/>
+                                        <Input type="text" id="email" name="email" className="form-style-input" placeholder={this.state.email} value={this.state.email} valid={errors.email === ''} invalid={errors.email !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('email')}/>
                                         <FormFeedback>{errors.email}</FormFeedback>
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="credit" className="form-style-label">Credit Score</Label>
-                                        <Input type="text" id="credit" name="credit" className="form-style-input" placeholder="Credit Score" value={this.state.credit} valid={errors.credit === ''} invalid={errors.credit !== ''} onChange={this.handleInputChange}/>
+                                        <Input type="text" id="credit" name="credit" className="form-style-input" placeholder={this.state.credit} value={this.state.credit} onChange={this.handleInputChange} />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -151,32 +210,31 @@ class ProfileSeller extends Component {
                                 <Col md={5}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="address" className="form-style-label">Address</Label>
-                                        <Input type="text" id="address" name="address" className="form-style-input" placeholder="Address" value={this.state.address} onChange={this.handleInputChange}/>
+                                        <Input type="text" id="address" name="address" className="form-style-input" placeholder={this.state.address} value={this.state.address} onChange={this.handleInputChange}/>
                                     </FormGroup>
                                 </Col>
                                 <Col md={3}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="city" className="form-style-label">City</Label>
-                                        <Input type="text" id="city" name="city" className="form-style-input" placeholder="City" value={this.state.city} onChange={this.handleInputChange}/>
+                                        <Input type="text" id="city" name="city" className="form-style-input" placeholder={this.state.city} value={this.state.city} onChange={this.handleInputChange}/>
                                     </FormGroup>
                                 </Col>
                                 <Col md={2}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="theState" className="form-style-label">State</Label>
-                                        <Input type="text" id="theState" name="theState" className="form-style-input" placeholder="State" value={this.state.theState} onChange={this.handleInputChange}/>
+                                        <Input type="text" id="theState" name="theState" className="form-style-input" placeholder={this.state.theState} value={this.state.theState} onChange={this.handleInputChange}/>
                                     </FormGroup>
                                 </Col>
                                 <Col md={2}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="zipcode" className="form-style-label">Zipcode</Label>
-                                        <Input type="text" id="zipcode" name="zipcode" className="form-style-input" placeholder="Zipcode" value={this.state.zipcode} valid={errors.zipcode === ''} invalid={errors.zipcode !== ''} onChange={this.handleInputChange}/>
-                                        <FormFeedback>{errors.zipcode}</FormFeedback>
+                                        <Input type="text" id="zipcode" name="zipcode" className="form-style-input" placeholder={this.state.zipcode} value={this.state.zipcode} onChange={this.handleInputChange}/>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <Row>
                                 <FormGroup>
-                                    <Button type="submit" className="button-width button-mr" color="primary">
+                                    <Button disabled={errors.username !== ''||errors.password!==''||errors.nickname!==''||errors.phone!==''||errors.email!==''||this.state.username===''||this.state.password===''||this.state.nickname===''||this.state.phone===''||this.state.email===''} type="submit" className="button-width button-mr" color="primary">
                                         Save
                                     </Button>
                                     <Button type="reset" className="button-width">
