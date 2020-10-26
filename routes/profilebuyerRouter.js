@@ -9,7 +9,7 @@ var profilebuyerRouter = express.Router();
 profilebuyerRouter.use(bodyParser.json());
 
 profilebuyerRouter.route('/:username')
-    .get(authenticate.verifyUser, (req,res,next) => {
+    .get(authenticate.verifyUser, authenticate.verifybuyer, (req,res,next) => {
         User.findOne({username: req.params.username})
         .then((user) => {
             res.StatusCode = 200;
@@ -18,7 +18,7 @@ profilebuyerRouter.route('/:username')
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .put(authenticate.verifyUser, (req, res, next) => {
+    .put(authenticate.verifyUser, authenticate.verifybuyer, (req, res, next) => {
         const filter = { username: req.params.username };
         const update = { 
             nickname: req.body.nickname,
