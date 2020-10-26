@@ -100,7 +100,7 @@ const itemSchema = new Schema({
     },
     comments: [commentSchema],
     images: {
-        type: [String],
+        type: String,
         required: true
     }
 }, {

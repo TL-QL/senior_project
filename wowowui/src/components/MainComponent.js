@@ -69,7 +69,7 @@ class Main extends Component{
                         <Route exact path="/favorite" component={Favorite}/>
                         <Route exact path="/shoppingcart" component={Shoppingcart}/>
                         <Route exact path="/postsub" component={()=><Postsub history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
-                        <Route exact path="/submissions" component={Submissions}/>
+                        <Route exact path="/submissions" component={()=><Submissions history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
                         <Route exact path="/adminverify" component={Adminverify}/>
                         <Redirect to="/home" />
                     </Switch>

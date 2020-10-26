@@ -13,6 +13,7 @@ var profilesellerRouter = require('./routes/profilesellerRouter');
 var profilebuyerRouter = require('./routes/profilebuyerRouter');
 var contactusRouter = require('./routes/contactusRouter');
 var postsubRouter = require('./routes/postsubRouter');
+var submissionsRouter = require('./routes/submissionsRouter');
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -46,6 +47,7 @@ app.use('/profileseller', profilesellerRouter);
 app.use('/profilebuyer', profilebuyerRouter);
 app.use('/contactus', contactusRouter);
 app.use('/postsub', postsubRouter);
+app.use('/submissions', submissionsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

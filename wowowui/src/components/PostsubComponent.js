@@ -10,7 +10,8 @@ class Postsub extends Component {
         super(props);
 
         this.state = {
-            image:null,
+            image:'',
+            imageURL:'',
             title:'',
             price:'',
             quantity:'',
@@ -39,7 +40,8 @@ class Postsub extends Component {
 
     handleInputFileChange(event){
         this.setState({
-            image: URL.createObjectURL(event.target.files[0])
+            image: event.target.files[0].name,
+            imageURL: URL.createObjectURL(event.target.files[0])
         })
     }
 
@@ -222,7 +224,7 @@ class Postsub extends Component {
                                 <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup>
                                         <CustomInput type="file" id="img" name="img" label="Upload Images" onChange={this.handleInputFileChange}/>
-                                        <img style={{width: "180px", marginTop:"20px"}} src={this.state.image} />
+                                        <img style={{width: "180px", marginTop:"20px"}} src={this.state.imageURL} />
                                     </FormGroup>
                                 </Col>
                             </Row>
