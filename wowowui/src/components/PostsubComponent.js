@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback, CustomInput} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import Select from 'react-select';
+var config = require('../config');
 
 class Postsub extends Component {
 
@@ -8,30 +10,42 @@ class Postsub extends Component {
         super(props);
 
         this.state = {
-            image:'',
+            image:null,
             title:'',
             price:'',
+            quantity:'',
             condition:'',
             delivery:'',
-            address:'',
-            phone:'',
-            email:'',
             category:'',
-            subCategory:'',
+            subCategories:[],
             sizeInfo:'',
             detachable:'',
             careIns:'',
             productInsurance:'',
-            damage:''
+            damage:'',
+            touched: {
+                title: false,
+                price: false,
+                quantity: false
+            }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputFileChange = this.handleInputFileChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleMultiInputChange = this.handleMultiInputChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+    }
+
+    handleInputFileChange(event){
+        this.setState({
+            image: URL.createObjectURL(event.target.files[0])
+        })
     }
 
     handleInputChange(event){
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.value;
         const name = target.name;
 
         this.setState({
@@ -39,40 +53,156 @@ class Postsub extends Component {
         });
     }
 
-    handleSubmit(event){
-        console.log("Current State is: "+JSON.stringify(this.state));
-        alert("Current State is: "+JSON.stringify(this.state));
-        event.preventDefault();
+    handleMultiInputChange = (events) => {
+        var value = [];
+        for(var i = 0;i < events.length;i++){
+            value.push(events[i].value);
+        }
+        this.setState({subCategories: value});
     }
 
-    validate(title, address, phone, email) {
+
+    handleSubmit(event){
+        event.preventDefault();
+        let databody = {
+            "image": this.state.image,
+            "title": this.state.title,
+            "price": this.state.price,
+            "quantity": this.state.quantity,
+            "condition": this.state.condition,
+            "delivery": this.state.delivery,
+            "category": this.state.category,
+            "subCategories": this.state.subCategories,
+            "sizeInfo": this.state.sizeInfo,
+            "detachable": this.state.detachable,
+            "careIns": this.state.careIns,
+            "productInsurance": this.state.productInsurance,
+            "damage": this.state.damage
+        }
+        fetch(config.serverUrl+'/postsub/'+this.props.username, {
+            method: 'POST',
+            body: JSON.stringify(databody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'bearer '+this.props.token
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success) this.props.history.push('/homeseller');
+            else
+                alert(JSON.stringify(data.err));
+        })
+    }
+
+    handleBlur = (field) => (evt) => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true },
+        });
+    }
+
+    validate(title, price, quantity) {
 
         const errors = {
             title: '',
-            address: '',
-            phone: '',
-            email: ''
+            price:'',
+            quantity:''
         };
 
-        if (title.length < 1)
+        if (this.state.touched.title && title.length < 1)
             errors.title = 'Title should be >= 1 characters';
 
-        if (address.length < 1)
-            errors.address = 'Address should be >= 1 characters';
-
         const reg = /^\d+$/;
-
-        if (!reg.test(phone))
-            errors.phone = 'Phone Number should contain only numbers';
-            
-        if (email.split('').filter(x => x === '@').length !== 1) 
-            errors.email = 'Email should contain a @';
+        if (this.state.touched.price && !reg.test(price))
+            errors.price = 'Price should contain only numbers';
+        if (this.state.touched.quantity && !reg.test(quantity))
+            errors.quantity = 'Quantity should contain only numbers';
 
         return errors;
     }
 
+    renderSelection(category){
+        const options_home = [
+            { value: 'furniture', label: 'Furniture' },
+            { value: 'livingroom', label: 'Living room' },
+            { value: 'bathroom', label: 'Bathroom' },
+            { value: 'bedroom', label: 'Bedroom' },
+            { value: 'dormroom', label: 'Dorm room' },
+            { value: 'kitchen', label: 'Kitchen' },
+            { value: 'storageOrganization', label: 'Storage and organization' },
+            { value: 'homeDecor', label: 'Home Decor' },
+            { value: 'others', label: 'Others' }
+        ]
+        const options_books = [
+            { value: 'textbook', label: 'Textbook' },
+            { value: 'others', label: 'Others' }
+        ]
+        const options_stationery = [
+            { value: 'writingUtensils', label: 'Writing Utensils' },
+            { value: 'organizationUtensils', label: 'Organization Utensils' },
+            { value: 'notebook', label: 'Notebook' },
+            { value: 'papers', label: 'Papers' },
+            { value: 'others', label: 'Others' }
+        ]
+        const options_electronics = [
+            { value: 'computer', label: 'Computer' },
+            { value: 'phone', label: 'Phone' },
+            { value: 'iclicker', label: 'iClicker' },
+            { value: 'ipad', label: 'iPad' },
+            { value: 'TV', label: 'TV' },
+            { value: 'gaming', label: 'Gaming' },
+            { value: 'headphone', label: 'Headphone' },
+            { value: 'printer', label: 'Printer' },
+            { value: 'others', label: 'Others' }
+        ]
+        const options_motors = [
+            { value: 'bike', label: 'Bike' },
+            { value: 'car', label: 'Phone' },
+            { value: 'unicycle', label: 'Unicycle' },
+            { value: 'skateboard', label: 'Skateboard' },
+            { value: 'others', label: 'Others' }
+        ]
+        const options_pets = [
+            { value: 'petSupplies', label: 'Pet Supplies' },
+            { value: 'petFood', label: 'Pet Food' },
+            { value: 'others', label: 'Others' }
+        ]
+        if(category == 'home'){
+            return(
+                options_home
+            );
+        }
+        else if(category == 'books'){
+            return(
+                options_books
+            );
+        }
+        else if(category== 'stationery'){
+            return(
+                options_stationery
+            );
+        }
+        else if(category == 'electronics'){
+            return(
+                options_electronics
+            );
+        }
+        else if(category == 'motors'){
+            return(
+                options_motors
+            );
+        }
+        // pets
+        else{
+            return(
+                options_pets
+            );
+        }
+    }
+
     render() {
-        const errors = this.validate(this.state.title, this.state.address, this.state.phone, this.state.email);
+        const errors = this.validate(this.state.title, this.state.price, this.state.quantity);
+        const { subCategory } = this.state;
         return(
             <div className="container">
                 <div className="row">
@@ -89,32 +219,45 @@ class Postsub extends Component {
                     <div className="col-12">
                         <Form onSubmit={this.handleSubmit} class="form-style">
                             <Row>
-                                <Col sm={12} md={3}>
+                                <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <CustomInput type="file" id="img" name="img" label="Upload Images"/>
+                                        <CustomInput type="file" id="img" name="img" label="Upload Images" onChange={this.handleInputFileChange}/>
+                                        <img style={{width: "180px", marginTop:"20px"}} src={this.state.image} />
                                     </FormGroup>
                                 </Col>
-                                <Col sm={12} md={{size:6, offset:1}}>
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="title" className="form-style-label">Title</Label>
-                                        <Input type="text" id="title" name="title" className="form-style-input" placeholder="Title" value={this.state.title} valid={errors.title === ''} invalid={errors.title !== ''} onChange={this.handleInputChange}/>
+                                        <Label htmlFor="title" className="form-style-label">Title (Required)</Label>
+                                        <Input type="text" id="title" name="title" className="form-style-input" placeholder="Title" value={this.state.title} valid={errors.title === ''} invalid={errors.title !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('title')}/>
                                         <FormFeedback>{errors.title}</FormFeedback>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={{size:6, offset:4}}>
+                                <Col xs={12} md={{size:6, offset:3}}>
                                     <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="price" className="form-style-label">Price</Label>
+                                        <Label htmlFor="price" className="form-style-label">Price (Required)</Label>
                                         <Input type="text" id="price" name="price" className="form-style-input" placeholder="Price in US Dollar" value={this.state.price} valid={errors.price === ''} invalid={errors.price !== ''} onChange={this.handleInputChange}/>
+                                        <FormFeedback>{errors.price}</FormFeedback>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={6} md={{size:6, offset:4}}>
+                                <Col xs={12} md={{size:6, offset:3}}>
+                                    <FormGroup className="form-style-form-group">
+                                        <Label htmlFor="quantity" className="form-style-label">Quantity</Label>
+                                        <Input type="text" id="quantity" name="quantity" className="form-style-input" value={this.state.quantity} valid={errors.quantity=== ''} invalid={errors.quantity !== ''} onChange={this.handleInputChange}/>
+                                        <FormFeedback>{errors.quantity}</FormFeedback>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <select name="condition" className="select-list">
-                                            <option selected disabled>Condition</option>
+                                        <select name="condition" className="select-list" onChange={this.handleInputChange}>
+                                            <option selected disabled>Condition (Required)</option>
                                             <option value ="99">99% new - Package has been opened but not used</option>
                                             <option value ="90">90% new - Slightly used or color faded</option>
                                             <option value ="70">70% new - Visible scratches and visible lost paint/color</option>
@@ -124,10 +267,10 @@ class Postsub extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={6} md={{size:6, offset:4}}>
+                                <Col xs={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <select name="delivery" className="select-list">
-                                            <option selected disabled>Delivery Option</option>
+                                        <select name="delivery" className="select-list" onChange={this.handleInputChange}>
+                                            <option selected disabled>Delivery Option (Required)</option>
                                             <option value ="pickup">Pick up</option>
                                             <option value ="delivery">Delivery</option>
                                             <option value ="both">Both</option>
@@ -135,40 +278,15 @@ class Postsub extends Component {
                                     </FormGroup>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col xs={12} md={6} md={{size:6, offset:4}}>
-                                    <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="address" className="form-style-label">Address</Label>
-                                        <Input type="text" id="address" name="address" className="form-style-input" placeholder="Address" value={this.state.address} valid={errors.address === ''} invalid={errors.address !== ''} onChange={this.handleInputChange}/>
-                                        <FormFeedback>{errors.address}</FormFeedback>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={12} md={{size:3, offset:4}}>
-                                    <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="phone" className="form-style-label">Phone</Label>
-                                        <Input type="text" id="phone" name="phone" className="form-style-input" placeholder="Phone" value={this.state.phone} valid={errors.phone === ''} invalid={errors.phone !== ''} onChange={this.handleInputChange}/>
-                                        <FormFeedback>{errors.phone}</FormFeedback>
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={12} md={3}>
-                                    <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="email" className="form-style-label">Email</Label>
-                                        <Input type="text" id="email" name="email" className="form-style-input" placeholder="Email" value={this.state.email} valid={errors.email === ''} invalid={errors.email !== ''} onChange={this.handleInputChange}/>
-                                        <FormFeedback>{errors.email}</FormFeedback>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <div className="col-12 col-md-6 offset-md-4">
+                            <div className="col-12 col-md-6 offset-md-3">
                                 <p style={{fontSize:"16px", fontFamily:"Arial Black"}}>More about your goods</p>
                                 <p style={{fontSize:"12px", marginTop:"-20px"}}>Please provide as much info as possible.</p>
                             </div>
                             <Row>
-                                <Col xs={12} md={6} md={{size:6, offset:4}}>
+                                <Col xs={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <select name="category" className="select-list">
-                                            <option selected disabled>Category</option>
+                                        <select name="category" className="select-list" onChange={this.handleInputChange}>
+                                            <option selected disabled>Category and Subcategory (Required)</option>
                                             <option value ="home">Home</option>
                                             <option value ="books">Books</option>
                                             <option value ="stationery">Stationery</option>
@@ -180,24 +298,30 @@ class Postsub extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={6} md={{size:6, offset:4}}>
+                                <Col xs={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <select name="subCategory" className="select-list">
-                                            <option selected disabled>Subcategory</option>
-                                        </select> 
+                                        <Label htmlFor="subCategories">Subcategories</Label>
+                                        <Select
+                                            isMulti
+                                            name="subCategories"
+                                            value= {subCategory}
+                                            options={this.renderSelection(this.state.category)}
+                                            classNamePrefix="select"
+                                            onChange={this.handleMultiInputChange}
+                                        />
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={12} md={{size:6, offset:4}}>
+                                <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="sizeinfo" className="form-style-label">Size Info</Label>
-                                        <Input type="text" id="sizeinfo" name="sizeinfo" className="form-style-input" placeholder="Size Info" value={this.state.sizeInfo} onChange={this.handleInputChange}/>
+                                        <Label htmlFor="sizeInfo" className="form-style-label">Size Info</Label>
+                                        <Input type="text" id="sizeInfo" name="sizeInfo" className="form-style-input" value={this.state.sizeInfo} onChange={this.handleInputChange}/>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={12} md={{size:6, offset:4}}>
+                                <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="productInsurance" className="form-style-label">Product Insurance</Label>
                                         <Input type="text" id="productInsurance" name="productInsurance" className="form-style-input" placeholder="Ex. No insurance" value={this.state.productInsurance} onChange={this.handleInputChange}/>
@@ -205,7 +329,7 @@ class Postsub extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={12} md={6} md={{size:6, offset:4}}>
+                                <Col sm={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="detachable" className="form-style-label">Detaching Info</Label>
                                         <Input type="textarea" rows="5" id="detachable" name="detachable" value={this.state.detachable} onChange={this.handleInputChange}/>
@@ -213,7 +337,7 @@ class Postsub extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={12} md={{size:6, offset:4}}>
+                                <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="careIns" className="form-style-label">Care Instruction</Label>
                                         <Input type="textarea" id="careIns" name="careIns" rows="5" value={this.state.careIns} onChange={this.handleInputChange}/>
@@ -221,7 +345,7 @@ class Postsub extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={12} md={{size:6, offset:4}}>
+                                <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="damage" className="form-style-label">Description on damage(s)</Label>
                                         <Input type="textarea" id="damage" name="damage" rows="5" value={this.state.damage} onChange={this.handleInputChange}/>
@@ -229,7 +353,7 @@ class Postsub extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={12} md={{size:6, offset:4}}>
+                                <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup>
                                         <Button type="submit" value="submit" style={{background:"rgba(132,0,255,0.57)", width:"100%", fontFamily:"Arial Black"}}>Submit</Button>
                                     </FormGroup>

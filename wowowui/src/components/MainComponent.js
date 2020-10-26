@@ -68,7 +68,7 @@ class Main extends Component{
                         <Route exact path="/search" component={Search}/>
                         <Route exact path="/favorite" component={Favorite}/>
                         <Route exact path="/shoppingcart" component={Shoppingcart}/>
-                        <Route exact path="/postsub" component={Postsub}/>
+                        <Route exact path="/postsub" component={()=><Postsub history={this.props.history} token={this.state.token}/>}/>
                         <Route exact path="/submissions" component={Submissions}/>
                         <Route exact path="/adminverify" component={Adminverify}/>
                         <Redirect to="/home" />

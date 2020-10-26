@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-require('mongoose-currency').loadType(mongoose);
-const Currency = mongoose.Types.Currency;
 
 const commentSchema = new Schema({
     rating:{
@@ -23,13 +21,17 @@ const commentSchema = new Schema({
 });
 
 const itemSchema = new Schema({
-    name: {
+    item_id:{
         type: String,
         required: true,
         unique: true
     },
+    name: {
+        type: String,
+        required: true
+    },
     price: {
-        type: Currency,
+        type: Number,
         required: true,
         min: 0
     },
@@ -43,15 +45,15 @@ const itemSchema = new Schema({
     },
     favoriteCount: {
         type: Number,
-        min: 0
+        default: 0
     },
     shoppingCartCount: {
         type: Number,
-        min: 0
+        default: 0
     },
     quantity: {
         type: Number,
-        min: 0
+        default: 1
     },
     condition: {
         type: String,
@@ -63,27 +65,23 @@ const itemSchema = new Schema({
     },
     sizeInfo: {
         type: String,
-        default: ''
+        default: "N/A"
     },
     detachable: {
         type: String,
-        default: ''
+        default: "N/A"
     },
     careIns: {
         type: String,
-        default: ''
+        default: "N/A"
     },
     productInsurance: {
         type: String,
-        default: ''
+        default: "N/A"
     },
     damage: {
         type: String,
-        default: ''
-    },
-    sellerInfo: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        default: "N/A"
     },
     // whether the item is approved by admin
     post: {
@@ -95,12 +93,10 @@ const itemSchema = new Schema({
         default: false
     },
     buyer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: String
     },
     seller: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: String
     },
     comments: [commentSchema],
     images: {
