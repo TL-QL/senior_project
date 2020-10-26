@@ -18,7 +18,7 @@ postsubRouter.route('/:username')
             }else{
                 var savedata = new Item({
                     "item_id": count,
-                    "images": req.body.image,
+                    "image": req.body.image,
                     "name": req.body.title,
                     "price": req.body.price,
                     "quantity": req.body.quantity,
