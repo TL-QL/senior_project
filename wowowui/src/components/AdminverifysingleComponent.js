@@ -152,7 +152,7 @@ class Adminverifysingle extends Component{
                         <p><strong>Category:</strong> {this.state.category}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <p><strong>Subcategories:</strong> {this.state.subCategory}</p>
+                        <p><strong>Subcategories:</strong> {this.state.subCategories}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Size Info:</strong> {this.state.sizeInfo}</p>
