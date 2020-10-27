@@ -15,6 +15,8 @@ var contactusRouter = require('./routes/contactusRouter');
 var postsubRouter = require('./routes/postsubRouter');
 var submissionsRouter = require('./routes/submissionsRouter');
 var editsubRouter = require('./routes/editsubRouter');
+var adminverifyRouter = require('./routes/adminverifyRouter');
+var adminverifysingleRouter = require('./routes/adminverifysingleRouter');
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -50,6 +52,8 @@ app.use('/contactus', contactusRouter);
 app.use('/postsub', postsubRouter);
 app.use('/submissions', submissionsRouter);
 app.use('/editsub', editsubRouter);
+app.use('/adminverify', adminverifyRouter);
+app.use('/adminverifysingle', adminverifysingleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

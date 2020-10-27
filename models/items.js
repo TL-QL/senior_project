@@ -84,7 +84,11 @@ const itemSchema = new Schema({
         default: "N/A"
     },
     // whether the item is approved by admin
-    post: {
+    approve: {
+        type: Boolean,
+        default: false
+    },
+    reject: {
         type: Boolean,
         default: false
     },
@@ -102,6 +106,10 @@ const itemSchema = new Schema({
     images: {
         type: String,
         required: true
+    },
+    imageScore:{
+        type: Number,
+        min: 0
     }
 }, {
     timestamps: true
