@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback, CustomInput} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {baseUrl} from '../shared/baseUrl';
 import Select from 'react-select';
 var config = require('../config');
 
-class Postsub extends Component {
+class Editsub extends Component {
 
     constructor(props){
         super(props);
 
         this.state = {
             image:'',
-            imageURL:'',
             title:'',
             price:'',
             quantity:'',
@@ -38,10 +38,37 @@ class Postsub extends Component {
         this.handleBlur = this.handleBlur.bind(this);
     }
 
+    componentDidMount() {
+        fetch(config.serverUrl+this.props.path, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'bearer '+this.props.token
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                image: data.images,
+                title: data.name,
+                price: data.price,
+                quantity: data.quantity,
+                condition: data.condition,
+                delivery: data.delivery,
+                category: data.category,
+                subCategories: data.subCategory,
+                sizeInfo: data.sizeInfo,
+                productInsurance: data.productInsurance,
+                detachable: data.detachable,
+                careIns: data.careIns,
+                damage: data.damage
+            })
+        })
+    }
+
     handleInputFileChange(event){
         this.setState({
-            image: event.target.files[0].name,
-            imageURL: URL.createObjectURL(event.target.files[0])
+            image: event.target.files[0].name
         })
     }
 
@@ -81,8 +108,8 @@ class Postsub extends Component {
             "productInsurance": this.state.productInsurance,
             "damage": this.state.damage
         }
-        fetch(config.serverUrl+'/postsub/'+this.props.username, {
-            method: 'POST',
+        fetch(config.serverUrl+this.props.path, {
+            method: 'PUT',
             body: JSON.stringify(databody),
             headers: {
                 'Content-Type': 'application/json',
@@ -213,7 +240,7 @@ class Postsub extends Component {
                         <BreadcrumbItem active>Seller Post</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
-                        <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Post Your Goods</h5>
+                        <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Edit Your Post</h5>
                         <hr className="seperation" />
                     </div>
                 </div>
@@ -224,7 +251,7 @@ class Postsub extends Component {
                                 <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup>
                                         <CustomInput type="file" id="img" name="img" label="Upload Images" onChange={this.handleInputFileChange}/>
-                                        <img style={{width: "180px", marginTop:"20px"}} src={this.state.imageURL} />
+                                        <img style={{width: "180px", marginTop:"20px"}} src={baseUrl+'/images/'+this.state.image} />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -369,4 +396,4 @@ class Postsub extends Component {
     }
 }
 
-export default Postsub;
+export default Editsub;

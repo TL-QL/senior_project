@@ -77,11 +77,10 @@ class Headerseller extends Component{
                 <Jumbotron>
                     <div className="container">
                         <div className="row rowheader">
-                            <div className="col-12 col-sm-7">
-                                <h1>Welcome to</h1> 
-                                <h2>Second-hand Goods Trading Platform!</h2>
+                            <div className="col-12 col-sm-8">
+                                <h1>Welcome to</h1>
+                                <h2>Second-hand Goods Trading Platform</h2>
                                 <p>We will provide you with the best experience of second-hand goods trading at CWRU! You can find cheap goods with good condition here. Or you can post your idle goods here for find their next owners.</p>
-                                <p>Start your journey with us NOW!</p>
                             </div>
                         </div>
                     </div>

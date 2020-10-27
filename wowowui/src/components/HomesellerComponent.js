@@ -41,7 +41,7 @@ class Homeseller extends Component{
     render(){
         return(
             <div className="container">
-                <div className="row">
+                <div className="row" style={{marginBottom: "150px"}}>
                     <div className="col-6">
                         <Link to={'/postsub'}>
                             <CardImg style={{width:"60%",marginTop:"5%"}} src={baseUrl+"/images/post.png"} alt="Post your goods" />

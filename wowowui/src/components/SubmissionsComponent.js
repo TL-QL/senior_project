@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from 'reactstrap';
 import {baseUrl} from '../shared/baseUrl';
+import { Link } from 'react-router-dom';
 var config = require('../config');
 
 class Submissions extends Component{
@@ -75,10 +76,8 @@ class Submissions extends Component{
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Description on damage(s):</strong> {item.damage}</p>
                     </div>
-                    <div className="row ml-auto">
-                        <form action={(item) => {return('/editsub/'+item.item_id)}}>
-                            <Button type="submit" value="submit" style={{background:"rgba(132,0,255,0.57)", fontFamily:"Arial Black"}}>Edit</Button>
-                        </form>
+                    <div className="col-12 col-md-2 offset-md-9 border" style={{borderRadius:"5px", backgroundColor:"rgba(132,0,255,0.57)", height:"40px",width:"100%",paddingTop:"8px"}}>
+                        <center><strong><Link to={`/editsub/${item.item_id}`} style={{ color: '#FFF' }}><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</Link></strong></center>
                     </div>
                 </div>
             );
