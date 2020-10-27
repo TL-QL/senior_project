@@ -25,23 +25,43 @@
      - Client and server will run concurrently
      - Client runs on http://localhost:3000
      - Server runs on http://localhost:5000
+## Existed Login Info
+- Admin account
+     - username: Admin
+     - password: 123456
+- Seller account
+     - username: QiwenLuo
+     - password: 123456
+- Buyer account
+     - username: TooLazy
+     - password: 123456
+- Your can walk through the website by logging in with these existed accounts. Or you can create your own account. Remember your password since it can not be retrieved and reset.
 
 ## Endpoints
-- /home
-- /profileseller (backend incomplete)
-- /profilebuyer (backend incomplete)
-- /search (backend incomplete)
-- /aboutus
-- /contactus (backend incomplete)
-- /favorite (backend incomplete)
-- /shoppingcart (backend incomplete)
-- /sellerpost (backend incomplete)
-- /sellersubmission (backend incomplete)
-- /itemdetail (backend incomplete)
-- /users/signupseller
-- /users/signupbuyer
-- /users/login
-- /adminverify (backend incomplete)
+- Endpoint for all roles
+     - /users/login
+- Endpoints for buyer
+     - /home (backend incomplete)
+     - /users/signupbuyer
+     - /profilebuyer
+     - /search (backend incomplete)
+     - /aboutus
+     - /contactus
+     - /favorite (backend incomplete)
+     - /shoppingcart (backend incomplete)
+     - /itemdetail (backend incomplete)
+- Endpoints for seller
+     - /users/signupseller
+     - /homeseller
+     - /profileseller
+     - /sellerpost
+     - /sellersubmissions
+     - /sellereditpost
+     - /contactusseller
+     - /aboutusseller
+- Endpoints for admin
+     - /adminverify
+     - /adminverifysingle
 
 ## Notes
 - To access the pages with incomplete back-end implementation, please type full URLs (Ex. http://localhost:3000/profileseller) to visit these pages.
