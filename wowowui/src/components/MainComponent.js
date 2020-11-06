@@ -72,7 +72,7 @@ class Main extends Component{
                         <Route exact path="/shoppingcart" component={Shoppingcart}/>
                         <Route exact path="/postsub" component={()=><Postsub history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
                         <Route exact path="/submissions" component={()=><Submissions history={this.props.history} username={this.state.username} token={this.state.token}/>}/>
-                        <Route path="/editsub/:itemId" component={()=><Editsub path={this.props.location.pathname} history={this.props.history} token={this.state.token}/>}/>
+                        <Route exact path="/editsub/:itemId" component={()=><Editsub path={this.props.location.pathname} history={this.props.history} token={this.state.token}/>}/>
                         <Route exact path="/adminverify" component={()=><Adminverify username={this.state.username} history={this.props.history} token={this.state.token}/>}/>
                         <Route exact path="/adminverifysingle/:itemId" component={()=><Adminverifysingle path={this.props.location.pathname} username={this.state.username} history={this.props.history} token={this.state.token}/>}/>
                         <Redirect to="/home" />

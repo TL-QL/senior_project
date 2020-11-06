@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "5f966b77ead26915f3d4a52f"
+  },
+  "subCategory": [
+    "furniture"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "",
+  "detachable": "",
+  "careIns": "",
+  "productInsurance": "",
+  "damage": "",
+  "post": false,
+  "soldout": false,
+  "item_id": "0",
+  "images": "furniture1.jpg",
+  "name": "sofa",
+  "price": 1222,
+  "condition": "99",
+  "delivery": "both",
+  "category": "home",
+  "seller": "QiwenLuo",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-10-26T06:23:51.599Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-27T06:45:42.587Z"
+  },
+  "__v": 0,
+  "imageScore": null,
+  "approve": false,
+  "reject": true
+},{
+  "_id": {
+    "$oid": "5f978f71e478b65d58872bbe"
+  },
+  "subCategory": [
+    "livingroom",
+    "furniture",
+    "dormroom"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "12*12*12",
+  "detachable": "dvdvdvddcdddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "careIns": "ccccccccccccccccccccccccccccccccccccc",
+  "productInsurance": "NO insurance",
+  "damage": "Perfect. No damage!",
+  "post": false,
+  "soldout": false,
+  "item_id": "1",
+  "images": "furniture2.png",
+  "name": "sofa2",
+  "price": 1222,
+  "condition": "99",
+  "delivery": "pickup",
+  "category": "home",
+  "seller": "QiwenLuo",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-10-27T03:09:37.118Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-27T05:55:11.531Z"
+  },
+  "__v": 0,
+  "imageScore": null,
+  "approve": true,
+  "reject": false
+}]
