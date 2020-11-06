@@ -14,10 +14,13 @@
 ## How to run the website
 - Download: Node JS (https://nodejs.org/en/) and MongoDB (https://www.mongodb.com/)
 - Start MongoDB
-     - Follow the instruction https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/ to start MongoDB on Windows, Mac or Linux
+     - Follow the instruction https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/ to install&run MongoDB on Windows, Mac or Linux
 - Run the website
      - Open another command window and move to the folder that contains all files (UI, backend, DB)
      - Type the following at the command prompt to install all dependencies: npm install
+     - Move to the folder wowowui which contains UIs
+     - Type the following at the command prompt to install all dependencies: npm install
+     - Move back to the folder that contains all files (UI, backend, DB)
      - Type the following at the command prompt to run the website: npm run dev 
      - Client and server will run concurrently
      - Client runs on http://localhost:3000
