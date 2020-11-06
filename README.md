@@ -10,6 +10,7 @@
 - Folder models stores all DB collections' schema 
 - Folder wowowui stores all front-end files
 - Folder routes usually deal with back-end issues
+- Folder json contains all data in the local database
 
 ## How to run the website
 - Download: Node JS (https://nodejs.org/en/) and MongoDB (https://www.mongodb.com/)
