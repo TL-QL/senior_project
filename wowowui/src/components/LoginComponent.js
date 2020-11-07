@@ -37,7 +37,7 @@ class Login extends Component{
             method: 'POST',
             body: JSON.stringify(databody),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
         })
         .then(res => res.json())

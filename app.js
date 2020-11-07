@@ -6,6 +6,7 @@ var logger = require('morgan');
 var passport = require('passport');
 var authenticate = require('./authenticate');
 var config = require('./config');
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -34,6 +35,8 @@ const port = 5000; //Node.js uses port 5000 for development server
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
