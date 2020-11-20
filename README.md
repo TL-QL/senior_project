@@ -15,7 +15,8 @@
 ## How to run the website
 - Download: Node JS (https://nodejs.org/en/) and MongoDB (https://www.mongodb.com/)
 - Start MongoDB
-     - Follow the instruction https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/ to install&run MongoDB on Windows, Mac or Linux
+     - Follow the instruction https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/ to install & run MongoDB on Windows, Mac or Linux
+     - For Mac users to run MongoDB, choose to make a directory called mongodb anywhere in the computers, make a directory called data under the mongodb folder, cd to directory mongodb at the command prompt and type mongod --dbpath=data at the command prompt  
 - Run the website
      - Open another command window and move to the folder that contains all files (UI, backend, DB)
      - Type the following at the command prompt to install all dependencies: npm install
