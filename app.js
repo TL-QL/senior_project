@@ -18,6 +18,10 @@ var submissionsRouter = require('./routes/submissionsRouter');
 var editsubRouter = require('./routes/editsubRouter');
 var adminverifyRouter = require('./routes/adminverifyRouter');
 var adminverifysingleRouter = require('./routes/adminverifysingleRouter');
+var homeRouter = require('./routes/homeRouter');
+var itemDetailRouterRouter = require('./routes/itemdetailRouter');
+var favoriteRouter = require('./routes/favoriteRouter');
+var shoppingRouter = require('./routes/shoppingRouter');
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -57,6 +61,10 @@ app.use('/submissions', submissionsRouter);
 app.use('/editsub', editsubRouter);
 app.use('/adminverify', adminverifyRouter);
 app.use('/adminverifysingle', adminverifysingleRouter);
+app.use('/home', homeRouter);
+app.use('/itemdetail', itemDetailRouterRouter);
+app.use('/fav', favoriteRouter);
+app.use('/shoppingcart', shoppingRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

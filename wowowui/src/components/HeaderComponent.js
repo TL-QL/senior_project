@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {baseUrl} from '../shared/baseUrl';
 var config = require('../config');
 
@@ -72,10 +72,14 @@ class Header extends Component{
                                     </Button>
                                 </NavItem>
                                 <NavItem>
-                                    <span className="fa fa-heart-o fa-lg fa-cog fa-margin-right fa-margin-top"></span>
+                                    <Link to={`/favorite`} style={{ color: '#FFF' }}>
+                                        <span className="fa fa-heart-o fa-lg fa-cog fa-margin-right fa-margin-top"></span>
+                                    </Link>
                                 </NavItem>
                                 <NavItem>
-                                    <span className="fa fa-shopping-cart fa-lg fa-cog fa-margin-top"></span>
+                                    <Link to={`/shoppingcart`} style={{ color: '#FFF' }}>
+                                        <span className="fa fa-shopping-cart fa-lg fa-cog fa-margin-top"></span>
+                                    </Link>
                                 </NavItem>
                             </Nav>
                         </Collapse>

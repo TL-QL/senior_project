@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback} from 'reactstrap';
+import {baseUrl} from '../shared/baseUrl';
+import { Link } from 'react-router-dom';
+var config = require('../config');
 
 class Home extends Component{
 
@@ -8,10 +11,11 @@ class Home extends Component{
 
         this.state = {
             search:'',
-            category:'',
-            condition:'',
-            delivery:'',
-            sort:''
+            category:'NA',
+            condition:'NA',
+            delivery:'NA',
+            sort:'NA',
+            items: []
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,13 +33,53 @@ class Home extends Component{
     }
 
     handleSubmit(event){
-        console.log("Current State is: "+JSON.stringify(this.state));
-        alert("Current State is: "+JSON.stringify(this.state));
         event.preventDefault();
+        fetch(config.serverUrl+'/home/'+this.state.search+'/'+this.state.category+'/'+this.state.condition+'/'+this.state.delivery+'/'+this.state.sort, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'bearer '+this.props.token
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                items: data
+            })
+        })
     }
 
 
     render(){
+
+        const item = this.state.items.map((item) => {
+            return (
+                <div key={item.item_id} className="row col-12 col-md-8 offset-md-1" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+item.images} />
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Title:</strong> {item.name}</p>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Price:</strong> {item.price}</p>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Seller:</strong> {item.seller}</p>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Favorite:</strong> {item.favoriteCount}</p>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Buy:</strong> {item.shoppingCartCount}</p>
+                    </div>
+                    <div className="col-6 col-md-4 offset-6 offset-md-8 border" style={{borderRadius:"5px", backgroundColor:"rgba(132,0,255,0.57)", height:"40px",width:"100%",paddingTop:"8px", marginBottom:"20px"}}>
+                        <center><strong><Link to={`/itemdetail/${item.item_id}`} style={{ color: '#FFF' }}><i class="fa fa-info-circle" aria-hidden="true"></i> More Info</Link></strong></center>
+                    </div>
+                </div>
+            );
+        });
+
         return(
             <div className="container">
                 <div className="col-12">
@@ -44,7 +88,7 @@ class Home extends Component{
                             <Col sm={12} md={9} className="mr-auto">
                                 <i className="fa fa-search fa-lg icon"></i>
                                 <FormGroup>
-                                    <Input type="text" className="search-bar" name="search" placeholder="Search.." />
+                                    <Input type="text" className="search-bar" name="search" placeholder="Search.." onChange={this.handleInputChange}/>
                                 </FormGroup>
                             </Col>
                             <Col sm={6} md={2}>
@@ -56,20 +100,20 @@ class Home extends Component{
                         <Row>
                             <Col sm={12} md={2}>
                                 <FormGroup>
-                                    <select name="category" className="select-list">
+                                    <select name="category" className="select-list" onChange={this.handleInputChange}>
                                         <option selected disabled>Category</option>
-                                        <option value ="Home">Home</option>
-                                        <option value ="Books">Books</option>
-                                        <option value ="Stationery">Stationery</option>
-                                        <option value ="Electronics">Electronics</option>
-                                        <option value ="Motors">Motors</option>
-                                        <option value ="Pets">Pets</option>
+                                        <option value ="home">Home</option>
+                                        <option value ="books">Books</option>
+                                        <option value ="stationery">Stationery</option>
+                                        <option value ="electronics">Electronics</option>
+                                        <option value ="motors">Motors</option>
+                                        <option value ="pets">Pets</option>
                                     </select> 
                                 </FormGroup>
                             </Col>
                             <Col sm= {12} md={4}>
                                 <FormGroup>
-                                    <select name="condition" className="select-list">
+                                    <select name="condition" className="select-list" onChange={this.handleInputChange}>
                                         <option selected disabled>Condition</option>
                                         <option value ="99">Package has been opened but not used</option>
                                         <option value ="90">Slightly used or color faded</option>
@@ -80,7 +124,7 @@ class Home extends Component{
                             </Col>
                             <Col sm={12} md={2} className="mr-auto">
                                 <FormGroup>
-                                    <select name="delivery" className="select-list">
+                                    <select name="delivery" className="select-list" onChange={this.handleInputChange}>
                                         <option selected disabled>Delivery Option</option>
                                         <option value ="pickup">Pick up</option>
                                         <option value ="delivery">Delivery</option>
@@ -91,18 +135,23 @@ class Home extends Component{
                             <p style={{marginLeft:"15px"}}>Sorted by</p>
                             <Col xs={12} sm={6} md={2}>
                                 <FormGroup>
-                                    <select name="sort" className="select-list">
+                                    <select name="sort" className="select-list" onChange={this.handleInputChange}>
                                         <option value ="none">Our Choice</option>
-                                        <option value ="price-high">Price High to Low</option>
-                                        <option value ="price-low">Price Low to High</option>
+                                        <option value ="high">Price High to Low</option>
+                                        <option value ="low">Price Low to High</option>
                                     </select> 
                                 </FormGroup>
                             </Col>
                         </Row>
                     </Form>
                 </div>
+                <div className="col-12" style={{marginTop:"22px"}}>
+                    <div className="row">
+                        {item}
+                    </div>
+                </div>
                 <div className="col-12">
-                    <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Things that You may Interested In</h5>
+                    <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Things that You May be Interested In</h5>
                     <hr className="seperation" />
                 </div>
             </div>

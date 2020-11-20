@@ -2,15 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const favoriteSchema = new Schema({
-    user:  {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    username:  {
+        type: String,
+        required: true
     },
-    items: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Item'
-        }]
+    items: {
+        type: [String]
+    }
 }, {
     timestamps: true
 });
