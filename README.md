@@ -42,15 +42,14 @@
 - Endpoint for all roles
      - /users/login
 - Endpoints for buyer
-     - /home (backend incomplete)
+     - /home
      - /users/signupbuyer
      - /profilebuyer
-     - /search (backend incomplete)
      - /aboutus
      - /contactus
-     - /favorite (backend incomplete)
-     - /shoppingcart (backend incomplete)
-     - /itemdetail (backend incomplete)
+     - /favorite
+     - /shoppingcart
+     - /itemdetail
 - Endpoints for seller
      - /users/signupseller
      - /homeseller
@@ -65,5 +64,4 @@
      - /adminverifysingle
 
 ## Notes
-- To access the pages with incomplete back-end implementation, please type full URLs (Ex. http://localhost:3000/profileseller) to visit these pages.
 - User Manual & Function Specification: https://docs.google.com/document/d/1U9XByjcjFJJ60AYanxge_nRDpEeNZTyfXa8YF1j33xI/edit?usp=sharing
