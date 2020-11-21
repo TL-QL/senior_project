@@ -33,7 +33,7 @@
      - username: Admin
      - password: 123456
 - Seller account
-     - username: QiwenLuo
+     - username: ABC
      - password: 123456
 - Buyer account
      - username: TooLazy
