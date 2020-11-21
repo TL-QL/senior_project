@@ -37,6 +37,7 @@ itemDetailRouter.route('/:item_id')
                 ans.comments = item.comments;
                 ans.address = user.address+' '+user.city+' '+user.theState+' '+user.zipcode;
                 ans.contact = user.phone + ' OR '+user.email;
+                ans.credit = user.credit;
                 res.StatusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
                 res.json(ans);

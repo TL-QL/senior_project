@@ -20,6 +20,8 @@ editsubRouter.route('/:item_id')
     })
     .put(authenticate.verifyUser, authenticate.verifySeller, (req, res, next) => {
         const filter = { item_id: req.params.item_id };
+        var soldout = false;
+        if(req.body.quantity <= 0) soldout = true;
         const update = { 
             "images": req.body.image,
             "name": req.body.title,
@@ -33,7 +35,9 @@ editsubRouter.route('/:item_id')
             "detachable": req.body.detachable,
             "careIns": req.body.careIns,
             "productInsurance": req.body.productInsurance,
-            "damage": req.body.damage
+            "damage": req.body.damage,
+            "soldout": soldout,
+            "buyer": req.body.buyer
         };
         Item.findOneAndUpdate(filter, update, {
             new: true

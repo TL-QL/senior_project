@@ -11,12 +11,13 @@ class Editsub extends Component {
         super(props);
 
         this.state = {
-            image:'',
+            image:[],
             title:'',
             price:'',
             quantity:'',
             condition:'',
             delivery:'',
+            buyers: '',
             category:'',
             subCategories:[],
             sizeInfo:'',
@@ -32,6 +33,7 @@ class Editsub extends Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
         this.handleInputFileChange = this.handleInputFileChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleMultiInputChange = this.handleMultiInputChange.bind(this);
@@ -61,7 +63,8 @@ class Editsub extends Component {
                 productInsurance: data.productInsurance,
                 detachable: data.detachable,
                 careIns: data.careIns,
-                damage: data.damage
+                damage: data.damage,
+                buyers: data.buyer
             })
         })
     }
@@ -100,6 +103,7 @@ class Editsub extends Component {
             "quantity": this.state.quantity,
             "condition": this.state.condition,
             "delivery": this.state.delivery,
+            "buyer": this.state.buyers,
             "category": this.state.category,
             "subCategories": this.state.subCategories,
             "sizeInfo": this.state.sizeInfo,
@@ -122,6 +126,10 @@ class Editsub extends Component {
             else
                 alert(JSON.stringify(data.err));
         })
+    }
+
+    handleButtonClick = () => {
+        this.props.history.push(this.props.path);
     }
 
     handleBlur = (field) => (evt) => {
@@ -232,6 +240,13 @@ class Editsub extends Component {
     render() {
         const errors = this.validate(this.state.title, this.state.price, this.state.quantity);
         const { subCategory } = this.state;
+        const pic = this.state.image.map((url) => {
+            return (
+                <div>
+                    <img style={{width: "220px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+url} />
+                </div>
+            );
+        });
         return(
             <div className="container">
                 <div className="row">
@@ -251,7 +266,8 @@ class Editsub extends Component {
                                 <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup>
                                         <CustomInput type="file" id="img" name="img" label="Upload Images" onChange={this.handleInputFileChange}/>
-                                        <img style={{width: "180px", marginTop:"20px"}} src={baseUrl+'/images/'+this.state.image} />
+                                        {pic}
+                                        {/* <img style={{width: "180px", marginTop:"20px"}} src={baseUrl+'/images/'+this.state.image} /> */}
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -285,7 +301,7 @@ class Editsub extends Component {
                             <Row>
                                 <Col xs={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <select name="condition" className="select-list" onChange={this.handleInputChange}>
+                                        <select name="condition" value={this.state.condition} className="select-list" onChange={this.handleInputChange}>
                                             <option selected disabled>Condition (Required)</option>
                                             <option value ="99">99% new - Package has been opened but not used</option>
                                             <option value ="90">90% new - Slightly used or color faded</option>
@@ -298,12 +314,20 @@ class Editsub extends Component {
                             <Row>
                                 <Col xs={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <select name="delivery" className="select-list" onChange={this.handleInputChange}>
+                                        <select name="delivery" value={this.state.delivery} className="select-list" onChange={this.handleInputChange}>
                                             <option selected disabled>Delivery Option (Required)</option>
                                             <option value ="pickup">Pick up</option>
                                             <option value ="delivery">Delivery</option>
                                             <option value ="both">Both</option>
                                         </select> 
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12} md={{size:6, offset:3}}>
+                                    <FormGroup className="form-style-form-group">
+                                        <Label htmlFor="buyers" className="form-style-label">Buyer(s)</Label>
+                                        <Input type="text" id="buyers" name="buyers" className="form-style-input" placeholder="Username_1,Username_2" value={this.state.buyers} onChange={this.handleInputChange}/>
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -314,7 +338,7 @@ class Editsub extends Component {
                             <Row>
                                 <Col xs={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <select name="category" className="select-list" onChange={this.handleInputChange}>
+                                        <select name="category" value={this.state.category} className="select-list" onChange={this.handleInputChange}>
                                             <option selected disabled>Category and Subcategory (Required)</option>
                                             <option value ="home">Home</option>
                                             <option value ="books">Books</option>
@@ -329,8 +353,9 @@ class Editsub extends Component {
                             <Row>
                                 <Col xs={12} md={6} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <Label htmlFor="subCategories">Subcategories</Label>
-                                        <Select
+                                        <Label htmlFor="subCategories">Subcategories (Click on Cancel to reset to original interests)</Label>
+                                        <p style={{color:"#B9B9B9", fontSize:"12px", marginTop:"-10px"}}>Current sub-categories: {this.state.subCategories.toString()}</p>
+                                       <Select
                                             isMulti
                                             name="subCategories"
                                             value= {subCategory}
@@ -382,9 +407,14 @@ class Editsub extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={12} md={{size:6, offset:3}}>
+                                <Col sm={6} md={{size:3, offset:3}}>
                                     <FormGroup>
                                         <Button type="submit" value="submit" style={{background:"rgba(132,0,255,0.57)", width:"100%", fontFamily:"Arial Black"}}>Submit</Button>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm={6} md={{size:3}}>
+                                    <FormGroup>
+                                        <Button onClick={this.handleButtonClick} style={{width:"100%", fontFamily:"Arial Black"}}>Cancel</Button>
                                     </FormGroup>
                                 </Col>
                             </Row>

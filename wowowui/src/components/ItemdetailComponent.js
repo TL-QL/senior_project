@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, FormFeedback, Modal, ModalHeader, ModalBody, Row, Col, Label, Input} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {baseUrl} from '../shared/baseUrl';
+import StarRatingComponent from 'react-star-rating-component';
 var config = require('../config');
 
 class Itemdetail extends Component {
@@ -10,10 +11,11 @@ class Itemdetail extends Component {
         super(props);
 
         this.state = {
-            image:'',
+            image:[],
             title:'',
             price:'',
             seller:'',
+            credit: '',
             favorite:'',
             buy:'',
             quantity:'',
@@ -46,6 +48,7 @@ class Itemdetail extends Component {
     }
 
     componentDidMount() {
+        //alert(JSON.stringify(this.props.location.state));
         fetch(config.serverUrl+this.props.path, {
             method: 'GET',
             headers: {
@@ -72,7 +75,8 @@ class Itemdetail extends Component {
                 detachable: data.detachable,
                 careIns: data.careIns,
                 damage: data.damage,
-                comments: data.comments
+                comments: data.comments,
+                credit: data.credit
             })
         })
     }
@@ -194,13 +198,30 @@ class Itemdetail extends Component {
         return errors;
     }
 
+
     render() {
         const errors = this.validate(this.state.rating, this.state.newComment);
+        const pic = this.state.image.map((url) => {
+            return (
+                <div>
+                    <img style={{width: "220px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+url} />
+                </div>
+            );
+        });
         const comment = this.state.comments.map((comment) => {
             return (
                 <div className="row col-12 col-md-6 offset-md-3" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
                     <div className="col-12" style={{marginTop:"20px"}}>
-                        <p><strong>Customer Rating: </strong> {comment.rating}</p>
+                        <p><strong>Customer Rating: </strong> 
+                            <StarRatingComponent 
+                                name="rate1" 
+                                starCount={10}
+                                value={comment.rating}
+                                starColor={"#F59A23"}
+                                emptyStarColor={"white"}
+                                renderStarIcon={() => <i class="fa fa-heart" aria-hidden="true"></i>}
+                                />
+                            </p>
                     </div>
                     <div className="col-12">
                         <p><strong>Comment: </strong> {comment.comment}</p>
@@ -208,11 +229,12 @@ class Itemdetail extends Component {
                 </div>
             );
         });
+
         return(
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={{ pathname: '/home' , state: { search: this.props.location.state.search, category: this.props.location.state.category, condition: this.props.location.state.condition, method: this.props.location.state.method, sort: this.props.location.state.sort} }}>Search Results</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Detailed Info</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
@@ -224,7 +246,8 @@ class Itemdetail extends Component {
                         <hr className="seperation" />
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+this.state.image} />
+                        {pic}
+                        {/* <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+this.state.image} /> */}
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {this.state.title}</p>
@@ -233,7 +256,18 @@ class Itemdetail extends Component {
                         <p><strong>Price:</strong> {this.state.price}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <p><strong>Seller:</strong> {this.state.seller}</p>
+                        <p><strong>Seller:</strong> {this.state.seller} 
+                            <StarRatingComponent 
+                                name="rate1" 
+                                starCount={10}
+                                value={this.state.credit}
+                                isHalf={true}
+                                starColor={"#D9001B"}
+                                emptyStarColor={"white"}
+                                renderStarIcon={() => <i class="fa fa-star" aria-hidden="true"></i>}
+                                renderStarIconHalf={() =><i class="fa fa-star-half" aria-hidden="true" style={{color:"#D9001B"}}></i> }
+                                />
+                        </p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Favorite:</strong> {this.state.favoriteCount}</p>

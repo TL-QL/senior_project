@@ -22,6 +22,25 @@ class Home extends Component{
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    componentDidMount() {
+        //alert(JSON.stringify(this.props.location.state));
+        if(this.props.location.state){
+            fetch(config.serverUrl+'/home/'+this.props.location.state.search+'/'+this.props.location.state.category+'/'+this.props.location.state.condition+'/'+this.props.location.state.method+'/'+this.props.location.state.sort, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer '+this.props.token
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    items: data
+                })
+            })
+        }
+    }
+
     handleInputChange(event){
         const target = event.target;
         const value = target.value;
@@ -56,7 +75,7 @@ class Home extends Component{
             return (
                 <div key={item.item_id} className="row col-12 col-md-8 offset-md-1" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+item.images} />
+                        <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+item.images[0]} />
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {item.name}</p>
@@ -74,7 +93,7 @@ class Home extends Component{
                         <p><strong>Buy:</strong> {item.shoppingCartCount}</p>
                     </div>
                     <div className="col-6 col-md-4 offset-6 offset-md-8 border" style={{borderRadius:"5px", backgroundColor:"rgba(132,0,255,0.57)", height:"40px",width:"100%",paddingTop:"8px", marginBottom:"20px"}}>
-                        <center><strong><Link to={`/itemdetail/${item.item_id}`} style={{ color: '#FFF' }}><i class="fa fa-info-circle" aria-hidden="true"></i> More Info</Link></strong></center>
+                        <center><strong><Link to={{ pathname: `/itemdetail/${item.item_id}` , state: { search: this.state.search, category: this.state.category, condition: this.state.condition, method: this.state.delivery, sort: this.state.sort} }} style={{ color: '#FFF' }}><i class="fa fa-info-circle" aria-hidden="true"></i> More Info</Link></strong></center>
                     </div>
                 </div>
             );

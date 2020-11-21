@@ -170,25 +170,9 @@ class ProfileSeller extends Component {
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="password" className="form-style-label">Password</Label>
-                                        <Input disabled type="text" id="password" name="password" className="form-style-input" placeholder={this.state.password} value={this.state.password} valid={errors.password === ''} invalid={errors.password !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('password')}/>
-                                        <FormFeedback>{errors.password}</FormFeedback>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={6}>
-                                    <FormGroup className="form-style-form-group">
                                         <Label htmlFor="nickname" className="form-style-label">Nickname</Label>
                                         <Input type="text" id="nickname" name="nickname" className="form-style-input" placeholder={this.state.nickname} value={this.state.nickname} valid={errors.nickname === ''} invalid={errors.nickname !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('nickname')}/>
                                         <FormFeedback>{errors.nickname}</FormFeedback>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup className="form-style-form-group">
-                                        <Label htmlFor="phone" className="form-style-label">Phone</Label>
-                                        <Input type="text" id="phone" name="phone" className="form-style-input" placeholder={this.state.phone} value={this.state.phone} valid={errors.phone === ''} invalid={errors.phone !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('phone')}/>
-                                        <FormFeedback>{errors.phone}</FormFeedback>
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -200,6 +184,15 @@ class ProfileSeller extends Component {
                                         <FormFeedback>{errors.email}</FormFeedback>
                                     </FormGroup>
                                 </Col>
+                                <Col md={6}>
+                                    <FormGroup className="form-style-form-group">
+                                        <Label htmlFor="phone" className="form-style-label">Phone</Label>
+                                        <Input type="text" id="phone" name="phone" className="form-style-input" placeholder={this.state.phone} value={this.state.phone} valid={errors.phone === ''} invalid={errors.phone !== ''} onChange={this.handleInputChange} onBlur={this.handleBlur('phone')}/>
+                                        <FormFeedback>{errors.phone}</FormFeedback>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
                                 <Col md={6}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="credit" className="form-style-label">Credit Score</Label>

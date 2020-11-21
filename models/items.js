@@ -103,12 +103,13 @@ const itemSchema = new Schema({
     },
     comments: [commentSchema],
     images: {
-        type: String,
+        type: Object,
         required: true
     },
     imageScore:{
         type: Number,
-        min: 0
+        min: -1,
+        default: -1
     }
 }, {
     timestamps: true

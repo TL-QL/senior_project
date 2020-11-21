@@ -10,8 +10,8 @@ class Postsub extends Component {
         super(props);
 
         this.state = {
-            image:'',
-            imageURL:'',
+            image:[],
+            imageURL:[],
             title:'',
             price:'',
             quantity:'',
@@ -39,10 +39,17 @@ class Postsub extends Component {
     }
 
     handleInputFileChange(event){
-        this.setState({
-            image: event.target.files[0].name,
-            imageURL: URL.createObjectURL(event.target.files[0])
-        })
+        // this.setState({
+        //     image: event.target.files[0].name,
+        //     imageURL: URL.createObjectURL(event.target.files[0])
+        // })
+        var value = [];
+        var value2 = [];
+        for(var i = 0;i < event.target.files.length;i++){
+            value.push(event.target.files[i].name.toString());
+            value2.push(URL.createObjectURL(event.target.files[i]));
+        }
+        this.setState({image: value, imageURL: value2});
     }
 
     handleInputChange(event){
@@ -50,16 +57,26 @@ class Postsub extends Component {
         const value = target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
+        //alert(JSON.stringify(name));
+        if(name == "category"){
+            this.setState({
+                category: value
+            });
+            this.handleMultiInputChange();
+        }
+        else
+            this.setState({
+                [name]: value
+            });
     }
 
     handleMultiInputChange = (events) => {
         var value = [];
+        if(events){
         for(var i = 0;i < events.length;i++){
             value.push(events[i].value);
         }
+    }
         this.setState({subCategories: value});
     }
 
@@ -205,6 +222,13 @@ class Postsub extends Component {
     render() {
         const errors = this.validate(this.state.title, this.state.price, this.state.quantity);
         const { subCategory } = this.state;
+        const pic = this.state.imageURL.map((url) => {
+            return (
+                <div>
+                    <img style={{width: "220px", marginTop:"20px"}} src={url} />
+                </div>
+            );
+        });
         return(
             <div className="container">
                 <div className="row">
@@ -223,8 +247,9 @@ class Postsub extends Component {
                             <Row>
                                 <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <CustomInput type="file" id="img" name="img" label="Upload Images" onChange={this.handleInputFileChange}/>
-                                        <img style={{width: "180px", marginTop:"20px"}} src={this.state.imageURL} />
+                                        <CustomInput type="file" multiple id="img" name="img" label="Upload Images (Required)" onChange={this.handleInputFileChange}/>
+                                        {/* <img style={{width: "180px", marginTop:"20px"}} src={this.state.imageURL} /> */}
+                                        {pic}
                                     </FormGroup>
                                 </Col>
                             </Row>

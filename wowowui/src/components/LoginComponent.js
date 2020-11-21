@@ -15,6 +15,7 @@ class Login extends Component{
 
         this.handleLoginChange = this.handleLoginChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
+        this.handleReset = this.handleReset.bind(this);
     }
 
     handleLoginChange(event){
@@ -51,6 +52,10 @@ class Login extends Component{
         })
     }
 
+    handleReset(event){
+        event.preventDefault();
+    }
+
     render(){
         return(
             <div className="container">
@@ -84,11 +89,40 @@ class Login extends Component{
                     <Row>
                         <Col xs={12} md={{size: 2, offset:3}}>
                             <FormGroup>
-                                <Button type="submit" value="submit" color="primary">Login</Button>
+                                <Button type="submit" value="submit" color="primary" style={{width: "100%"}}>Login</Button>
                             </FormGroup>
                         </Col>
                     </Row>
                 </Form>
+                {/* <div className="col-12 col-md-6 offset-md-3">
+                    <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Reset Password</h5>
+                    <hr className="seperation" />
+                </div>
+                <Form onSubmit={this.handleReset}>
+                    <Row>
+                        <Col xs={12} md={{size: 6, offset:3}}>
+                            <FormGroup>
+                                <Label htmlFor="username">Username</Label>
+                                <Input type="text" id="username" name="username" value={this.state.username} onChange={this.handleLoginChange}/>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} md={{size: 6, offset:3}}>
+                            <FormGroup>
+                                <Label htmlFor="password">Password</Label>
+                                <Input type="password" id="password" name="password" value={this.state.password} onChange={this.handleLoginChange}/>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} md={{size: 2, offset:3}}>
+                            <FormGroup>
+                                <Button type="submit" value="submit" style={{width: "100%"}}>Reset Password</Button>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                </Form> */}
             </div>
         );
     }

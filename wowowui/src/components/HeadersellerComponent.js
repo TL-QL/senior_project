@@ -15,6 +15,7 @@ class Headerseller extends Component{
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModalSignUp = this.toggleModalSignUp.bind(this);
         this.toggleModalLogin = this.toggleModalLogin.bind(this);
+        this.handeLogout = this.handeLogout.bind(this);
     }
 
     toggleNav(){
@@ -33,6 +34,12 @@ class Headerseller extends Component{
         this.setState({
             isModalLoginOpen: !this.state.isModalLoginOpen,
         });
+    }
+
+    handeLogout(event){
+        event.preventDefault();
+        this.props.onUsernameChange(this.state.username, '');
+        this.props.history.push('/');
     }
 
     render(){
@@ -68,6 +75,11 @@ class Headerseller extends Component{
                                 <NavItem>
                                     <Button className="button-mr" outline onClick={this.toggleModalLogin}>
                                         <span className="fa fa-sign-in fa-lg"></span> Login
+                                    </Button>
+                                </NavItem>
+                                <NavItem>
+                                    <Button className="button-mr" outline onClick={this.handeLogout}>
+                                        <span className="fa fa-sign-out fa-lg"></span> Logout
                                     </Button>
                                 </NavItem>
                             </Nav>

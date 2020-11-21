@@ -35,7 +35,7 @@ class Main extends Component{
     onUsernameChange = (username, token) => {
         this.setState({ 
             username: username,
-            token: token
+            token: token,
         });
     }
 
@@ -53,10 +53,10 @@ class Main extends Component{
         return(
             <div>
                 <UsernameContext.Provider value={{state: this.state}}>
-                    {exclusionArray.indexOf(this.props.location.pathname) < 0 && <Header />}
-                    {exclusionArray.indexOf(this.props.location.pathname) >= 0 && <Headerseller />}
+                    {exclusionArray.indexOf(this.props.location.pathname) < 0 && <Header history={this.props.history} onUsernameChange={this.onUsernameChange}/>}
+                    {exclusionArray.indexOf(this.props.location.pathname) >= 0 && <Headerseller history={this.props.history} onUsernameChange={this.onUsernameChange}/>}
                     <Switch>
-                        <Route exact path="/home" component={()=><Home history={this.props.history} token={this.state.token}/>} />
+                        <Route exact path="/home" component={()=><Home history={this.props.history} location={this.props.location} username={this.state.username} token={this.state.token} onUsernameChange={this.onUsernameChange}/>} />
                         <Route exact path="/homeseller" component={Homeseller} />
                         <Route exact path="/users/signupseller" component={Signupseller}/>
                         <Route exact path="/users/signupbuyer" component={Signupbuyer}/>
@@ -74,7 +74,7 @@ class Main extends Component{
                         <Route exact path="/editsub/:itemId" component={()=><Editsub path={this.props.location.pathname} history={this.props.history} token={this.state.token}/>}/>
                         <Route exact path="/adminverify" component={()=><Adminverify username={this.state.username} history={this.props.history} token={this.state.token}/>}/>
                         <Route exact path="/adminverifysingle/:itemId" component={()=><Adminverifysingle path={this.props.location.pathname} username={this.state.username} history={this.props.history} token={this.state.token}/>}/>
-                        <Route exact path="/itemdetail/:itemId" component={()=><ItemDetail path={this.props.location.pathname} history={this.props.history} token={this.state.token} username={this.state.username}/>}/>
+                        <Route exact path="/itemdetail/:itemId" component={()=><ItemDetail path={this.props.location.pathname} history={this.props.history} location={this.props.location} token={this.state.token} username={this.state.username} />}/>
                         <Redirect to="/home" />
                     </Switch>
                     <Footer />

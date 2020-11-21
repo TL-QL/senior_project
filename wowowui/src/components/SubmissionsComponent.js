@@ -32,13 +32,31 @@ class Submissions extends Component{
 
     render(){
         const item = this.state.items.map((item) => {
+            var score = item.imageScore;
+            if(score == -1) score = "Not Applicable";
+            const pic = item.images.map((url) => {
+                return (
+                    <div>
+                        <img style={{width: "220px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+url} />
+                    </div>
+                );
+            });
             return (
                 <div key={item.item_id} className="row" style={{marginBottom:"30px"}}>
                     <div className="col-12">
                         <hr className="seperation" />
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+item.images} />
+                        {/* <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+item.images} /> */}
+                        {pic}
+                    </div>
+                    <div className="col-12 col-md-3 offset-md-3" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
+                        <div className="col-12">
+                            <p><strong>Admin Approved:</strong> {item.approve.toString()}</p>
+                        </div>
+                        <div className="col-12">
+                            <p><strong>Image Score:</strong> {score}</p>
+                        </div>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {item.name}</p>
@@ -56,10 +74,13 @@ class Submissions extends Component{
                         <p><strong>Delivery:</strong> {item.delivery}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Buyer(s):</strong> {item.buyer}</p>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Category:</strong> {item.category}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <p><strong>Subcategories:</strong> {item.subCategory}</p>
+                        <p><strong>Subcategories:</strong> {item.subCategory.toString()}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Size Info:</strong> {item.sizeInfo}</p>
