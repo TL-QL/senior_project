@@ -2,13 +2,15 @@
   "_id": {
     "$oid": "5fb74c3122e45b14ba5da361"
   },
-  "items": [],
+  "items": [
+    "1"
+  ],
   "username": "TooLazy",
   "createdAt": {
     "$date": "2020-11-20T04:55:13.020Z"
   },
   "updatedAt": {
-    "$date": "2020-11-20T07:56:45.234Z"
+    "$date": "2020-11-22T06:42:18.528Z"
   },
   "__v": 0
 }]

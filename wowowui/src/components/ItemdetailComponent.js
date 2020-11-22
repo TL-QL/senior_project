@@ -119,7 +119,7 @@ class Itemdetail extends Component {
         .then(data => {
             if(data.success){
                 alert(JSON.stringify(data.status));
-                this.props.history.push(this.props.path);
+                //this.props.history.push(this.props.path);
             }
             else
                 alert(JSON.stringify(data.err));
@@ -204,7 +204,7 @@ class Itemdetail extends Component {
         const pic = this.state.image.map((url) => {
             return (
                 <div>
-                    <img style={{width: "220px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+url} />
+                    <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>
                 </div>
             );
         });
@@ -234,7 +234,7 @@ class Itemdetail extends Component {
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to={{ pathname: '/home' , state: { search: this.props.location.state.search, category: this.props.location.state.category, condition: this.props.location.state.condition, method: this.props.location.state.method, sort: this.props.location.state.sort} }}>Search Results</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={{ pathname: '/home' , state: { search: this.props.location.state.search, category: this.props.location.state.category, condition: this.props.location.state.condition, method: this.props.location.state.method, sort: this.props.location.state.sort} }}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Detailed Info</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">

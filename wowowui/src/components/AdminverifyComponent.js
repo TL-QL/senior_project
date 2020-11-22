@@ -33,13 +33,20 @@ class Adminverify extends Component{
     render(){
 
         const item = this.state.items.map((item) => {
+            const pic = item.images.map((url) => {
+                return (
+                    <div>
+                        <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>  
+                    </div>
+                );
+            });
             return (
                 <div key={item.item_id} className="row" style={{marginBottom:"30px"}}>
                     <div className="col-12">
                         <hr className="seperation" />
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+item.images} />
+                        {pic}
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {item.name}</p>

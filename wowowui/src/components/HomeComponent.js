@@ -75,7 +75,7 @@ class Home extends Component{
             return (
                 <div key={item.item_id} className="row col-12 col-md-8 offset-md-1" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+item.images[0]} />
+                    <iframe style={{width: "220px", marginTop:"20px"}} src={item.images[0]}></iframe>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {item.name}</p>

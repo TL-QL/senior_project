@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback, CustomInput} from 'reactstrap';
+import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import Select from 'react-select';
 var config = require('../config');
@@ -10,8 +10,7 @@ class Postsub extends Component {
         super(props);
 
         this.state = {
-            image:[],
-            imageURL:[],
+            image:['','',''],
             title:'',
             price:'',
             quantity:'',
@@ -25,31 +24,26 @@ class Postsub extends Component {
             productInsurance:'',
             damage:'',
             touched: {
+                img1: false,
                 title: false,
                 price: false,
                 quantity: false
-            }
+            },
+            isModalOpen: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInputFileChange = this.handleInputFileChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleImgURLChange = this.handleImgURLChange.bind(this);
         this.handleMultiInputChange = this.handleMultiInputChange.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
+        this.toggleImgInstruction = this.toggleImgInstruction.bind(this);
     }
 
-    handleInputFileChange(event){
-        // this.setState({
-        //     image: event.target.files[0].name,
-        //     imageURL: URL.createObjectURL(event.target.files[0])
-        // })
-        var value = [];
-        var value2 = [];
-        for(var i = 0;i < event.target.files.length;i++){
-            value.push(event.target.files[i].name.toString());
-            value2.push(URL.createObjectURL(event.target.files[i]));
-        }
-        this.setState({image: value, imageURL: value2});
+    toggleImgInstruction(){
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
     }
 
     handleInputChange(event){
@@ -57,14 +51,6 @@ class Postsub extends Component {
         const value = target.value;
         const name = target.name;
 
-        //alert(JSON.stringify(name));
-        if(name == "category"){
-            this.setState({
-                category: value
-            });
-            this.handleMultiInputChange();
-        }
-        else
             this.setState({
                 [name]: value
             });
@@ -80,6 +66,18 @@ class Postsub extends Component {
         this.setState({subCategories: value});
     }
 
+    handleImgURLChange(event){
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        var imgs = this.state.image.slice();
+
+        if(name == 'img1') imgs[0] = value;
+        else if(name == 'img2') imgs[1] = value;
+        else
+            imgs[2] = value;
+        this.setState({image: imgs});
+    }
 
     handleSubmit(event){
         event.preventDefault();
@@ -120,13 +118,18 @@ class Postsub extends Component {
         });
     }
 
-    validate(title, price, quantity) {
+    validate(img1, title, price, quantity) {
 
         const errors = {
+            img1:'',
             title: '',
             price:'',
             quantity:''
         };
+
+        if (this.state.touched.img1 && img1.length < 1)
+            errors.img1 = 'At least one image should be uploaded';
+
 
         if (this.state.touched.title && title.length < 1)
             errors.title = 'Title should be >= 1 characters';
@@ -220,15 +223,8 @@ class Postsub extends Component {
     }
 
     render() {
-        const errors = this.validate(this.state.title, this.state.price, this.state.quantity);
+        const errors = this.validate(this.state.image[0], this.state.title, this.state.price, this.state.quantity);
         const { subCategory } = this.state;
-        const pic = this.state.imageURL.map((url) => {
-            return (
-                <div>
-                    <img style={{width: "220px", marginTop:"20px"}} src={url} />
-                </div>
-            );
-        });
         return(
             <div className="container">
                 <div className="row">
@@ -246,10 +242,34 @@ class Postsub extends Component {
                         <Form onSubmit={this.handleSubmit} class="form-style">
                             <Row>
                                 <Col sm={12} md={{size:6, offset:3}}>
-                                    <FormGroup>
-                                        <CustomInput type="file" multiple id="img" name="img" label="Upload Images (Required)" onChange={this.handleInputFileChange}/>
-                                        {/* <img style={{width: "180px", marginTop:"20px"}} src={this.state.imageURL} /> */}
-                                        {pic}
+                                    <FormGroup className="form-style-form-group">
+                                        <Label htmlFor="img1" className="form-style-label">URL for Image 1 (Required)</Label>
+                                        <Input type="text" id="img1" name="img1" className="form-style-input" value={this.state.image[0]} valid={errors.img1 === ''} invalid={errors.img1 !== ''} onChange={this.handleImgURLChange} onBlur={this.handleBlur('img1')}/>
+                                        <FormFeedback>{errors.img1}</FormFeedback>
+                                        <iframe style={{width: "220px", marginTop:"20px"}} src={this.state.image[0]}></iframe>
+                                        <Row>
+                                        <Button className="button-mr" onClick={this.toggleImgInstruction} style={{marginBottom: "15px", border:"none", fontSize:"10px", color:"black", background:"none"}}>
+                                        <i class="fa fa-question-circle" aria-hidden="true"></i> Images upload instruction
+                                    </Button>
+                                    </Row>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={{size:6, offset:3}}>
+                                    <FormGroup className="form-style-form-group">
+                                        <Label htmlFor="img2" className="form-style-label">URL for Image 2</Label>
+                                        <Input type="text" id="img2" name="img2" className="form-style-input" value={this.state.image[1]} onChange={this.handleImgURLChange}/>
+                                        <iframe style={{width: "220px", marginTop:"20px"}} src={this.state.image[1]}></iframe>                                    
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={{size:6, offset:3}}>
+                                    <FormGroup className="form-style-form-group">
+                                        <Label htmlFor="img3" className="form-style-label">URL for Image 3</Label>
+                                        <Input type="text" id="img3" name="img3" className="form-style-input" value={this.state.image[2]} onChange={this.handleImgURLChange}/>
+                                        <iframe style={{width: "220px", marginTop:"20px"}} src={this.state.image[2]}></iframe>
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -389,6 +409,25 @@ class Postsub extends Component {
                         </Form>
                     </div>
                 </div>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleImgInstruction}>
+                    <ModalHeader toggle={this.toggleImgInstruction}>Images Upload Instruction</ModalHeader>
+                    <ModalBody>
+                        <div className="row" style={{marginLeft:"5px"}}>
+                            <p>1. Upload your image(s) to Google Drive</p>
+                        </div>
+                        <div className="row" style={{marginLeft:"5px"}}>
+                            <p>For each image,</p>
+                        </div>
+                        <div classname="row" style={{marginLeft:"12px"}}>
+                            <p>2. Open your image in Google Drive</p>
+                            <p>3. Click on the icon at the right-top cornor (More actions)</p>
+                            <p>4. Choose "Open in new window"</p>
+                            <p>5. Click on the icon at the right-top cornor (More actions)</p>
+                            <p>6. Choose "Embed item..."</p>
+                            <p>7. Copy and paste the link after "src="</p>
+                        </div>
+                    </ModalBody>
+                </Modal>
             </div>
         );
     }

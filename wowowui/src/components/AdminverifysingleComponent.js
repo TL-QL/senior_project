@@ -10,7 +10,7 @@ class Adminverifysingle extends Component{
         super(props);
 
         this.state = {
-            image:'',
+            image:[],
             title:'',
             price:'',
             quantity:'',
@@ -114,7 +114,13 @@ class Adminverifysingle extends Component{
     }
 
     render(){
-
+        const pic = this.state.image.map((url) => {
+            return (
+                <div>
+                    <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>  
+                </div>
+            );
+        });
         return(
             <div className="container">
                 <div className="row">
@@ -131,7 +137,7 @@ class Adminverifysingle extends Component{
                         <hr className="seperation" />
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+this.state.image} />
+                        {pic}
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {this.state.title}</p>
@@ -169,8 +175,8 @@ class Adminverifysingle extends Component{
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Description on damage(s):</strong> {this.state.damage}</p>
                     </div>
-                    <Row >
-                        <Col sm={6} md={{size:6, offset:6}}>
+ 
+                        <Col sm={6} md={{size:3, offset:3}}>
                             <Form onSubmit={this.handleApprove}>       
                                 <FormGroup className="form-style-form-group">
                                     <Input type="text" id="imageScore" name="imageScore" placeholder="ImageScore" value={this.state.imageScore} onChange={this.handleInputChange} style={{alignSelf: "stretch"}}/>
@@ -180,14 +186,15 @@ class Adminverifysingle extends Component{
                                 </FormGroup>
                             </Form>
                         </Col>
-                        <Col sm={6} md={{size:6, offset:6}}>
+                        <Col sm={6} md={6}></Col>
+                        <Col sm={6} md={{size:3, offset:3}}>
                             <Form onSubmit={this.handleReject}>
                                     <FormGroup>
                                         <Button block type="submit" value="submit" style={{background:"rgba(132,0,255,0.57)", alignSelf: "stretch", fontFamily:"Arial Black"}}><i class="fa fa-times" aria-hidden="true"></i>Reject</Button>
                                     </FormGroup>
                             </Form>
                         </Col>
-                    </Row>
+
                 </div>
             </div>
         );

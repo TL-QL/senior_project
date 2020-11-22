@@ -37,7 +37,7 @@ class Submissions extends Component{
             const pic = item.images.map((url) => {
                 return (
                     <div>
-                        <img style={{width: "220px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+url} />
+                        <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>  
                     </div>
                 );
             });
@@ -47,16 +47,7 @@ class Submissions extends Component{
                         <hr className="seperation" />
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        {/* <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+item.images} /> */}
                         {pic}
-                    </div>
-                    <div className="col-12 col-md-3 offset-md-3" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
-                        <div className="col-12">
-                            <p><strong>Admin Approved:</strong> {item.approve.toString()}</p>
-                        </div>
-                        <div className="col-12">
-                            <p><strong>Image Score:</strong> {score}</p>
-                        </div>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {item.name}</p>
@@ -97,7 +88,17 @@ class Submissions extends Component{
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Description on damage(s):</strong> {item.damage}</p>
                     </div>
-                    <div className="col-12 col-md-2 offset-md-9 border" style={{borderRadius:"5px", backgroundColor:"rgba(132,0,255,0.57)", height:"40px",width:"100%",paddingTop:"8px"}}>
+                    <div className="col-12 col-md-3 offset-md-3" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
+                        <div className="col-12">
+                            <p><strong>Admin Approved:</strong> {item.approve.toString()}</p>
+                        </div>
+                        <div className="col-12">
+                            <p><strong>Image Score:</strong> {score}</p>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-7 offset-md-3">
+                    </div>
+                    <div className="col-12 col-md-3 offset-md-3 border" style={{borderRadius:"5px", backgroundColor:"rgba(132,0,255,0.57)", height:"40px",width:"100%",paddingTop:"8px"}}>
                         <center><strong><Link to={`/editsub/${item.item_id}`} style={{ color: '#FFF' }}><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</Link></strong></center>
                     </div>
                 </div>

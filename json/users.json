@@ -27,7 +27,7 @@
   "city": "",
   "theState": "",
   "zipcode": "",
-  "credit": 5.5,
+  "credit": -1,
   "transportation": "walk",
   "care": "feature",
   "interests": [
@@ -51,7 +51,7 @@
   "city": "",
   "theState": "",
   "zipcode": "",
-  "credit": 5.5,
+  "credit": -1,
   "transportation": "",
   "care": "",
   "interests": [],

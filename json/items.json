@@ -16,13 +16,16 @@
   "post": false,
   "soldout": false,
   "item_id": "0",
-  "images": "furniture1.jpg",
+  "images": [
+    "https://drive.google.com/file/d/1zszYcAV690YY6eKwkfmmEdZZTW7ZkcKD/preview",
+    "https://drive.google.com/file/d/1g2nt-MeQBN8vklrwltpTPHq4c_P_RRX_/preview"
+  ],
   "name": "sofa",
   "price": 1222,
   "condition": "99",
   "delivery": "both",
   "category": "home",
-  "seller": "QiwenLuo",
+  "seller": "ABC",
   "comments": [],
   "createdAt": {
     "$date": "2020-10-26T06:23:51.599Z"
@@ -31,7 +34,7 @@
     "$date": "2020-11-20T04:43:32.892Z"
   },
   "__v": 0,
-  "imageScore": null,
+  "imageScore": -1,
   "approve": false,
   "reject": true
 },{
@@ -44,7 +47,7 @@
     "dormroom"
   ],
   "favoriteCount": 0,
-  "shoppingCartCount": 0,
+  "shoppingCartCount": 1,
   "quantity": 1,
   "sizeInfo": "12*12*12",
   "detachable": "dvdvdvddcdddddddddddddddddddddddddddddddddddddddddddddddddddd",
@@ -54,13 +57,16 @@
   "post": false,
   "soldout": false,
   "item_id": "1",
-  "images": "furniture2.png",
+  "images": [
+    "https://drive.google.com/file/d/1ZaEa99iTr4eYUxaR6lGR4PVxDVWmr54M/preview",
+    "https://drive.google.com/file/d/1wfkbLcttdUnCWtrLNJgkEKm9aam8U9uB/preview"
+  ],
   "name": "sofa2",
   "price": 1222,
   "condition": "99",
   "delivery": "pickup",
   "category": "home",
-  "seller": "QiwenLuo",
+  "seller": "ABC",
   "comments": [
     {
       "_id": {
@@ -103,16 +109,84 @@
       "createdAt": {
         "$date": "2020-11-20T05:36:11.844Z"
       }
+    },
+    {
+      "_id": {
+        "$oid": "5fba06dc8935d48175f85fa3"
+      },
+      "rating": 5,
+      "comment": "bb-11",
+      "author": "TooLazy",
+      "updatedAt": {
+        "$date": "2020-11-22T06:36:12.876Z"
+      },
+      "createdAt": {
+        "$date": "2020-11-22T06:36:12.876Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5fba07c17908c3819a049d27"
+      },
+      "rating": 3,
+      "comment": "bb-12",
+      "author": "TooLazy",
+      "updatedAt": {
+        "$date": "2020-11-22T06:40:01.074Z"
+      },
+      "createdAt": {
+        "$date": "2020-11-22T06:40:01.074Z"
+      }
     }
   ],
   "createdAt": {
     "$date": "2020-10-27T03:09:37.118Z"
   },
   "updatedAt": {
-    "$date": "2020-11-20T07:56:45.241Z"
+    "$date": "2020-11-22T06:45:03.527Z"
   },
   "__v": 0,
-  "imageScore": null,
+  "imageScore": 5,
   "approve": true,
   "reject": false
+},{
+  "_id": {
+    "$oid": "5fb9f807222f997c1f8fd064"
+  },
+  "subCategory": [
+    "furniture",
+    "bathroom"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "12*12*12",
+  "detachable": "",
+  "careIns": "",
+  "productInsurance": "NO insurance",
+  "damage": "",
+  "approve": false,
+  "reject": false,
+  "soldout": false,
+  "imageScore": -1,
+  "item_id": "2",
+  "images": [
+    "https://drive.google.com/file/d/1g2nt-MeQBN8vklrwltpTPHq4c_P_RRX_/preview",
+    "https://drive.google.com/file/d/1g2nt-MeQBN8vklrwltpTPHq4c_P_RRX_/preview",
+    "https://drive.google.com/file/d/1g2nt-MeQBN8vklrwltpTPHq4c_P_RRX_/preview"
+  ],
+  "name": "chair",
+  "price": 1222,
+  "condition": "99",
+  "delivery": "pickup",
+  "category": "home",
+  "seller": "ABC",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-11-22T05:32:55.646Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-22T05:32:55.646Z"
+  },
+  "__v": 0
 }]
