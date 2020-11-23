@@ -45,28 +45,23 @@ class ProfileBuyer extends Component {
                 'Authorization': 'bearer '+this.props.token
             }
         })
-        .then(res => {
-            alert(JSON.stringify(res));
-            res.json();
-        })
+        .then(res => res.json())
         .then(data => {
-            alert(JSON.stringify(data));
-            if(data.err) alert(JSON.stringify(data.err));
-            else
-                this.setState({
-                    username: data.username,
-                    password: data.password,
-                    nickname: data.nickname,
-                    phone: data.phone,
-                    email: data.email,
-                    address: data.address,
-                    city: data.city,
-                    theState: data.theState,
-                    zipcode: data.zipcode,
-                    transportation: data.transportation,
-                    care: data.care,
-                    interests: data.interests
-                })
+
+            this.setState({
+                username: data.username,
+                password: data.password,
+                nickname: data.nickname,
+                phone: data.phone,
+                email: data.email,
+                address: data.address,
+                city: data.city,
+                theState: data.theState,
+                zipcode: data.zipcode,
+                transportation: data.transportation,
+                care: data.care,
+                interests: data.interests
+            })
         })
     }
 

@@ -173,13 +173,6 @@ itemDetailRouter.route('/:item_id')
                     var output;
                     python.stdout.on('data', function (data) {
                         output = JSON.parse(data.toString());
-                        // User.findOneAndUpdate({username: data.seller}, {"$set": {"credit": data.credit}})
-                        // .then((uu) => {
-                        //     res.statusCode = 200;
-                        //     res.setHeader('Content-Type', 'application/json');
-                        //     res.json({success: true, status: 'Successfully post your comment!', data: output.toString()});
-                        // }, (err) => next(error))
-                        // .catch((err) => next(err));
                     });
                     python.on('close', (code) => {
                         User.findOneAndUpdate({username: output.seller}, {"$set": {"credit": output.credit}})
