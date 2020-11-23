@@ -9,6 +9,7 @@ var passport = require('passport');
 var authenticate = require('../authenticate');
 const user = require('../models/user');
 const Items = require('../models/items');
+const {spawn} = require('child_process');
 
 var itemDetailRouter = express.Router();
 itemDetailRouter.use(bodyParser.json());
@@ -154,9 +155,43 @@ itemDetailRouter.route('/:item_id')
         else{
             Item.findOneAndUpdate({item_id: req.params.item_id}, { "$push": { "comments": {"rating": req.body.rating, "comment": req.body.comment, "author": req.body.username}}})
             .then((item) => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json({success: true, status: 'Successfully post your comment!'});
+                User.findOne({username: req.body.username})
+                .then((user) => {
+                    var input = {};
+                    input.sizeInfo = item.sizeInfo;
+                    input.detachable = item.detachable;
+                    input.careIns = item.careIns;
+                    input.productInsurance = item.productInsurance;
+                    input.damage = item.damage;
+                    input.soldout = item.soldout;
+                    input.seller = item.seller;
+                    input.comments = item.comments;
+                    input.imageScore = item.imageScore;
+                    input.approve = item.approve;
+                    input.credit = user.credit;
+                    const python = spawn('python', ['JsonTest.py', JSON.stringify(input)]);
+                    var output;
+                    python.stdout.on('data', function (data) {
+                        output = JSON.parse(data.toString());
+                        // User.findOneAndUpdate({username: data.seller}, {"$set": {"credit": data.credit}})
+                        // .then((uu) => {
+                        //     res.statusCode = 200;
+                        //     res.setHeader('Content-Type', 'application/json');
+                        //     res.json({success: true, status: 'Successfully post your comment!', data: output.toString()});
+                        // }, (err) => next(error))
+                        // .catch((err) => next(err));
+                    });
+                    python.on('close', (code) => {
+                        User.findOneAndUpdate({username: output.seller}, {"$set": {"credit": output.credit}})
+                        .then((uu) => {
+                            res.statusCode = 200;
+                            res.setHeader('Content-Type', 'application/json');
+                            res.json({success: true, status: 'Successfully post your comment!'});
+                        }, (err) => next(error))
+                        .catch((err) => next(err));
+                    });
+                }, (err) => next(error))
+                .catch((err) => next(err));
             }, (err) => next(error))
             .catch((err) => next(err));
         }
