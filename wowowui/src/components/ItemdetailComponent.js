@@ -30,9 +30,11 @@ class Itemdetail extends Component {
             damage:'',
             comments: [],
             rating: 0,
+            serviceRating: 0,
             newComment: '',
             touched: {
                 rating: false,
+                serviceRating: false,
                 comment: false
             },
             isModalOpen: false
@@ -104,6 +106,7 @@ class Itemdetail extends Component {
         event.preventDefault();
         let databody = {
             "rating": this.state.rating,
+            "serviceRating": this.state.serviceRating,
             "comment": this.state.newComment,
             "username": this.props.username
         }
@@ -182,15 +185,19 @@ class Itemdetail extends Component {
         });
     }
 
-    validate(rating, newComment) {
+    validate(rating, serviceRating, newComment) {
 
         const errors = {
             rating:'',
+            serviceRating: '',
             newComment:''
         };
 
         if (this.state.touched.rating && rating.length < 1)
             errors.rating = 'Rating is required';
+
+        if (this.state.touched.serviceRating && serviceRating.length < 1)
+            errors.serviceRating = 'Rating is required';
 
         if (this.state.touched.newComment && newComment.length < 1)
             errors.newComment = 'Comment is required';
@@ -200,7 +207,7 @@ class Itemdetail extends Component {
 
 
     render() {
-        const errors = this.validate(this.state.rating, this.state.newComment);
+        const errors = this.validate(this.state.rating, this.state.serviceRating, this.state.newComment);
         const pic = this.state.image.map((url) => {
             return (
                 <div>
@@ -212,11 +219,23 @@ class Itemdetail extends Component {
             return (
                 <div className="row col-12 col-md-6 offset-md-3" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
                     <div className="col-12" style={{marginTop:"20px"}}>
-                        <p><strong>Customer Rating: </strong> 
+                        <p><strong>Goods Rating: </strong> 
                             <StarRatingComponent 
                                 name="rate1" 
                                 starCount={10}
                                 value={comment.rating}
+                                starColor={"#F59A23"}
+                                emptyStarColor={"white"}
+                                renderStarIcon={() => <i class="fa fa-heart" aria-hidden="true"></i>}
+                                />
+                            </p>
+                    </div>
+                    <div className="col-12" style={{marginTop:"20px"}}>
+                        <p><strong>Buyer Rating: </strong> 
+                            <StarRatingComponent 
+                                name="rate2" 
+                                starCount={10}
+                                value={comment.serviceRating}
                                 starColor={"#F59A23"}
                                 emptyStarColor={"white"}
                                 renderStarIcon={() => <i class="fa fa-heart" aria-hidden="true"></i>}
@@ -349,8 +368,8 @@ class Itemdetail extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <FormGroup>
-                                        <select name="rating" className="select-list" onChange={this.handleInputChange}>
-                                            <option selected disabled> Rating (Required)</option>
+                                        <select name="rating" className="select-list" onChange={this.handleInputChange} valid={errors.rating === ''} invalid={errors.rating !== ''} onBlur={this.handleBlur('rating')}>
+                                            <option selected disabled> Goods Rating (Required)</option>
                                             <option value ="0">0</option>
                                             <option value ="1">1</option>
                                             <option value ="2">2</option>
@@ -369,9 +388,30 @@ class Itemdetail extends Component {
                             </Row>
                             <Row>
                                 <Col xs={12}>
+                                    <FormGroup>
+                                        <select name="serviceRating" className="select-list" onChange={this.handleInputChange} valid={errors.serviceRating === ''} invalid={errors.serviceRating !== ''} onBlur={this.handleBlur('serviceRating')}>
+                                            <option selected disabled> Buyer Rating (Required)</option>
+                                            <option value ="0">0</option>
+                                            <option value ="1">1</option>
+                                            <option value ="2">2</option>
+                                            <option value ="3">3</option>
+                                            <option value ="4">4</option>
+                                            <option value ="5">5</option>
+                                            <option value ="6">6</option>
+                                            <option value ="7">7</option>
+                                            <option value ="8">8</option>
+                                            <option value ="9">9</option>
+                                            <option value ="10">10</option>
+                                        </select> 
+                                        <FormFeedback>{errors.serviceRating}</FormFeedback>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="newComment" className="form-style-label">Comment (Required)</Label>
-                                        <Input type="textarea" id="newComment" name="newComment" rows="5" value={this.state.newComment} onChange={this.handleInputChange}/>
+                                        <Input type="textarea" id="newComment" name="newComment" rows="5" value={this.state.newComment} onChange={this.handleInputChange} valid={errors.newComment === ''} invalid={errors.newComment !== ''} onBlur={this.handleBlur('newComment')}/>
                                         <FormFeedback>{errors.newComment}</FormFeedback>
                                     </FormGroup>
                                 </Col>
@@ -379,7 +419,7 @@ class Itemdetail extends Component {
                             <Row>
                                 <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <Button type="submit" value="submit" style={{background:"rgba(132,0,255,0.57)", width:"100%", fontFamily:"Arial Black"}}>Submit</Button>
+                                        <Button disabled={ this.state.rating === '' || this.state.serviceRating === '' || this.state.newComment === '' || errors.rating != '' || errors.serviceRating != '' || errors.newComment != ''} type="submit" value="submit" style={{background:"rgba(132,0,255,0.57)", width:"100%", fontFamily:"Arial Black"}}>Submit</Button>
                                     </FormGroup>
                                 </Col>
                             </Row>

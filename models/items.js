@@ -8,6 +8,12 @@ const commentSchema = new Schema({
         max: 10,
         required: true
     },
+    serviceRating:{
+        type: Number,
+        min: 0,
+        max: 10,
+        required: true
+    },
     comment: {
         type: String,
         required: true

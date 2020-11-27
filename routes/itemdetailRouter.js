@@ -153,7 +153,7 @@ itemDetailRouter.route('/:item_id')
             .catch((err) => next(err));
         }
         else{
-            Item.findOneAndUpdate({item_id: req.params.item_id}, { "$push": { "comments": {"rating": req.body.rating, "comment": req.body.comment, "author": req.body.username}}})
+            Item.findOneAndUpdate({item_id: req.params.item_id}, { "$push": { "comments": {"rating": req.body.rating, "serviceRating": req.body.serviceRating, "comment": req.body.comment, "author": req.body.username}}})
             .then((item) => {
                 User.findOne({username: req.body.username})
                 .then((user) => {
