@@ -84,6 +84,11 @@ class Header extends Component{
                                     </Button>
                                 </NavItem>
                                 <NavItem>
+                                    <Link to={"/help"} style={{ color: '#FFF' }}>
+                                        <span className="fa fa-question-circle fa-lg fa-cog fa-margin-right fa-margin-top"></span>
+                                    </Link>
+                                </NavItem>
+                                <NavItem>
                                     <Link to={`/favorite`} style={{ color: '#FFF' }}>
                                         <span className="fa fa-heart-o fa-lg fa-cog fa-margin-right fa-margin-top"></span>
                                     </Link>

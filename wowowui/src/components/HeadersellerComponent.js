@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {baseUrl} from '../shared/baseUrl';
 
 class Headerseller extends Component{
@@ -81,6 +81,11 @@ class Headerseller extends Component{
                                     <Button className="button-mr" outline onClick={this.handeLogout}>
                                         <span className="fa fa-sign-out fa-lg"></span> Logout
                                     </Button>
+                                </NavItem>
+                                <NavItem>
+                                    <Link to={"/help"} style={{ color: '#FFF' }}>
+                                        <span className="fa fa-question-circle fa-lg fa-cog fa-margin-right fa-margin-top"></span>
+                                    </Link>
                                 </NavItem>
                             </Nav>
                         </Collapse>
