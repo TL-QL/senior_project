@@ -231,7 +231,7 @@ class Itemdetail extends Component {
                             </p>
                     </div>
                     <div className="col-12" style={{marginTop:"20px"}}>
-                        <p><strong>Buyer Rating: </strong> 
+                        <p><strong>Seller Rating: </strong> 
                             <StarRatingComponent 
                                 name="rate2" 
                                 starCount={10}
@@ -390,7 +390,7 @@ class Itemdetail extends Component {
                                 <Col xs={12}>
                                     <FormGroup>
                                         <select name="serviceRating" className="select-list" onChange={this.handleInputChange} valid={errors.serviceRating === ''} invalid={errors.serviceRating !== ''} onBlur={this.handleBlur('serviceRating')}>
-                                            <option selected disabled> Buyer Rating (Required)</option>
+                                            <option selected disabled> Seller Rating (Required)</option>
                                             <option value ="0">0</option>
                                             <option value ="1">1</option>
                                             <option value ="2">2</option>
