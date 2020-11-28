@@ -285,7 +285,7 @@ class ProfileBuyer extends Component {
                                     <FormGroup className="form-style-form-group">
                                         <p style={{color:"#B9B9B9", fontSize:"12px"}}>What kinds of goods are you interested in? (Click on Cancel to reset to original interests)</p>
                                         <p style={{color:"#B9B9B9", fontSize:"12px"}}>Current interests: {originaInterests}</p>
-                                        <p style={{color:"#B9B9B9", fontSize:"12px"}}>Your new interests: </p>
+                                        <p style={{color:"#B9B9B9", fontSize:"12px"}}>Your new interests</p>
                                         <Label htmlFor="interests" className="form-style-label"></Label>
                                         <Select
                                             isMulti
