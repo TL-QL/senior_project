@@ -22,12 +22,13 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
     if(req.params.sort == 'low') mySort=1;
     Item.find(filter).sort({price: mySort})
     .then((items) => {
-        Item.find({})
+        Item.find({approve: true, soldout: false})
         .then((all_items) => {
-            var input = [];
+            var input = {};
+            input.username = req.params.username;
+            input.items = [];
             for(var i = 0;i < all_items.length;i++){
                 var temp = {};
-                temp.username = req.params.username;
                 temp.item_id = all_items[i].item_id;
                 temp.description = 'It is '+all_items[i].name.toString()+'. It belongs to category '+all_items[i].category.toString()+'. Product insurance: '+all_items[i].productInsurance.toString()+'. Detaching Info: '+all_items[i].detachable.toString()+'. Care Instruction: '+ all_items[i].careIns.toString()+'. Description on damage(s): '+all_items[i].damage.toString();
                 var ratings =[];
@@ -39,7 +40,8 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                 else
                     ratings.push(6);
                 temp.rating = ratings;
-                input.push(temp);
+                temp.buyer = all_items[i].buyer;
+                input.items.push(temp);
             }
             const python = spawn('python', ['integration_code.py', JSON.stringify(input)]);
             var output = [];

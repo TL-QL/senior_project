@@ -95,6 +95,9 @@ class Submissions extends Component{
                         <div className="col-12">
                             <p><strong>Image Score:</strong> {score}</p>
                         </div>
+                        <div className="col-12">
+                            <p><strong>Soldout:</strong> {item.soldout.toString()}</p>
+                        </div>
                     </div>
                     <div className="col-12 col-md-7 offset-md-3">
                     </div>

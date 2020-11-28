@@ -13,14 +13,13 @@
   "careIns": "",
   "productInsurance": "",
   "damage": "",
-  "post": false,
   "soldout": false,
   "item_id": "0",
   "images": [
     "https://drive.google.com/file/d/1zszYcAV690YY6eKwkfmmEdZZTW7ZkcKD/preview",
     "https://drive.google.com/file/d/1g2nt-MeQBN8vklrwltpTPHq4c_P_RRX_/preview"
   ],
-  "name": "sofa",
+  "name": "spongebob",
   "price": 1222,
   "condition": "99",
   "delivery": "both",
@@ -34,9 +33,9 @@
     "$date": "2020-11-20T04:43:32.892Z"
   },
   "__v": 0,
-  "imageScore": -1,
-  "approve": false,
-  "reject": true
+  "imageScore": 5,
+  "approve": true,
+  "reject": false
 },{
   "_id": {
     "$oid": "5f978f71e478b65d58872bbe"
@@ -54,7 +53,6 @@
   "careIns": "ccccccccccccccccccccccccccccccccccccc",
   "productInsurance": "NO insurance",
   "damage": "Perfect. No damage!",
-  "post": false,
   "soldout": false,
   "item_id": "1",
   "images": [
@@ -73,6 +71,7 @@
         "$oid": "5fb7547d7edb68169c03bb1e"
       },
       "rating": 1,
+      "serviceRating": "2",
       "comment": "bb8",
       "author": "TooLazy",
       "updatedAt": {
@@ -84,58 +83,17 @@
     },
     {
       "_id": {
-        "$oid": "5fb754bfa4eb0c16b117cc09"
+        "$oid": "5fc0b11a48b04b56e581e119"
       },
-      "rating": 3,
-      "comment": "bb-9",
+      "rating": 2,
+      "serviceRating": 5,
+      "comment": "sss",
       "author": "TooLazy",
       "updatedAt": {
-        "$date": "2020-11-20T05:31:43.736Z"
+        "$date": "2020-11-27T07:56:10.465Z"
       },
       "createdAt": {
-        "$date": "2020-11-20T05:31:43.736Z"
-      }
-    },
-    {
-      "_id": {
-        "$oid": "5fb755cb150aa81707424d0c"
-      },
-      "rating": 3,
-      "comment": "bb-10",
-      "author": "TooLazy",
-      "updatedAt": {
-        "$date": "2020-11-20T05:36:11.844Z"
-      },
-      "createdAt": {
-        "$date": "2020-11-20T05:36:11.844Z"
-      }
-    },
-    {
-      "_id": {
-        "$oid": "5fba06dc8935d48175f85fa3"
-      },
-      "rating": 5,
-      "comment": "bb-11",
-      "author": "TooLazy",
-      "updatedAt": {
-        "$date": "2020-11-22T06:36:12.876Z"
-      },
-      "createdAt": {
-        "$date": "2020-11-22T06:36:12.876Z"
-      }
-    },
-    {
-      "_id": {
-        "$oid": "5fba07c17908c3819a049d27"
-      },
-      "rating": 3,
-      "comment": "bb-12",
-      "author": "TooLazy",
-      "updatedAt": {
-        "$date": "2020-11-22T06:40:01.074Z"
-      },
-      "createdAt": {
-        "$date": "2020-11-22T06:40:01.074Z"
+        "$date": "2020-11-27T07:56:10.465Z"
       }
     }
   ],
@@ -143,7 +101,7 @@
     "$date": "2020-10-27T03:09:37.118Z"
   },
   "updatedAt": {
-    "$date": "2020-11-22T06:45:03.527Z"
+    "$date": "2020-11-27T07:56:10.465Z"
   },
   "__v": 0,
   "imageScore": 5,
@@ -165,10 +123,10 @@
   "careIns": "",
   "productInsurance": "NO insurance",
   "damage": "",
-  "approve": false,
+  "approve": true,
   "reject": false,
   "soldout": false,
-  "imageScore": -1,
+  "imageScore": 5,
   "item_id": "2",
   "images": [
     "https://drive.google.com/file/d/1g2nt-MeQBN8vklrwltpTPHq4c_P_RRX_/preview",
