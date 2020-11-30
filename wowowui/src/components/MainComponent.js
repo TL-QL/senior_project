@@ -22,6 +22,7 @@ import Adminverifysingle from './AdminverifysingleComponent';
 import ItemDetail from './ItemdetailComponent';
 import Footer from './FooterComponent';
 import Help from './HelpComponent';
+import HelpSeller from './HelpSellerComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 
 const UsernameContext = React.createContext('');
@@ -47,6 +48,7 @@ class Main extends Component{
             '/homeseller',
             '/contactusseller',
             '/aboutusseller',
+            '/helpseller',
             '/postsub',
             '/submissions',
             '/editsub/:itemId'
@@ -77,6 +79,7 @@ class Main extends Component{
                         <Route exact path="/adminverifysingle/:itemId" component={()=><Adminverifysingle path={this.props.location.pathname} username={this.state.username} history={this.props.history} token={this.state.token}/>}/>
                         <Route exact path="/itemdetail/:itemId" component={()=><ItemDetail path={this.props.location.pathname} history={this.props.history} location={this.props.location} token={this.state.token} username={this.state.username} />}/>
                         <Route exact path="/help" component={Help} />
+                        <Route exact path="/helpseller" component={HelpSeller} />
                         <Redirect to="/home" />
                     </Switch>
                     <Footer />

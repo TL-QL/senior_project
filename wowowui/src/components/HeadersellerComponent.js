@@ -83,7 +83,7 @@ class Headerseller extends Component{
                                     </Button>
                                 </NavItem>
                                 <NavItem>
-                                    <Link to={"/help"} style={{ color: '#FFF' }}>
+                                    <Link to={"/helpseller"} style={{ color: '#FFF' }}>
                                         <span className="fa fa-question-circle fa-lg fa-cog fa-margin-right fa-margin-top"></span>
                                     </Link>
                                 </NavItem>

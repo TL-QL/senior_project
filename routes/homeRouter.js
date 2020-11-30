@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var Item = require('../models/items');
 var User = require('../models/user');
+var Shopping = require('../models/shoppingcarts');
 var passport = require('passport');
 var authenticate = require('../authenticate');
 const {spawn} = require('child_process');
@@ -25,6 +26,7 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
         Item.find({approve: true, soldout: false})
         .then((all_items) => {
             var input = {};
+            var input2 = {};
             input.username = req.params.username;
             input.items = [];
             for(var i = 0;i < all_items.length;i++){
@@ -40,10 +42,17 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                 else
                     ratings.push(6);
                 temp.rating = ratings;
-                temp.buyer = all_items[i].buyer;
+                if(all_items[i].buyer) temp.buyer = all_items[i].buyer;
+                else 
+                    temp.buyer = "";
                 input.items.push(temp);
             }
-            const python = spawn('python', ['integration_code.py', JSON.stringify(input)]);
+            Shopping.find({})
+            .then((shop) => {
+                input2 = shop;
+            }, (err) => next(err))
+            .catch((err) => next(err));
+            const python = spawn('python', ['integration_code.py', JSON.stringify(input), JSON.stringify(input2)]);
             var output = [];
             python.stdout.on('data', function (data) {
                 output = JSON.parse(data.toString());
@@ -53,16 +62,13 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                 .then((rec) => {
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'application/json');
-                    res.json({search: items, recommendation: rec});
+                    //res.json({search: items, recommendation: rec});
+                    res.json({input:input, input2: input2});
                 }, (err) => next(err))
                 .catch((err) => next(err));
             });
         }, (err) => next(err))
         .catch((err) => next(err));
-        // const python = spawn('python', ['JsonTest.py', JSON.stringify(input)]);
-        // res.StatusCode = 200;
-        // res.setHeader('Content-Type', 'application/json');
-        // res.json(items);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
