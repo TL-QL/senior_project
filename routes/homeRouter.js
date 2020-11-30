@@ -52,7 +52,7 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                 input2 = shop;
             }, (err) => next(err))
             .catch((err) => next(err));
-            const python = spawn('python', ['integration_code.py', JSON.stringify(input), JSON.stringify(input2)]);
+            const python = spawn('python', ['recommend_system.py', JSON.stringify(input), JSON.stringify(input2)]);
             var output = [];
             python.stdout.on('data', function (data) {
                 output = JSON.parse(data.toString());
