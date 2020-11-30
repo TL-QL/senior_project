@@ -33,15 +33,16 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                 var temp = {};
                 temp.item_id = all_items[i].item_id;
                 temp.description = 'It is '+all_items[i].name.toString()+'. It belongs to category '+all_items[i].category.toString()+'. Product insurance: '+all_items[i].productInsurance.toString()+'. Detaching Info: '+all_items[i].detachable.toString()+'. Care Instruction: '+ all_items[i].careIns.toString()+'. Description on damage(s): '+all_items[i].damage.toString();
-                var ratings =[];
+                var comments =[];
                 if(all_items[i].comments){
                     for(var j = 0;j < all_items[i].comments.length;j++){
-                        ratings.push(all_items[i].comments[j].rating);
+                        var tt = {};
+                        tt.rating = all_items[i].comments[j].rating;
+                        tt.author = all_items[i].comments[j].author;
+                        comments.push(tt);
                     }
                 }
-                else
-                    ratings.push(6);
-                temp.rating = ratings;
+                temp.comments = comments;
                 if(all_items[i].buyer) temp.buyer = all_items[i].buyer;
                 else 
                     temp.buyer = "";
@@ -62,8 +63,8 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                 .then((rec) => {
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'application/json');
-                    //res.json({search: items, recommendation: rec});
-                    res.json({input:input, input2: input2});
+                    res.json({search: items, recommendation: rec});
+                    //res.json({input:JSON.stringify(input), input2: JSON.stringify(input2)});
                 }, (err) => next(err))
                 .catch((err) => next(err));
             });

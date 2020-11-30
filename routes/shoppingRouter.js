@@ -13,7 +13,7 @@ shoppingRouter.route('/:username')
     .get(authenticate.verifyUser, authenticate.verifybuyer, (req,res,next) => {
         Shoppingcarts.findOne({username: req.params.username})
         .then((items) => {
-            Item.find({item_id: {$in: items.items}})
+            Item.find({item_id: {$in: items.items}, soldout: false})
             .then((info) => {
                 res.StatusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
