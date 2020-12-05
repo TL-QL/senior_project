@@ -16,19 +16,25 @@ class Favorite extends Component{
     }
 
     componentDidMount() {
-        fetch(config.serverUrl+'/fav/'+this.props.username, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'bearer '+this.props.token
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                items: data
+        if(this.props.username){
+            fetch(config.serverUrl+'/fav/'+this.props.username, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer '+this.props.token
+                }
             })
-        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    items: data
+                })
+            })
+        }
+        else{
+            alert("You have not logged in!");
+            this.props.history.push('/home');
+        }
     }
 
     handleFav(item_id, event){

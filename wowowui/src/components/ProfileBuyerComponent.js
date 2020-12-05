@@ -38,31 +38,36 @@ class ProfileBuyer extends Component {
     }
 
     componentDidMount() {
-        fetch(config.serverUrl+'/profilebuyer/'+this.props.username, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'bearer '+this.props.token
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-
-            this.setState({
-                username: data.username,
-                password: data.password,
-                nickname: data.nickname,
-                phone: data.phone,
-                email: data.email,
-                address: data.address,
-                city: data.city,
-                theState: data.theState,
-                zipcode: data.zipcode,
-                transportation: data.transportation,
-                care: data.care,
-                interests: data.interests
+        if(this.props.username){
+            fetch(config.serverUrl+'/profilebuyer/'+this.props.username, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer '+this.props.token
+                }
             })
-        })
+            .then(res => res.json())
+            .then(data => {
+                    this.setState({
+                        username: data.username,
+                        password: data.password,
+                        nickname: data.nickname,
+                        phone: data.phone,
+                        email: data.email,
+                        address: data.address,
+                        city: data.city,
+                        theState: data.theState,
+                        zipcode: data.zipcode,
+                        transportation: data.transportation,
+                        care: data.care,
+                        interests: data.interests
+                    })
+            })
+        }
+        else{
+            alert("You have not logged in!");
+            this.props.history.push('/home');
+        }
     }
 
     handleInputChange(event){

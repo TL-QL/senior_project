@@ -53,20 +53,26 @@ class Home extends Component{
 
     handleSubmit(event){
         event.preventDefault();
-        fetch(config.serverUrl+'/home/'+this.props.username+'/'+this.state.search+'/'+this.state.category+'/'+this.state.condition+'/'+this.state.delivery+'/'+this.state.sort, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'bearer '+this.props.token
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                items: data.search,
-                recommendation: data.recommendation
+        if(this.props.username){
+            fetch(config.serverUrl+'/home/'+this.props.username+'/'+this.state.search+'/'+this.state.category+'/'+this.state.condition+'/'+this.state.delivery+'/'+this.state.sort, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer '+this.props.token
+                }
             })
-        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    items: data.search,
+                    recommendation: data.recommendation
+                })
+            })
+        }
+        else{
+            alert("You have not logged in!");
+            this.props.history.push('/home');
+        }
     }
 
 

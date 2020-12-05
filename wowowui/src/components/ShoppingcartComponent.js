@@ -16,19 +16,25 @@ class Shoppingcart extends Component{
     }
 
     componentDidMount() {
-        fetch(config.serverUrl+'/shoppingcart/'+this.props.username, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'bearer '+this.props.token
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                items: data
+        if(this.props.username){
+            fetch(config.serverUrl+'/shoppingcart/'+this.props.username, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer '+this.props.token
+                }
             })
-        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    items: data
+                })
+            })
+        }
+        else{
+            alert("You have not logged in!");
+            this.props.history.push('/home');
+        }
     }
 
     handleBuy(item_id, event){
