@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, FormGroup, Label, Input, Col, Row} from 'reactstrap';
-import {baseUrl} from '../shared/baseUrl';
+import {Button, Form, FormGroup, Row} from 'reactstrap';
 import { Link } from 'react-router-dom';
 var config = require('../config');
 
@@ -12,6 +11,7 @@ class Adminverify extends Component{
         this.state = {
             items:[]
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -27,6 +27,21 @@ class Adminverify extends Component{
             this.setState({
                 items: data
             })
+        })
+    }
+
+    handleSubmit(event){
+        event.preventDefault();
+        fetch(config.serverUrl+'/profilebuyer/'+this.props.username, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'bearer '+this.props.token
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success) alert(JSON.stringify(data.status));
         })
     }
 
@@ -96,6 +111,15 @@ class Adminverify extends Component{
                 <div className="col-12">
                     <h5 style={{marginTop:"22px", fontFamily:"Arial Black"}}>Approve Posts</h5>
                 </div>
+                <Form onSubmit={this.handleSubmit} class="form-style">
+                    <Row>
+                        <FormGroup>
+                            <Button type="submit" className="button-width button-mr" color="primary">
+                                <i class="fa fa-play-circle" aria-hidden="true"></i> Re-calculate weight
+                            </Button>
+                        </FormGroup>
+                    </Row>
+                </Form>
                 <div className="row">
                     {item}
                 </div>

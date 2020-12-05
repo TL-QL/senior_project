@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {Button} from 'reactstrap';
-import {baseUrl} from '../shared/baseUrl';
 import { Link } from 'react-router-dom';
 var config = require('../config');
 

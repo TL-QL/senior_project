@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import {Link} from 'react-router-dom';
-import {baseUrl} from '../shared/baseUrl';
 import Select from 'react-select';
 var config = require('../config');
 

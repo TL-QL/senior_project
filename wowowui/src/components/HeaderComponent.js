@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import {NavLink, Link} from 'react-router-dom';
 import {baseUrl} from '../shared/baseUrl';
-var config = require('../config');
 
 class Header extends Component{
 

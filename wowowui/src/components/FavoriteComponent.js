@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Form} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import {baseUrl} from '../shared/baseUrl';
 var config = require('../config');
 
 class Favorite extends Component{

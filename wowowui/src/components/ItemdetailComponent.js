@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, FormFeedback, Modal, ModalHeader, ModalBody, Row, Col, Label, Input} from 'reactstrap';
 import {Link} from 'react-router-dom';
-import {baseUrl} from '../shared/baseUrl';
 import StarRatingComponent from 'react-star-rating-component';
 var config = require('../config');
 

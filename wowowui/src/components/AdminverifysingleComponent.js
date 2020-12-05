@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row} from 'reactstrap';
-import {baseUrl} from '../shared/baseUrl';
+import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Input, Col} from 'reactstrap';
 import { Link } from 'react-router-dom';
 var config = require('../config');
 
