@@ -147,4 +147,398 @@
     "$date": "2020-11-22T05:32:55.646Z"
   },
   "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd10d74fc39e452002bb202"
+  },
+  "subCategory": [
+    "textbook"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "7.1 x 0.4 x 10",
+  "detachable": "not detachable",
+  "careIns": "just a book",
+  "productInsurance": "no insurance",
+  "damage": "almost perfect, some notes being taken",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 4.5,
+  "item_id": "3",
+  "images": [
+    "https://drive.google.com/file/d/1XHftq4sjKonQQypCdnNMU03Fsi3YpUI1/preview",
+    "https://drive.google.com/file/d/1ZrjQ8we9kliVGBHK_kvattmdWFNal1np/preview",
+    "https://drive.google.com/file/d/1TNWRyG-3Z-zxRC7VRbjHCJk_nwYwCY2B/preview"
+  ],
+  "name": "Genki textbook",
+  "price": 17,
+  "condition": "90",
+  "delivery": "both",
+  "category": "books",
+  "seller": "Seller1",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T17:46:28.981Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:42:30.069Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd110e9fc39e452002bb203"
+  },
+  "subCategory": [
+    "others"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "6.5 x 1.7 x 9.4",
+  "detachable": "not detachable",
+  "careIns": "just a book",
+  "productInsurance": "no insurance",
+  "damage": "perfect, no damage",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 4,
+  "item_id": "4",
+  "images": [
+    "https://drive.google.com/file/d/1CypcuYZ1werGQc5sRQ_0VTsNRyk6Yk9K/preview",
+    "https://drive.google.com/file/d/1QVHtsYni0BFDm0QsBGIfSydYfzuyB25a/preview",
+    "https://drive.google.com/file/d/1Ckq6HugppiAF9B7Xfc6Vk24UxA_RadJ5/preview"
+  ],
+  "name": "Harry Potter and the Sorcerer's Stone",
+  "price": 23,
+  "condition": "99",
+  "delivery": "both",
+  "category": "books",
+  "seller": "Seller1",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:01:13.441Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:42:51.364Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd111acfc39e452002bb204"
+  },
+  "subCategory": [
+    "homeDecor",
+    "livingroom",
+    "dormroom"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "12.9 x 5.5 x 5.9",
+  "detachable": "stick on wall",
+  "careIns": "",
+  "productInsurance": "No insurance",
+  "damage": "used, but no obvious damage on surface",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 5,
+  "item_id": "5",
+  "images": [
+    "https://drive.google.com/file/d/1OwZOkVihsTBuCp6x59dEewAnsm6D9J1c/preview",
+    "https://drive.google.com/file/d/1Fzw_8VKtpkjPFt0Pjnq22zR89jkfSQY7/preview",
+    "https://drive.google.com/file/d/1-oJ69aJ0okZcPIBlkQZRzfOeZjoh92iT/preview"
+  ],
+  "name": "Home Decor flower light",
+  "price": 40,
+  "condition": "90",
+  "delivery": "both",
+  "category": "home",
+  "seller": "Seller2",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:04:28.309Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:43:02.780Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd11294fc39e452002bb207"
+  },
+  "subCategory": [
+    "storageOrganization",
+    "kitchen",
+    "bedroom"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "29 x 17.75 x 13.25",
+  "detachable": "cover can be detached from the main bin itself",
+  "careIns": "",
+  "productInsurance": "",
+  "damage": "there are visible scratches on the bottom but is still functional itself",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 4.5,
+  "item_id": "6",
+  "images": [
+    "https://drive.google.com/file/d/1E6O6uxr7yvv84mxFqbGYev1BIydaReWW/preview",
+    "https://drive.google.com/file/d/1ZpxywcwktU1lMQKIKXV_Z77zLbQnk4HI/preview",
+    "https://drive.google.com/file/d/1HPfQLUo8dZ3GhWgY1TDBDUWCe43Wmj2-/preview"
+  ],
+  "name": "Storage bin",
+  "price": 99,
+  "condition": "70",
+  "delivery": "both",
+  "category": "home",
+  "seller": "Seller3",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:08:20.733Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:43:14.790Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd11333fc39e452002bb208"
+  },
+  "subCategory": [
+    "iclicker"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "2.5 x 1 x 5.25",
+  "detachable": "",
+  "careIns": "no batteries included, need to plugin batteries yourself",
+  "productInsurance": "no insurance",
+  "damage": "there are light scratches but the item is totally functional",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 4.5,
+  "item_id": "7",
+  "images": [
+    "https://drive.google.com/file/d/1YhPaQRO7-_Ek98hdFXgsL9esWfBxytxT/preview",
+    "https://drive.google.com/file/d/17IlmUHIKPe60VV4oDch0dIndMBNMgLMy/preview",
+    "https://drive.google.com/file/d/1L6DJ1kN07Qo8qgEGywemlaWJfbtoSGFw/preview"
+  ],
+  "name": "iclicker",
+  "price": 77,
+  "condition": "90",
+  "delivery": "pickup",
+  "category": "electronics",
+  "seller": "Seller4",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:10:59.858Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:43:30.585Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd113c9fc39e452002bb209"
+  },
+  "subCategory": [
+    "computer"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "15 x 13.3 x 0.8",
+  "detachable": "",
+  "careIns": "charger is included",
+  "productInsurance": "No insurance",
+  "damage": "there are scratches on the bottom, and little issues with the fans",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 4.5,
+  "item_id": "8",
+  "images": [
+    "https://drive.google.com/file/d/1qF6fLrCuHnA03ILSefxJlhNc1HENDd5J/preview",
+    "https://drive.google.com/file/d/1ET4kkYjgt6L2quIlbhC4DLY-yyRQLpsf/preview",
+    "https://drive.google.com/file/d/12IL9Z2dIZaBnpDnsQ3-p-sm6arc0eX-u/preview"
+  ],
+  "name": "HP laptop",
+  "price": 2000,
+  "condition": "70",
+  "delivery": "pickup",
+  "category": "electronics",
+  "seller": "Seller5",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:13:29.685Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:43:44.361Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd1145afc39e452002bb20a"
+  },
+  "subCategory": [
+    "phone"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "regular iphone 11 size",
+  "detachable": "",
+  "careIns": "no charger/USB included",
+  "productInsurance": "No insurance",
+  "damage": "there are some sort of light scratches on the back, otherwise, perfect",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 5,
+  "item_id": "9",
+  "images": [
+    "https://drive.google.com/file/d/1uTk2rywQh-USCLoX2kywJU9W-GZ9hZiG/preview",
+    "https://drive.google.com/file/d/14XJwk5vNMBJ9NTVPwmgnA2JO6IEGg2L4/preview",
+    "https://drive.google.com/file/d/1PjjrFxi3MIrHZOK9J_T9wsFI-lePO0ef/preview"
+  ],
+  "name": "Iphone 11, 128GB",
+  "price": 5000,
+  "condition": "90",
+  "delivery": "both",
+  "category": "electronics",
+  "seller": "Seller6",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:15:54.460Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:44:00.337Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd114dcfc39e452002bb20b"
+  },
+  "subCategory": [
+    "petFood"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "23.5 x 14 x 3",
+  "detachable": "not detachable",
+  "careIns": "just dog food",
+  "productInsurance": "no insurance",
+  "damage": "still half bag left",
+  "approve": false,
+  "reject": true,
+  "soldout": false,
+  "imageScore": null,
+  "item_id": "10",
+  "images": [
+    "https://drive.google.com/file/d/1nQE1CPfCJSO_O_DyhuR6ShJVHZtjmBdQ/preview",
+    "https://drive.google.com/file/d/1nQE1CPfCJSO_O_DyhuR6ShJVHZtjmBdQ/preview",
+    "https://drive.google.com/file/d/1nQE1CPfCJSO_O_DyhuR6ShJVHZtjmBdQ/preview"
+  ],
+  "name": "Wellness dog dry food for senior",
+  "price": 300,
+  "condition": "50",
+  "delivery": "pickup",
+  "category": "pets",
+  "seller": "Seller7",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:18:04.565Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:44:09.442Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd11549fc39e452002bb20d"
+  },
+  "subCategory": [
+    "petSupplies"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "19.37 x 13.23 x 2.05",
+  "detachable": "detachable",
+  "careIns": "",
+  "productInsurance": "no insurance",
+  "damage": "there is a hole on left side",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 4.5,
+  "item_id": "11",
+  "images": [
+    "https://drive.google.com/file/d/1D6QV5KGVT2z4VvKC4-UhpJkB0qjwbRyQ/preview",
+    "https://drive.google.com/file/d/1DMqEWxfaIiT8VTcxLDVRQm5723O0XznL/preview",
+    "https://drive.google.com/file/d/1z2P8asfTHIy_Ww6Lsjl71RZ5Ysl7nTSu/preview"
+  ],
+  "name": "dog outdoor tent",
+  "price": 50,
+  "condition": "90",
+  "delivery": "pickup",
+  "category": "pets",
+  "seller": "Seller7",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:19:53.459Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:44:23.340Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fd115ebfc39e452002bb20e"
+  },
+  "subCategory": [
+    "bike"
+  ],
+  "favoriteCount": 0,
+  "shoppingCartCount": 0,
+  "quantity": 1,
+  "sizeInfo": "49 x 24.5 x 9",
+  "detachable": "No detaching info",
+  "careIns": "",
+  "productInsurance": "No insurance",
+  "damage": "perfect but little scratches on the body",
+  "approve": true,
+  "reject": false,
+  "soldout": false,
+  "imageScore": 4.5,
+  "item_id": "12",
+  "images": [
+    "https://drive.google.com/file/d/1YXVvEbRhUzGFzh1hCf82xCFzn_J5CI4I/preview",
+    "https://drive.google.com/file/d/1pTehj6GleQY5N8mgFvvEc9lH1n6Bjp0z/preview",
+    "https://drive.google.com/file/d/1pMmvvSIBxM0cOXzA0bDepSGlxDLcG9we/preview"
+  ],
+  "name": "outdoor pink bike",
+  "price": 1500,
+  "condition": "90",
+  "delivery": "both",
+  "category": "motors",
+  "seller": "Seller8",
+  "comments": [],
+  "createdAt": {
+    "$date": "2020-12-09T18:22:35.519Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-09T18:44:35.275Z"
+  },
+  "__v": 0
 }]
