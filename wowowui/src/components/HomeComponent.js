@@ -54,20 +54,25 @@ class Home extends Component{
     handleSubmit(event){
         event.preventDefault();
         if(this.props.username){
-            fetch(config.serverUrl+'/home/'+this.props.username+'/'+this.state.search+'/'+this.state.category+'/'+this.state.condition+'/'+this.state.delivery+'/'+this.state.sort, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'bearer '+this.props.token
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                this.setState({
-                    items: data.search,
-                    recommendation: data.recommendation
+            if(this.state.search){
+                fetch(config.serverUrl+'/home/'+this.props.username+'/'+this.state.search+'/'+this.state.category+'/'+this.state.condition+'/'+this.state.delivery+'/'+this.state.sort, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'bearer '+this.props.token
+                    }
                 })
-            })
+                .then(res => res.json())
+                .then(data => {
+                    this.setState({
+                        items: data.search,
+                        recommendation: data.recommendation
+                    })
+                })
+            }
+            else{
+                alert("Must enter keyword!");
+            }
         }
         else{
             alert("You have not logged in!");
