@@ -38,7 +38,7 @@ var User = new Schema({
     credit: {
         type: Number,
         default: -1,
-        min: -1,
+        min: 0.0,
         max: 10.0
     },
     // Drive, Transit, Bike, Walk
