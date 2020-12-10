@@ -34,9 +34,10 @@ thisJson = {
         "credit": int(round(3.5*2))
     }
 jsonOut = json.dumps(thisJson)
-sys.stdout.write(jsonOut)
-sys.exit(0)
-
+# sys.stdout.write(jsonOut)
+# sys.exit(0)
+print(jsonOut)
+sys.stdout.flush()
 
 
 
