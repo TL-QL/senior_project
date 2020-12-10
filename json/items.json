@@ -71,7 +71,7 @@
         "$oid": "5fb7547d7edb68169c03bb1e"
       },
       "rating": 1,
-      "serviceRating": 2,
+      "serviceRating": "2",
       "comment": "bb8",
       "author": "TooLazy",
       "updatedAt": {
@@ -236,7 +236,7 @@
   ],
   "favoriteCount": 0,
   "shoppingCartCount": 0,
-  "quantity": 1,
+  "quantity": 0,
   "sizeInfo": "12.9 x 5.5 x 5.9",
   "detachable": "stick on wall",
   "careIns": "",
@@ -244,7 +244,7 @@
   "damage": "used, but no obvious damage on surface",
   "approve": true,
   "reject": false,
-  "soldout": false,
+  "soldout": true,
   "imageScore": 5,
   "item_id": "5",
   "images": [
@@ -258,12 +258,28 @@
   "delivery": "both",
   "category": "home",
   "seller": "Seller2",
-  "comments": [],
+  "comments": [
+    {
+      "_id": {
+        "$oid": "5fd26ac641ce8e0d9c7f6084"
+      },
+      "rating": 10,
+      "serviceRating": 8,
+      "comment": "The product itself is lovely. Really beautiful when turned on. Hope the seller could respond my message a little bit sooner. I was kept checking the message box and hoping it is not already sold to others. Overall, great experience. ",
+      "author": "Buyer1",
+      "updatedAt": {
+        "$date": "2020-12-10T18:36:54.993Z"
+      },
+      "createdAt": {
+        "$date": "2020-12-10T18:36:54.993Z"
+      }
+    }
+  ],
   "createdAt": {
     "$date": "2020-12-09T18:04:28.309Z"
   },
   "updatedAt": {
-    "$date": "2020-12-09T18:43:02.780Z"
+    "$date": "2020-12-10T18:36:54.993Z"
   },
   "__v": 0
 },{
@@ -277,7 +293,7 @@
   ],
   "favoriteCount": 0,
   "shoppingCartCount": 0,
-  "quantity": 1,
+  "quantity": 0,
   "sizeInfo": "29 x 17.75 x 13.25",
   "detachable": "cover can be detached from the main bin itself",
   "careIns": "",
@@ -285,7 +301,7 @@
   "damage": "there are visible scratches on the bottom but is still functional itself",
   "approve": true,
   "reject": false,
-  "soldout": false,
+  "soldout": true,
   "imageScore": 4.5,
   "item_id": "6",
   "images": [
@@ -299,12 +315,28 @@
   "delivery": "both",
   "category": "home",
   "seller": "Seller3",
-  "comments": [],
+  "comments": [
+    {
+      "_id": {
+        "$oid": "5fd271c77f9be9228865f6fe"
+      },
+      "rating": 5,
+      "serviceRating": 7,
+      "comment": "Well, the bin is not leaking but it is pretty obvious to be an heavily used item. I think the price is too high. But anyway I bought it. ",
+      "author": "Buyer2",
+      "updatedAt": {
+        "$date": "2020-12-10T19:06:47.714Z"
+      },
+      "createdAt": {
+        "$date": "2020-12-10T19:06:47.714Z"
+      }
+    }
+  ],
   "createdAt": {
     "$date": "2020-12-09T18:08:20.733Z"
   },
   "updatedAt": {
-    "$date": "2020-12-09T18:43:14.790Z"
+    "$date": "2020-12-10T19:06:47.714Z"
   },
   "__v": 0
 },{

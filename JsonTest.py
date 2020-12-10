@@ -154,9 +154,11 @@ def computeCredits(creditarray, weightarray): # input: credit array, weight arra
     return credit*5
 
 
-weight = readNN()
-thiscredit, thisseller = readJSON()
-finalcredit = computeCredits(thiscredit,weight)
-outputJsonObject(thisseller,finalcredit[0])
+# weight = readNN()
+# thiscredit, thisseller = readJSON()
+# finalcredit = computeCredits(thiscredit,weight)
+# outputJsonObject(thisseller,finalcredit[0])
 
+thiscredit, thisseller = readJSON()
+outputJsonObject(thisseller, 3.5)
 
