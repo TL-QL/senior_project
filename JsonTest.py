@@ -17,6 +17,7 @@ if jsoninput['productInsurance']=='':
 if jsoninput['damage']=='':
     value -= 1
 inputList.append(value)
+
 purchase = 0.0
 service = 0.0
 if jsoninput['comments']!=[]: # check if there is feedback value
