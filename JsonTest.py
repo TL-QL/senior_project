@@ -150,12 +150,19 @@ def computeCredits(creditarray, weightarray): # input: credit array, weight arra
     # print("this",credit*5)
     return credit*5
 
-    
+
+def openSampleOut():
+    file = open('C:/itemsSample.json')
+    readout = file.read()
+    readarray = readout.split('/')
+    return readarray[0]
+
 # weight = readNN()
 # thiscredit, thisseller = readJSON()
 # finalcredit = computeCredits(thiscredit,weight)
 # outputJsonObject(thisseller,finalcredit[0])
 
 thiscredit, thisseller = readJSON()
-outputJsonObject(thisseller, 3.5)
+sampleSeller = openSampleOut()
+outputJsonObject(sampleSeller, 3.5)
 
