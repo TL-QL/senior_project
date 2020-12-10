@@ -23,7 +23,7 @@ service = 0.0
 if jsoninput['comments']!=[]: # check if there is feedback value
     for i in range(len(jsoninput['comments'])):
         purchase = purchase + jsoninput['comments'][i]['rating']
-        server = server + jsoninput['comments'][i]['serviceRating']
+        service = service + jsoninput['comments'][i]['serviceRating']
     purchase = purchase / len(jsoninput['comments'])
     service = service / len(jsoninput['comments'])
     inputList.append(purchase)

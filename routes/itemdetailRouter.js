@@ -169,12 +169,16 @@ itemDetailRouter.route('/:item_id')
                     input.imageScore = item.imageScore;
                     input.approve = item.approve;
                     input.credit = user.credit;
-                    const python = spawn('python', ['JsonTest.py', JSON.stringify(input)]);
+
+                    var python = spawn('python', ['JsonTest.py', JSON.stringify(input)]);
                     var output;
-                    python.stdout.on('data', function (data) {
+                    python.stdout.on('data', (data) => {
                         output = JSON.parse(data.toString());
                     });
                     python.on('close', (code) => {
+                        // res.statusCode = 200;
+                        // res.setHeader('Content-Type', 'application/json');
+                        // res.json({success: true, status: JSON.stringify(output)});
                         User.findOneAndUpdate({username: output.seller}, {"$set": {"credit": output.credit}})
                         .then((uu) => {
                             res.statusCode = 200;
