@@ -66,7 +66,7 @@ def readJSON():
     items = terminalTest()
     # inputList = [informationIntegrity,purchaseExperience,serviceExperience,pictureQuality]
     inputList = []
-    if items['soldout']==True and items['comments']!=[]: # check if there is feedback value
+    if items['comments']!=[]: # check if there is feedback value
         # print("is sold out and comments non zero")
         inputList.append(infoIntegrityCompute(items))
         purchase = 0.0
@@ -81,11 +81,6 @@ def readJSON():
         inputList.append(items['imageScore'])
         # soldoutList.append(inputList)
         # correspondingSeller.append(items['seller'])
-    elif items['soldout']==True and items['comments']==[]:
-        print("is sold out but no comments")
-    else:
-        print("neither of those")
-        print(items['comments'])
     # return soldoutList, correspondingSeller
     return inputList, items['seller']
 
@@ -128,7 +123,7 @@ def sigmoid(x):
 def computeCredits(creditarray, weightarray): # input: credit array, weight array, bias array; output: float
     creditarray=np.concatenate(([1], creditarray), axis=0)
     # np.array([1,3,5,4.8,20]) #notice concatenated a 1
-    print(len(weightarray))
+    # print(len(weightarray))
     num_hidden_layers=len(weightarray)-1
 
     u_matrice = np.zeros((num_hidden_layers+1), dtype=np.object)
@@ -137,20 +132,20 @@ def computeCredits(creditarray, weightarray): # input: credit array, weight arra
     # readNN()[0][0] 3X1 vetor u_matrice
     u_matrice[0] = np.dot((weightarray[0]),creditarray.T) # weight[1] * input_pattern
     # print("start:",u_matrice[0])
-    print(weightarray[0])
-    print(weightarray[1])
-    print(weightarray[2])
+    # print(weightarray[0])
+    # print(weightarray[1])
+    # print(weightarray[2])
 
     phi_matrice[0] = sigmoid(u_matrice[0])
     # print("this is :", phi_matrice[0])
-    print(type(phi_matrice[0]))
+    # print(type(phi_matrice[0]))
     phi_matrice[0][0]= 1
     # u_matrice[0] [0]= 1
     for i in range(1,len(weightarray)):
        u_matrice[i] =  np.dot((weightarray[i]),phi_matrice[i-1])
        phi_matrice[i] = sigmoid(u_matrice[i])
     credit = phi_matrice[len(phi_matrice)-1]
-    print("this",credit*5)
+    # print("this",credit*5)
     return credit*5
 
 
