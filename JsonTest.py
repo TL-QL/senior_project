@@ -56,13 +56,29 @@ def outputJsonObject(seller, credit):
     
 
 
-# weight = readNN()
-# thiscredit, thisseller = readJSON()
-# finalcredit = computeCredits(thiscredit,weight)
-# outputJsonObject(thisseller,finalcredit[0])
+thiscredit, thisseller= readJSON()
 
-thiscredit, thisseller = readJSON()
-value = outputJsonObject(thisseller, 3.5)
-jsonOut = json.dumps(value)
+thisJson = {
+        "seller": thisseller,
+        "credit": int(round(3.5*2))
+    }
+jsonOut = json.dumps(thisJson)
 sys.stdout.write(jsonOut)
 sys.exit(0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
