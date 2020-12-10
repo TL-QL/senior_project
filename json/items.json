@@ -71,7 +71,7 @@
         "$oid": "5fb7547d7edb68169c03bb1e"
       },
       "rating": 1,
-      "serviceRating": "2",
+      "serviceRating": 2,
       "comment": "bb8",
       "author": "TooLazy",
       "updatedAt": {

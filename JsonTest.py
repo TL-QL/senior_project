@@ -73,7 +73,7 @@ def readJSON():
         service = 0.0
         for i in range(len(items['comments'])):
             purchase = purchase + items['comments'][i]['rating']
-            service = service + 5.0
+            server = server + items['comments'][i]['serviceRating']
         purchase = purchase / len(items['comments'])
         service = service / len(items['comments'])
         inputList.append(purchase)
