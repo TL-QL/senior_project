@@ -22,15 +22,10 @@ def infoIntegrityCompute(inputItem):
     return value
 
 
-def terminalTest():
-    # return the json object as input argv from terminal
-    return json.loads(sys.argv[1])
-
-
 def readJSON():
     # the input json object is info about 'one' sold item
     # items = localTest()
-    items = terminalTest()
+    items = json.loads(sys.argv[1])
     # inputList = [informationIntegrity,purchaseExperience,serviceExperience,pictureQuality]
     inputList = []
     if items['comments']!=[]: # check if there is feedback value
@@ -57,9 +52,8 @@ def outputJsonObject(seller, credit):
         "seller": seller,
         "credit": int(round(credit*2))
     }
-    JsonOut = json.dumps(thisJson)
-    sys.stdout.write(JsonOut)
-    sys.exit(0)
+    return thisJson
+    
 
 
 # weight = readNN()
@@ -68,5 +62,7 @@ def outputJsonObject(seller, credit):
 # outputJsonObject(thisseller,finalcredit[0])
 
 thiscredit, thisseller = readJSON()
-outputJsonObject(thisseller, 3.5)
-
+value = outputJsonObject(thisseller, 3.5)
+jsonOut = json.dumps(value)
+sys.stdout.write(jsonOut)
+sys.exit(0)
