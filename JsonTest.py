@@ -7,15 +7,15 @@ jsoninput = json.loads(sys.argv[1])
 inputList = []
 if jsoninput['comments']!=[]: # check if there is feedback value
 		value = 5
-		if inputItem['sizeInfo']=='':
+		if jsoninput['sizeInfo']=='':
 			value -= 1
-		if inputItem['detachable']=='':
+		if jsoninput['detachable']=='':
 			value -= 1
-		if inputItem['careIns']=='':
+		if jsoninput['careIns']=='':
 			value -= 1
-		if inputItem['productInsurance']=='':
+		if jsoninput['productInsurance']=='':
 			value -= 1
-		if inputItem['damage']=='':
+		if jsoninput['damage']=='':
 			value -= 1
         inputList.append(value)
         purchase = 0.0
