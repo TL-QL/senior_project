@@ -1,19 +1,54 @@
+import numpy as np
 import json
 import sys
 
-# fileObject2 = open('D:/aCSDS395/pythonReadWrite/itemsSample.json')
-# filename = sys.argv[1] # python JsonTest.py D:/aCSDS395/pythonReadWrite/itemsSample.json
-# fileObject2 = open(filename)
-# testinput = json.load(fileObject2)
-testinput = json.loads(sys.argv[1]) # this should be a json object
-testx = {
-    "seller": testinput['seller'],
-    "credit": 8.8
-}
-testoutput = json.dumps(testx)
-print(testoutput)
-sys.stdout.write(testoutput)
+
+jsoninput = json.loads(sys.argv[1])
+inputList = []
+if jsoninput['comments']!=[]: # check if there is feedback value
+		value = 5
+		if inputItem['sizeInfo']=='':
+			value -= 1
+		if inputItem['detachable']=='':
+			value -= 1
+		if inputItem['careIns']=='':
+			value -= 1
+		if inputItem['productInsurance']=='':
+			value -= 1
+		if inputItem['damage']=='':
+			value -= 1
+        inputList.append(value)
+        purchase = 0.0
+        service = 0.0
+        for i in range(len(jsoninput['comments'])):
+            purchase = purchase + jsoninput['comments'][i]['rating']
+            server = server + jsoninput['comments'][i]['serviceRating']
+        purchase = purchase / len(jsoninput['comments'])
+        service = service / len(jsoninput['comments'])
+        inputList.append(purchase)
+        inputList.append(service)
+        inputList.append(jsoninput['imageScore'])
+thisJson = {
+        "seller": jsoninput['seller'],
+        "credit": int(round(3.5*2))
+    }
+jsonOut = json.dumps(thisJson)
+sys.stdout.write(jsonOut)
 sys.exit(0)
-# sample running phrase in terminal:
-# python JsonTest.py (the input JsonObject) > tempout.txt
-# so the content will stored in tempout.txt, you may use other format of file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
