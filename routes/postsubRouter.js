@@ -31,7 +31,8 @@ postsubRouter.route('/:username')
                     "careIns": req.body.careIns,
                     "productInsurance": req.body.productInsurance,
                     "damage": req.body.damage,
-                    "seller": req.params.username
+                    "seller": req.params.username,
+                    "buyer":""
                 }).save(function(err, result) {
                     if (err){
                         res.statusCode = 500;

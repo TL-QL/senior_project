@@ -16,7 +16,7 @@ class Editsub extends Component {
             quantity:'',
             condition:'',
             delivery:'',
-            buyers: '',
+            buyers: [],
             category:'',
             subCategories:[],
             sizeInfo:'',
@@ -30,13 +30,17 @@ class Editsub extends Component {
                 price: false,
                 quantity: false
             },
-            isModalOpen: false
+            isModalOpen: false,
+            users:[]
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.handleImgURLChange = this.handleImgURLChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.addBuyer = this.addBuyer.bind(this);
+        this.removeBuyer = this.removeBuyer.bind(this);
+        this.handleChangeBuyer = this.handleChangeBuyer.bind(this);
         this.handleMultiInputChange = this.handleMultiInputChange.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.toggleImgInstruction = this.toggleImgInstruction.bind(this);
@@ -53,20 +57,21 @@ class Editsub extends Component {
         .then(res => res.json())
         .then(data => {
             this.setState({
-                image: data.images,
-                title: data.name,
-                price: data.price,
-                quantity: data.quantity,
-                condition: data.condition,
-                delivery: data.delivery,
-                category: data.category,
-                subCategories: data.subCategory,
-                sizeInfo: data.sizeInfo,
-                productInsurance: data.productInsurance,
-                detachable: data.detachable,
-                careIns: data.careIns,
-                damage: data.damage,
-                buyers: data.buyer
+                image: data.item.images,
+                title: data.item.name,
+                price: data.item.price,
+                quantity: data.item.quantity,
+                condition: data.item.condition,
+                delivery: data.item.delivery,
+                category: data.item.category,
+                subCategories: data.item.subCategory,
+                sizeInfo: data.item.sizeInfo,
+                productInsurance: data.item.productInsurance,
+                detachable: data.item.detachable,
+                careIns: data.item.careIns,
+                damage: data.item.damage,
+                buyers: data.item.buyer.split(','),
+                users: data.users
             })
         })
     }
@@ -101,6 +106,20 @@ class Editsub extends Component {
         });
     }
 
+    addBuyer(){
+        this.setState({buyers: [...this.state.buyers, ""]});
+    }
+
+    removeBuyer(index){
+        this.state.buyers.splice(index, 1);
+        this.setState({buyers: this.state.buyers});
+    }
+
+    handleChangeBuyer(event, index){
+        this.state.buyers[index] = event.target.value;
+        this.setState({buyers: this.state.buyers});
+    }
+
     handleMultiInputChange = (events) => {
         var value = [];
         for(var i = 0;i < events.length;i++){
@@ -119,7 +138,7 @@ class Editsub extends Component {
             "quantity": this.state.quantity,
             "condition": this.state.condition,
             "delivery": this.state.delivery,
-            "buyer": this.state.buyers,
+            "buyer": this.state.buyers.toString(),
             "category": this.state.category,
             "subCategories": this.state.subCategories,
             "sizeInfo": this.state.sizeInfo,
@@ -364,7 +383,29 @@ class Editsub extends Component {
                                 <Col xs={12} md={{size:6, offset:3}}>
                                     <FormGroup className="form-style-form-group">
                                         <Label htmlFor="buyers" className="form-style-label">Buyer(s)</Label>
-                                        <Input type="text" id="buyers" name="buyers" className="form-style-input" placeholder="Username_1,Username_2" value={this.state.buyers} onChange={this.handleInputChange}/>
+                                        {
+                                            this.state.buyers.map((buyer, index) => {
+                                                return (
+                                                    <div key={index}>
+                                                        <select style={{border:"1px solid #D7D7D7", marginTop:"5px", width:"100%", borderRadius:"5px"}} value={buyer} onChange={(e) => this.handleChangeBuyer(e, index)}>
+                                                            <option selected>Choose a buyer</option>
+                                                            {
+                                                                this.state.users.map((user) => {
+                                                                    return(
+                                                                        <option value={user.username}>{user.username}</option>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </select>
+                                                        {/* <Input style={{border:"1px solid #D7D7D7"}} type="text" className="form-style-input"  value={buyer} onChange={(e) => this.handleChangeBuyer(e, index)} /> */}
+                                                        <Button style={{background:"none", color:"#90999e", border:"none", textDecorationLine: "underline", fontSize:"10px"}} onClick={() => this.removeBuyer(index)}>Remove</Button>
+                                                    </div>
+
+                                                )
+                                            })
+                                        }
+                                        {/* <Input type="text" id="buyers" name="buyers" className="form-style-input" placeholder="Username_1,Username_2" value={this.state.buyers} onChange={this.handleInputChange}/> */}
+                                        <Button style={{background:"none", color:"#327ba8", border:"none", textDecorationLine: "underline", fontSize:"10px"}} onClick={() => this.addBuyer()}>Add Buyer</Button>
                                     </FormGroup>
                                 </Col>
                             </Row>
