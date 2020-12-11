@@ -26,7 +26,6 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
         Item.find({approve: true, soldout: false})
         .then((all_items) => {
             var input = {};
-            var input2 = {};
             input.username = req.params.username;
             input.items = [];
             for(var i = 0;i < all_items.length;i++){
@@ -48,12 +47,7 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                     temp.buyer = "";
                 input.items.push(temp);
             }
-            Shopping.find({})
-            .then((shop) => {
-                input2 = shop;
-            }, (err) => next(err))
-            .catch((err) => next(err));
-            const python = spawn('python', ['recommend_system.py', JSON.stringify(input), JSON.stringify(input2)]);
+            const python = spawn('python', ['recommend_system.py', JSON.stringify(input)]);
             var output = [];
             python.stdout.on('data', function (data) {
                 output = JSON.parse(data.toString());
