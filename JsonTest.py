@@ -80,7 +80,7 @@ def outputJsonObject(seller, credit):
     # since the site use 10 credit scale, double and then round to int
     thisJson = {
         "seller": seller,
-        "credit": int(round(credit*2))
+        "credit": credit
     }
     JsonOut = json.dumps(thisJson)
     # sys.stdout.write(JsonOut)
