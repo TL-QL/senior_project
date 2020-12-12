@@ -2,6 +2,7 @@ var express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var Item = require('../models/items');
+var User = require('../models/user');
 var passport = require('passport');
 var authenticate = require('../authenticate');
 
@@ -12,9 +13,13 @@ editsubRouter.route('/:item_id')
     .get(authenticate.verifyUser, authenticate.verifySeller, (req,res,next) => {
         Item.findOne({item_id: req.params.item_id})
         .then((item) => {
-            res.StatusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.json(item);
+            User.find({"seller": false, "admin": false}).select("username")
+            .then((users) => {
+                res.StatusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json({item: item, users: users});
+            }, (err) => next(err))
+            .catch((err) => next(err));
         }, (err) => next(err))
         .catch((err) => next(err));
     })

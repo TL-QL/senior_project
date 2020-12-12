@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, FormFeedback, Modal, ModalHeader, ModalBody, Row, Col, Label, Input} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
 var config = require('../config');
 
 class Itemdetail extends Component {
@@ -207,10 +209,17 @@ class Itemdetail extends Component {
 
     render() {
         const errors = this.validate(this.state.rating, this.state.serviceRating, this.state.newComment);
+        // const pic = this.state.image.map((url) => {
+        //     return (
+        //         <div>
+        //             <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>
+        //         </div>
+        //     );
+        // });
         const pic = this.state.image.map((url) => {
             return (
-                <div>
-                    <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>
+                <div className="each-slide" style={{width: "220px", marginTop:"20px"}}>
+                    <iframe className="col-md-8 offset-md-3" src={url}></iframe>
                 </div>
             );
         });
@@ -263,9 +272,10 @@ class Itemdetail extends Component {
                     <div className="col-12">
                         <hr className="seperation" />
                     </div>
-                    <div className="col-12 col-md-6 offset-md-3">
-                        {pic}
-                        {/* <img style={{width: "180px", marginTop:"20px", marginBottom:"20px"}} src={baseUrl+'/images/'+this.state.image} /> */}
+                    <div className="col-12 col-md-3 offset-md-3">
+                        <Slide>
+                            {pic}
+                        </Slide>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {this.state.title}</p>
