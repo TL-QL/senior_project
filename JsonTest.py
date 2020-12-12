@@ -95,7 +95,7 @@ def provideInt(creditarray, finalcredit):
         num += i
     num = num / len(creditarray)
     num = num * 2
-    print(num)
+    # print(num)
     if num >= finalcredit:
         num = (num + finalcredit)/2
     else:
