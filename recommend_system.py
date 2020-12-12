@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[21]:
+# In[17]:
 
 
-import integration_code
+# reference website https://heartbeat.fritz.ai/recommender-systems-with-python-part-i-content-based-filtering-5df4940bd831
+# reference website https://towardsdatascience.com/recommender-system-singular-value-decomposition-svd-truncated-svd-97096338f361
+
+# import integration_code
 import pandas as pd
 import random
 import json
@@ -14,9 +17,17 @@ from sklearn.metrics.pairwise import linear_kernel,cosine_similarity
 import numpy as np
 from sklearn.decomposition import TruncatedSVD
 import sys
+from rake_nltk import Rake
+import gc
 
 
-# In[4]:
+# In[2]:
+
+
+# !pip install rake-nltk
+
+
+# In[2]:
 
 
 def get_purchase_list(username):
@@ -35,18 +46,30 @@ def get_index(purchase_list):
     return random.randint(0,len(purchase_list)-1)
 
 
-# In[15]:
+# In[3]:
 
 
-def recommend(item_id, num):
+def recommend(item_id, num,df_1):
     item_id = str(item_id)
     tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 4), min_df=0, stop_words='english')
+    df_1['key_words'] = ''
+    r = Rake() 
+    for index, row in df_1.iterrows():
+        r.extract_keywords_from_text(row['description'])
+        key_words_dict_scores = r.get_word_degrees()
+        row['key_words'] = list(key_words_dict_scores.keys())
+    columns = ['key_words'] 
+    for index, row in df_1.iterrows():
+        words = ''
+        for col in columns:
+            words += ' '.join(row[col]) + ' '
+        row['description'] = words
     tfidf_matrix = tf.fit_transform(df_1['description'])
-    cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
+    cosine_similarities = cosine_similarity(tfidf_matrix, tfidf_matrix)
     results = {}
-    for idx, row in df_1.iterrows():
-        similar_indices = cosine_similarities[idx].argsort()[:-100:-1]
-        similar_items = [(cosine_similarities[idx][i], df_1['item_id'][i]) for i in similar_indices]
+    for index, row in df_1.iterrows():        
+        similar_index = cosine_similarities[index].argsort()
+        similar_items = [(cosine_similarities[index][i], df_1['item_id'][i]) for i in similar_index]
         results[row['item_id']] = similar_items[1:]
     recs = results[item_id][:num]
     rec_list = []
@@ -55,19 +78,16 @@ def recommend(item_id, num):
     return rec_list
 
 
-# In[16]:
+# In[4]:
 
 
 def col_fil(item_index,num,final_ver_df):    
     final_ver_df.sort_values("rating",ascending=False)
     ratings_utility_matrix = final_ver_df.pivot_table(values='rating', index= "buyer", columns='item_id', fill_value=0)
-
-    ratings_utility_matrix.shape
-    
     X = ratings_utility_matrix.T
     X1 = X
     
-    SVD = TruncatedSVD(n_components=2)
+    SVD = TruncatedSVD(n_components=3)
     decomposed_matrix = SVD.fit_transform(X)
     correlation_matrix = np.corrcoef(decomposed_matrix)
     X.index[item_index]
@@ -79,55 +99,61 @@ def col_fil(item_index,num,final_ver_df):
     return Recommend[0:num]
 
 
-# In[22]:
+# In[33]:
 
 
 if __name__ == "__main__":
-#     obj = json.loads(sys.argv[1])
-    
-    obj = integration_code.testinput
-    
-    with open("test2.json","w",encoding="utf-8") as f:
-        f.write(obj)
-    
-    with open("test2.json","r",encoding="utf-8") as f:
-        info=f.read()
-        data_list = json.loads(info)
-        username = data_list["username"]
-        items = data_list["items"]
-        df_1=pd.DataFrame(items)
-        
-    new_rating = []
+    obj = sys.argv[1]
+    #     obj = "{\"username\":\"TooLazy\",\"items\":[{\"item_id\":\"0\",\"description\":\"It is spongebob. It belongs to category home. Product insurance: . Detaching Info: . Care Instruction: . Description on damage(s): \",\"comments\":[],\"buyer\":\"TooLazy,Buyer1\"},{\"item_id\":\"1\",\"description\":\"It is sofa2. It belongs to category home. Product insurance: NO insurance. Detaching Info: dvdvdvddcdddddddddddddddddddddddddddddddddddddddddddddddddddd. Care Instruction: ccccccccccccccccccccccccccccccccccccc. Description on damage(s): Perfect. No damage!\",\"comments\":[{\"rating\":1,\"author\":\"TooLazy\"},{\"rating\":2,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"}],\"buyer\":\"\"},{\"item_id\":\"2\",\"description\":\"It is chair. It belongs to category home. Product insurance: NO insurance. Detaching Info: . Care Instruction: . Description on damage(s): \",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"3\",\"description\":\"It is Genki textbook. It belongs to category books. Product insurance: no insurance. Detaching Info: not detachable. Care Instruction: just a book. Description on damage(s): almost perfect, some notes being taken\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"4\",\"description\":\"It is Harry Potter and the Sorcerer's Stone. It belongs to category books. Product insurance: no insurance. Detaching Info: not detachable. Care Instruction: just a book. Description on damage(s): perfect, no damage\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"7\",\"description\":\"It is iclicker. It belongs to category electronics. Product insurance: no insurance. Detaching Info: . Care Instruction: no batteries included, need to plugin batteries yourself. Description on damage(s): there are light scratches but the item is totally functional\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"8\",\"description\":\"It is HP laptop. It belongs to category electronics. Product insurance: No insurance. Detaching Info: . Care Instruction: charger is included. Description on damage(s): there are scratches on the bottom, and little issues with the fans\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"9\",\"description\":\"It is Iphone 11, 128GB. It belongs to category electronics. Product insurance: No insurance. Detaching Info: . Care Instruction: no charger/USB included. Description on damage(s): there are some sort of light scratches on the back, otherwise, perfect\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"11\",\"description\":\"It is dog outdoor tent. It belongs to category pets. Product insurance: no insurance. Detaching Info: detachable. Care Instruction: . Description on damage(s): there is a hole on left side\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"12\",\"description\":\"It is outdoor pink bike. It belongs to category motors. Product insurance: No insurance. Detaching Info: No detaching info. Care Instruction: . Description on damage(s): perfect but little scratches on the body\",\"comments\":[{\"rating\":6,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"}],\"buyer\":\"\"}]}"
+    data = json.dumps(eval(obj))
+    data_list = json.loads(data)
 
-    for r in df_1["rating"]:
-        if len(r) == 0:
-            new_rating.append(5.0)
-        else:
-            sum = 0
-            for i in r:
-                sum = sum + i
-            avg = sum* 1.0/(len(r) * 1.0)
-            new_rating.append(avg)
+    #     fileObject = open("C:/Users/12169/Desktop/CWRU/senior project/Recommendation system/test2.json")    
+    #     data_list = json.load(fileObject)
+    #     print(obj)
+    #     obj = integration_code.testinput2
+    #     print(obj)
 
-    
-    df_1["rating"] = new_rating
 
-    new_buyer = []
+    #     with open("test4.json","w",encoding="utf-8") as f:
+    #         f.write(obj)
+
+    #     with open("test4.json","r",encoding="utf-8") as f:
+    #         info=f.read()
+    #     data_list = json.loads(obj)
+    username = data_list["username"]
+    items = data_list["items"]
+    #print(len(items))
+
+    df_1=pd.DataFrame(items)
+
+    all_rate = []
     all_buyer = []
-
+    new_buyer = []
     for b in df_1["buyer"]:
         if len(b)>0:
             buyer_list = b.split(',')
             new_buyer.append(buyer_list)
-            for i in buyer_list:
-                if i not in all_buyer:
-                    all_buyer.append(i)
         else:
-            new_buyer.append([])
-    df_1["buyer"] = new_buyer
+            new_buyer.append([])  
 
-    
-    array_display = df_1.to_numpy()
+    index = 0
+    for c in df_1["comments"].array:
+        comment_list = c
+        current_rate = []
+        current_author = []
+        for i in comment_list:
+            if i["author"] in new_buyer[index]:
+                current_rate.append(i["rating"])
+                current_author.append(i["author"])
+        all_rate.append(current_rate)
+        all_buyer.append(current_author)
+        index = index + 1
+
+    df_1["buyer"] = all_buyer
+    df_2 = df_1.drop(columns=["comments"])
+
+    array_display = df_2.to_numpy()
     new_list = []
 
     for i in array_display:
@@ -136,41 +162,55 @@ if __name__ == "__main__":
             if isinstance(j, list) == False:
                 item.append(j)
         new_list.append(item)
-    
+
     final_version = []
     index = 0
 
-    for i in new_buyer:
+    for i in all_buyer:
+        rating_index = 0
         for j in i:
             item = []
             item = new_list[index].copy()
+            item.append(all_rate[index][rating_index])
             item.append(j)
             final_version.append(item)
+            rating_index = rating_index + 1
         index = index + 1
-    
+
     final_ver_df = pd.DataFrame(final_version, columns=["item_id", "description","rating","buyer"])
-    
+
+
     purchase_list = get_purchase_list(username)
-    get_index(purchase_list)
-    content_based_index = get_index(purchase_list)
-    content_based_res = recommend(content_based_index, 3)
-    col_fil_index = get_index(purchase_list)
-    col_fil_res = col_fil(col_fil_index,3,final_ver_df)
-    
     final_res = []
-    for i in content_based_res:
-        if i not in final_res:
-            final_res.append(i)
-    for i in col_fil_res:
-        if i not in final_res:
-            final_res.append(i)
+    if len(purchase_list) > 0:
+    #         get_index(purchase_list)
+        final_res = []
+        #print(purchase_list)
+
+        content_based_index = get_index(purchase_list)
+        content_based_res = recommend(content_based_index, 3,df_1)
+        col_fil_index = get_index(purchase_list)
+        col_fil_res = col_fil(col_fil_index,3,final_ver_df)
+
+        
+        for i in content_based_res:
+            if i not in final_res:
+                final_res.append(i)
+        for i in col_fil_res:
+            if i not in final_res:
+                final_res.append(i)
+        
+    if len(final_res) is 0:
+        final_res = ['0','1','2']
     testx = final_res
-    testoutput = json.dumps(testx)
-    sys.stdout.write(testoutput)
-    sys.exit(0)
-#     print(content_based_res)  
-#     print(col_fil_res)
-#     print(final_res)
+    #     testoutput = json.dumps(testx)
+
+    #     print(gc.get_threshold())
+    #     sys.stdout.write(testoutput)
+    #     sys.exit(0)
+    JsonOut = json.dumps(final_res)
+    print(JsonOut)
+    sys.stdout.flush()
+    #print("success")
     
-#     main()
 

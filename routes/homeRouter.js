@@ -31,7 +31,9 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
             for(var i = 0;i < all_items.length;i++){
                 var temp = {};
                 temp.item_id = all_items[i].item_id;
-                temp.description = 'It is '+all_items[i].name.toString()+'. It belongs to category '+all_items[i].category.toString()+'. Product insurance: '+all_items[i].productInsurance.toString()+'. Detaching Info: '+all_items[i].detachable.toString()+'. Care Instruction: '+ all_items[i].careIns.toString()+'. Description on damage(s): '+all_items[i].damage.toString();
+                var original = 'It is '+all_items[i].name.toString()+'. It belongs to category '+all_items[i].category.toString()+'. Product insurance: '+all_items[i].productInsurance.toString()+'. Detaching Info: '+all_items[i].detachable.toString()+'. Care Instruction: '+ all_items[i].careIns.toString()+'. Description on damage(s): '+all_items[i].damage.toString();
+                original = original.replace(/\?|!|\+|@|\(|\)|\$|;|:|&|~|#|\^|\'/g, "");
+                temp.description = original;
                 var comments =[];
                 if(all_items[i].comments){
                     for(var j = 0;j < all_items[i].comments.length;j++){
@@ -47,9 +49,9 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                     temp.buyer = "";
                 input.items.push(temp);
             }
-            const python = spawn('python', ['recommend_system.py', JSON.stringify(input)]);
+            var python = spawn('python3', ['./recommend_system.py', JSON.stringify(input)]);
             var output = [];
-            python.stdout.on('data', function (data) {
+            python.stdout.on('data', (data) => {
                 output = JSON.parse(data.toString());
             });
             python.on('close', (code) => {
@@ -57,7 +59,7 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                 .then((rec) => {
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'application/json');
-                    res.json({search: items, recommendation: rec, input: JSON.stringify(input)});
+                    res.json({search: items, recommendation: rec});
                     //res.json({input:JSON.stringify(input), input2: JSON.stringify(input2)});
                 }, (err) => next(err))
                 .catch((err) => next(err));
