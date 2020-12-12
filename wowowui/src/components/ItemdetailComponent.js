@@ -298,7 +298,7 @@ class Itemdetail extends Component {
                         </p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <p><strong>Favorite:</strong> {this.state.favoriteCount}</p>
+                        <p><strong>Favorite:</strong> {this.state.favorite}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Buy:</strong> {this.state.buy}</p>
