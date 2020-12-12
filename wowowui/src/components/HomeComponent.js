@@ -68,6 +68,7 @@ class Home extends Component{
                         items: data.search,
                         recommendation: data.recommendation
                     })
+                    alert(JSON.stringify(data.input));
                 })
             }
             else{

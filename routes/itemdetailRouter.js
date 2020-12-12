@@ -155,7 +155,7 @@ itemDetailRouter.route('/:item_id')
         else{
             Item.findOneAndUpdate({item_id: req.params.item_id}, { "$push": { "comments": {"rating": req.body.rating, "serviceRating": req.body.serviceRating, "comment": req.body.comment, "author": req.body.username}}})
             .then((item) => {
-                User.findOne({username: req.body.username})
+                User.findOne({username: item.seller})
                 .then((user) => {
                     var input = {};
                     input.sizeInfo = item.sizeInfo;
@@ -169,6 +169,12 @@ itemDetailRouter.route('/:item_id')
                     input.imageScore = item.imageScore;
                     input.approve = item.approve;
                     input.credit = user.credit;
+
+                    var lastComment = {};
+                    lastComment.rating = req.body.rating;
+                    lastComment.serviceRating = req.body.serviceRating;
+                    lastComment.comment = req.body.comment;
+                    input.comments.push(lastComment);
 
                     var python = spawn('python', ['JsonTest.py', JSON.stringify(input)]);
                     var output;
