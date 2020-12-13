@@ -36,7 +36,7 @@ itemDetailRouter.route('/:item_id')
                 ans.careIns = item.careIns;
                 ans.damage = item.damage;
                 ans.comments = item.comments;
-                ans.address = user.address+' '+user.city+' '+user.theState+' '+user.zipcode;
+                ans.zipcode = user.zipcode;
                 ans.contact = user.phone + ' OR '+user.email;
                 ans.credit = user.credit;
                 res.StatusCode = 200;

@@ -41,6 +41,12 @@ class Submissions extends Component{
                     );
                 }
             });
+            var conditions = {
+                "99": "Package has been opened but not used",
+                "90": "Slightly used or color faded",
+                "70": "Visible scratches and visible lost paint/color",
+                "50": "Heavily used but still functional"
+            };
             return (
                 <div key={item.item_id} className="row" style={{marginBottom:"30px"}}>
                     <div className="col-12">
@@ -59,7 +65,7 @@ class Submissions extends Component{
                         <p><strong>Quantity:</strong> {item.quantity}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <p><strong>Condition:</strong> {item.condition}</p>
+                        <p><strong>Condition:</strong> {conditions[item.condition]}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Delivery:</strong> {item.delivery}</p>

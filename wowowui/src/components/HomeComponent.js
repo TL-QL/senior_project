@@ -37,6 +37,7 @@ class Home extends Component{
                     items: data.search,
                     recommendation: data.recommendation
                 })
+                alert(data.recommendation);
             })
         }
     }
@@ -68,6 +69,7 @@ class Home extends Component{
                         items: data.search,
                         recommendation: data.recommendation
                     })
+                    alert(JSON.stringify(data.output));
                 })
             }
             else{
@@ -160,7 +162,7 @@ class Home extends Component{
                             <Col sm={12} md={2}>
                                 <FormGroup>
                                     <select name="category" className="select-list" onChange={this.handleInputChange}>
-                                        <option selected disabled>Category</option>
+                                        <option selected value="NA">Category</option>
                                         <option value ="home">Home</option>
                                         <option value ="books">Books</option>
                                         <option value ="stationery">Stationery</option>
@@ -173,7 +175,7 @@ class Home extends Component{
                             <Col sm= {12} md={4}>
                                 <FormGroup>
                                     <select name="condition" className="select-list" onChange={this.handleInputChange}>
-                                        <option selected disabled>Condition</option>
+                                        <option selected value="NA">Condition</option>
                                         <option value ="99">Package has been opened but not used</option>
                                         <option value ="90">Slightly used or color faded</option>
                                         <option value ="70">Visible scratches and visible lost paint/color</option>
@@ -184,7 +186,7 @@ class Home extends Component{
                             <Col sm={12} md={2} className="mr-auto">
                                 <FormGroup>
                                     <select name="delivery" className="select-list" onChange={this.handleInputChange}>
-                                        <option selected disabled>Delivery Option</option>
+                                        <option selected value="NA">Delivery Option</option>
                                         <option value ="pickup">Pick up</option>
                                         <option value ="delivery">Delivery</option>
                                         <option value ="both">Both</option>

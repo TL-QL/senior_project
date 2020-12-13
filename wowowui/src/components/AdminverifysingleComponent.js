@@ -21,7 +21,9 @@ class Adminverifysingle extends Component{
             detachable:'',
             careIns:'',
             productInsurance:'',
-            damage:''
+            damage:'',
+            ImageScore: '',
+            status:''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -54,6 +56,15 @@ class Adminverifysingle extends Component{
                 careIns: data.careIns,
                 damage: data.damage
             })
+            if(data.imageScore != -1){
+                this.setState({
+                    imageScore: data.imageScore
+                })
+            }
+            if(data.approve) this.setState({status: "approved"});
+            else if(data.reject) this.setState({status: "rejected"});
+            else
+                this.setState({status: "Not Applicable"});
         })
     }
 
@@ -122,6 +133,12 @@ class Adminverifysingle extends Component{
                 );
             }
         });
+        var conditions = {
+            "99": "Package has been opened but not used",
+            "90": "Slightly used or color faded",
+            "70": "Visible scratches and visible lost paint/color",
+            "50": "Heavily used but still functional"
+        };
         return(
             <div className="container">
                 <div className="row">
@@ -150,7 +167,7 @@ class Adminverifysingle extends Component{
                         <p><strong>Quantity:</strong> {this.state.quantity}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <p><strong>Condition:</strong> {this.state.condition}</p>
+                        <p><strong>Condition:</strong> {conditions[this.state.condition]}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Delivery:</strong> {this.state.delivery}</p>
@@ -175,6 +192,9 @@ class Adminverifysingle extends Component{
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Description on damage(s):</strong> {this.state.damage}</p>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Current status:</strong> {this.state.status}</p>
                     </div>
  
                         <Col sm={6} md={{size:3, offset:3}}>

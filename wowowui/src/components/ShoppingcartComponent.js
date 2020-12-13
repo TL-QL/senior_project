@@ -65,11 +65,13 @@ class Shoppingcart extends Component{
     render(){
         const item = this.state.items.map((item) => {
             const pic = item.images.map((url) => {
-                return (
-                    <div>
-                        <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>  
-                    </div>
-                );
+                if(url != ""){
+                    return (
+                        <div>
+                            <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>  
+                        </div>
+                    );
+                }
             });
             return (
                 <div key={item.item_id} className="row col-12 col-md-8 offset-md-1" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>

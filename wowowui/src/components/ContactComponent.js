@@ -61,7 +61,10 @@ class Contact extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            if(data.success) this.props.history.push('/home');
+            if(data.success){
+                alert(data.status);
+                this.props.history.push('/home');
+            }
             else
                 alert(JSON.stringify(data));
         })
@@ -131,7 +134,7 @@ class Contact extends Component {
                                 <div className="btn-group" role="group">
                                     <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
                                     <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
-                                    <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
+                                    <a role="button" className="btn btn-success" href="wow@gmail.com"><i className="fa fa-envelope-o"></i> Email</a>
                                 </div>
                                 <br />
                             </address>

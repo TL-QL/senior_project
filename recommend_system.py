@@ -27,7 +27,7 @@ import gc
 # !pip install rake-nltk
 
 
-# In[2]:
+# In[49]:
 
 
 def get_purchase_list(username):
@@ -46,7 +46,7 @@ def get_index(purchase_list):
     return random.randint(0,len(purchase_list)-1)
 
 
-# In[3]:
+# In[50]:
 
 
 def recommend(item_id, num,df_1):
@@ -71,6 +71,7 @@ def recommend(item_id, num,df_1):
         similar_index = cosine_similarities[index].argsort()
         similar_items = [(cosine_similarities[index][i], df_1['item_id'][i]) for i in similar_index]
         results[row['item_id']] = similar_items[1:]
+#     print(item_id)
     recs = results[item_id][:num]
     rec_list = []
     for rec in recs:
@@ -99,31 +100,19 @@ def col_fil(item_index,num,final_ver_df):
     return Recommend[0:num]
 
 
-# In[33]:
+# In[55]:
 
 
 if __name__ == "__main__":
     obj = sys.argv[1]
-    #     obj = "{\"username\":\"TooLazy\",\"items\":[{\"item_id\":\"0\",\"description\":\"It is spongebob. It belongs to category home. Product insurance: . Detaching Info: . Care Instruction: . Description on damage(s): \",\"comments\":[],\"buyer\":\"TooLazy,Buyer1\"},{\"item_id\":\"1\",\"description\":\"It is sofa2. It belongs to category home. Product insurance: NO insurance. Detaching Info: dvdvdvddcdddddddddddddddddddddddddddddddddddddddddddddddddddd. Care Instruction: ccccccccccccccccccccccccccccccccccccc. Description on damage(s): Perfect. No damage!\",\"comments\":[{\"rating\":1,\"author\":\"TooLazy\"},{\"rating\":2,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"},{\"rating\":3,\"author\":\"TooLazy\"}],\"buyer\":\"\"},{\"item_id\":\"2\",\"description\":\"It is chair. It belongs to category home. Product insurance: NO insurance. Detaching Info: . Care Instruction: . Description on damage(s): \",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"3\",\"description\":\"It is Genki textbook. It belongs to category books. Product insurance: no insurance. Detaching Info: not detachable. Care Instruction: just a book. Description on damage(s): almost perfect, some notes being taken\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"4\",\"description\":\"It is Harry Potter and the Sorcerer's Stone. It belongs to category books. Product insurance: no insurance. Detaching Info: not detachable. Care Instruction: just a book. Description on damage(s): perfect, no damage\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"7\",\"description\":\"It is iclicker. It belongs to category electronics. Product insurance: no insurance. Detaching Info: . Care Instruction: no batteries included, need to plugin batteries yourself. Description on damage(s): there are light scratches but the item is totally functional\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"8\",\"description\":\"It is HP laptop. It belongs to category electronics. Product insurance: No insurance. Detaching Info: . Care Instruction: charger is included. Description on damage(s): there are scratches on the bottom, and little issues with the fans\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"9\",\"description\":\"It is Iphone 11, 128GB. It belongs to category electronics. Product insurance: No insurance. Detaching Info: . Care Instruction: no charger/USB included. Description on damage(s): there are some sort of light scratches on the back, otherwise, perfect\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"11\",\"description\":\"It is dog outdoor tent. It belongs to category pets. Product insurance: no insurance. Detaching Info: detachable. Care Instruction: . Description on damage(s): there is a hole on left side\",\"comments\":[],\"buyer\":\"\"},{\"item_id\":\"12\",\"description\":\"It is outdoor pink bike. It belongs to category motors. Product insurance: No insurance. Detaching Info: No detaching info. Care Instruction: . Description on damage(s): perfect but little scratches on the body\",\"comments\":[{\"rating\":6,\"author\":\"TooLazy\"},{\"rating\":5,\"author\":\"TooLazy\"}],\"buyer\":\"\"}]}"
+#     obj = '{"username":"TooLazy","items":[{"item_id":"1","description":"It is sofa2. It belongs to category home. Product insurance NO insurance. Detaching Info dvdvdvddcdddddddddddddddddddddddddddddddddddddddddddddddddddd. Care Instruction ccccccccccccccccccccccccccccccccccccc. Description on damages Perfect. No damage","comments":[{"rating":3,"author":"TooLazy"}],"buyer":""},{"item_id":"3","description":"It is Genki textbook. It belongs to category books. Product insurance no insurance. Detaching Info not detachable. Care Instruction just a book. Description on damages almost perfect, some notes being taken","comments":[{"rating":9,"author":"TooLazy"}],"buyer":""},{"item_id":"4","description":"It is Harry Potter and the Sorcerers Stone. It belongs to category books. Product insurance no insurance. Detaching Info not detachable. Care Instruction just a book. Description on damages perfect, no damage","comments":[],"buyer":""},{"item_id":"7","description":"It is iclicker. It belongs to category electronics. Product insurance no insurance. Detaching Info . Care Instruction no batteries included, need to plugin batteries yourself. Description on damages there are light scratches but the item is totally functional","comments":[],"buyer":""},{"item_id":"8","description":"It is HP laptop. It belongs to category electronics. Product insurance No insurance. Detaching Info . Care Instruction charger is included. Description on damages there are scratches on the bottom, and little issues with the fans","comments":[],"buyer":""},{"item_id":"9","description":"It is Iphone 11, 128GB. It belongs to category electronics. Product insurance No insurance. Detaching Info . Care Instruction no charger/USB included. Description on damages there are some sort of light scratches on the back, otherwise, perfect","comments":[],"buyer":""},{"item_id":"11","description":"It is dog outdoor tent. It belongs to category pets. Product insurance no insurance. Detaching Info detachable. Care Instruction . Description on damages there is a hole on left side","comments":[],"buyer":""},{"item_id":"12","description":"It is outdoor pink bike. It belongs to category motors. Product insurance No insurance. Detaching Info No detaching info. Care Instruction . Description on damages perfect but little scratches on the body","comments":[{"rating":6,"author":"TooLazy"},{"rating":5,"author":"TooLazy"},{"rating":1,"author":"TooLazy"},{"rating":9,"author":"Buyer"}],"buyer":"TooLazy"},{"item_id":"13","description":"It is bike. It belongs to category motors. Product insurance NO insurance. Detaching Info . Care Instruction . Description on damages ","comments":[{"rating":8,"author":"TooLazy"}],"buyer":""}]}'
     data = json.dumps(eval(obj))
     data_list = json.loads(data)
 
-    #     fileObject = open("C:/Users/12169/Desktop/CWRU/senior project/Recommendation system/test2.json")    
-    #     data_list = json.load(fileObject)
-    #     print(obj)
-    #     obj = integration_code.testinput2
-    #     print(obj)
 
-
-    #     with open("test4.json","w",encoding="utf-8") as f:
-    #         f.write(obj)
-
-    #     with open("test4.json","r",encoding="utf-8") as f:
-    #         info=f.read()
-    #     data_list = json.loads(obj)
     username = data_list["username"]
     items = data_list["items"]
-    #print(len(items))
+#     print(len(items))
 
     df_1=pd.DataFrame(items)
 
@@ -183,34 +172,39 @@ if __name__ == "__main__":
     purchase_list = get_purchase_list(username)
     final_res = []
     if len(purchase_list) > 0:
-    #         get_index(purchase_list)
-        final_res = []
-        #print(purchase_list)
-
+#         print(purchase_list)
+        content_based_res = []
+        col_fil_res = []
         content_based_index = get_index(purchase_list)
-        content_based_res = recommend(content_based_index, 3,df_1)
-        col_fil_index = get_index(purchase_list)
-        col_fil_res = col_fil(col_fil_index,3,final_ver_df)
+#         print(purchase_list)
+        content_based_res = recommend(purchase_list[content_based_index], 3,df_1)
 
-        
+        try:
+            col_fil_index = get_index(purchase_list)
+            col_fil_res = col_fil(purchase_list[col_fil_index],3,final_ver_df)
+        except Exception:
+            pass
+
+#         print(content_based_res)
         for i in content_based_res:
             if i not in final_res:
                 final_res.append(i)
         for i in col_fil_res:
             if i not in final_res:
                 final_res.append(i)
-        
+       
     if len(final_res) is 0:
-        final_res = ['0','1','2']
+        option1, option2, option3 = random.sample(range(0, len(items)-1), 3)
+        final_res = [str(option1),str(option1),str(option3)]
     testx = final_res
-    #     testoutput = json.dumps(testx)
-
-    #     print(gc.get_threshold())
-    #     sys.stdout.write(testoutput)
-    #     sys.exit(0)
+#     testoutput = json.dumps(testx)
+    
+#     print(gc.get_threshold())
+#     sys.stdout.write(testoutput)
+#     sys.exit(0)
     JsonOut = json.dumps(final_res)
     print(JsonOut)
     sys.stdout.flush()
-    #print("success")
+#     print("success")
     
 

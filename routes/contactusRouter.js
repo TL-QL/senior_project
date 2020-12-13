@@ -9,7 +9,7 @@ var contactusRouter = express.Router();
 contactusRouter.use(bodyParser.json());
 
 contactusRouter.route('/')
-    .post(authenticate.verifyUser, (req,res,next) => {
+    .post((req,res,next) => {
         Feedback.countDocuments({}, function (err, count) { 
             if (err){ 
                 res.statusCode = 500;

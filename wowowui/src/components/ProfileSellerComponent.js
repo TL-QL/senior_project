@@ -89,7 +89,10 @@ class ProfileSeller extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            if(data.success) this.props.history.push('/profileseller');
+            if(data.success){
+                alert(data.status);
+                this.props.history.push('/profileseller');
+            }
             else
                 alert(JSON.stringify(data));
         })

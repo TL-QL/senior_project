@@ -32,22 +32,30 @@ class Adminverify extends Component{
     render(){
 
         const item = this.state.items.map((item) => {
-            const pic = item.images.map((url) => {
-                if(url !== ""){
-                    return (
-                        <div>
-                            <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>  
-                        </div>
-                    );
-                }
-            });
+            var score;
+            var status;
+            if(item.approve) status = "approved";
+            else if(item.reject) status = "rejected";
+            else
+                status = "Not Applicable";
+            if(item.imageScore > 0) score = item.imageScore;
+            else   
+                score = "Not Applicable";
+            var conditions = {
+                "99": "Package has been opened but not used",
+                "90": "Slightly used or color faded",
+                "70": "Visible scratches and visible lost paint/color",
+                "50": "Heavily used but still functional"
+            };
             return (
                 <div key={item.item_id} className="row" style={{marginBottom:"30px"}}>
                     <div className="col-12">
                         <hr className="seperation" />
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        {pic}
+                        <div>
+                            <iframe style={{width: "220px", marginTop:"20px"}} src={item.images[0]}></iframe>  
+                        </div>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Title:</strong> {item.name}</p>
@@ -59,7 +67,7 @@ class Adminverify extends Component{
                         <p><strong>Quantity:</strong> {item.quantity}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <p><strong>Condition:</strong> {item.condition}</p>
+                        <p><strong>Condition:</strong> {conditions[item.condition]}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Delivery:</strong> {item.delivery}</p>
@@ -84,6 +92,12 @@ class Adminverify extends Component{
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Description on damage(s):</strong> {item.damage}</p>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Current status:</strong> {status}</p>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3">
+                        <p><strong>Image score:</strong> {score}</p>
                     </div>
                     <div className="col-12 col-md-2 offset-md-9 border" style={{borderRadius:"5px", backgroundColor:"rgba(132,0,255,0.57)", height:"40px",width:"100%",paddingTop:"8px"}}>
                         <center><strong><Link to={`/adminverifysingle/${item.item_id}`} style={{ color: '#FFF' }}><i class="fa fa-search" aria-hidden="true"></i>Review</Link></strong></center>

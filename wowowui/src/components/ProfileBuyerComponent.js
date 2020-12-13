@@ -116,7 +116,10 @@ class ProfileBuyer extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            if(data.success) this.props.history.push('/profilebuyer');
+            if(data.success){
+                alert(data.status);
+                this.props.history.push('/profilebuyer');
+            }
             else
                 alert(JSON.stringify(data));
         })
@@ -188,7 +191,7 @@ class ProfileBuyer extends Component {
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to='/homeseller'>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Profile</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">

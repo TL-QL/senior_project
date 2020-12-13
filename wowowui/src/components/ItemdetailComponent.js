@@ -30,8 +30,8 @@ class Itemdetail extends Component {
             productInsurance:'',
             damage:'',
             comments: [],
-            rating: 0,
-            serviceRating: 0,
+            rating: -1,
+            serviceRating: -1,
             newComment: '',
             touched: {
                 rating: false,
@@ -61,6 +61,10 @@ class Itemdetail extends Component {
         })
         .then(res => res.json())
         .then(data => {
+            var addr;
+            if(data.delivery == "delivery") addr = "";
+            else
+                addr = data.zipcode;
             this.setState({
                 image: data.images,
                 title: data.name,
@@ -69,7 +73,7 @@ class Itemdetail extends Component {
                 favorite: data.favoriteCount,
                 buy: data.shoppingCartCount,
                 quantity: data.quantity,
-                address: data.address,
+                address: addr,
                 contact: data.contact,
                 condition: data.condition,
                 delivery: data.delivery,
@@ -123,6 +127,7 @@ class Itemdetail extends Component {
         .then(data => {
             if(data.success){
                 alert(JSON.stringify(data.status));
+                this.toggleModal();
                 //this.props.history.push(this.props.path);
             }
             else
@@ -209,15 +214,8 @@ class Itemdetail extends Component {
 
     render() {
         const errors = this.validate(this.state.rating, this.state.serviceRating, this.state.newComment);
-        // const pic = this.state.image.map((url) => {
-        //     return (
-        //         <div>
-        //             <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>
-        //         </div>
-        //     );
-        // });
         const pic = this.state.image.map((url) => {
-            if(url!==""){
+            if(url !== ""){
                 return (
                     <div className="each-slide" style={{width: "220px", marginTop:"20px"}}>
                         <iframe className="col-md-8 offset-md-3" src={url}></iframe>
@@ -225,6 +223,12 @@ class Itemdetail extends Component {
                 );
             }
         });
+        var conditions = {
+            "99": "Package has been opened but not used",
+            "90": "Slightly used or color faded",
+            "70": "Visible scratches and visible lost paint/color",
+            "50": "Heavily used but still functional"
+        };
         const comment = this.state.comments.map((comment) => {
             return (
                 <div className="row col-12 col-md-6 offset-md-3" style={{marginBottom:"30px", borderStyle:"solid", borderRadius:"10px", borderWidth:"1px", borderColor:"#D7D7D7"}}>
@@ -309,7 +313,7 @@ class Itemdetail extends Component {
                         <p><strong>Quantity:</strong> {this.state.quantity}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
-                        <p><strong>Condition:</strong> {this.state.condition}</p>
+                        <p><strong>Condition:</strong> {conditions[this.state.condition]}</p>
                     </div>
                     <div className="col-12 col-md-6 offset-md-3">
                         <p><strong>Delivery Option:</strong> {this.state.delivery}</p>
@@ -430,7 +434,7 @@ class Itemdetail extends Component {
                             <Row>
                                 <Col sm={12} md={{size:6, offset:3}}>
                                     <FormGroup>
-                                        <Button disabled={ this.state.rating === '' || this.state.serviceRating === '' || this.state.newComment === '' || errors.rating != '' || errors.serviceRating != '' || errors.newComment != ''} type="submit" value="submit" style={{background:"rgba(132,0,255,0.57)", width:"100%", fontFamily:"Arial Black"}}>Submit</Button>
+                                        <Button disabled={ this.state.rating < 0 || this.state.serviceRating < 0 || this.state.newComment === '' || errors.rating != '' || errors.serviceRating != '' || errors.newComment != ''} type="submit" value="submit" style={{background:"rgba(132,0,255,0.57)", width:"100%", fontFamily:"Arial Black"}}>Submit</Button>
                                     </FormGroup>
                                 </Col>
                             </Row>
