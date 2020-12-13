@@ -217,11 +217,13 @@ class Itemdetail extends Component {
         //     );
         // });
         const pic = this.state.image.map((url) => {
-            return (
-                <div className="each-slide" style={{width: "220px", marginTop:"20px"}}>
-                    <iframe className="col-md-8 offset-md-3" src={url}></iframe>
-                </div>
-            );
+            if(url!==""){
+                return (
+                    <div className="each-slide" style={{width: "220px", marginTop:"20px"}}>
+                        <iframe className="col-md-8 offset-md-3" src={url}></iframe>
+                    </div>
+                );
+            }
         });
         const comment = this.state.comments.map((comment) => {
             return (

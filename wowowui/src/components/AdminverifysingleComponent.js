@@ -114,11 +114,13 @@ class Adminverifysingle extends Component{
 
     render(){
         const pic = this.state.image.map((url) => {
-            return (
-                <div>
-                    <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>  
-                </div>
-            );
+            if(url !== ""){
+                return (
+                    <div>
+                        <iframe style={{width: "220px", marginTop:"20px"}} src={url}></iframe>  
+                    </div>
+                );
+            }
         });
         return(
             <div className="container">
