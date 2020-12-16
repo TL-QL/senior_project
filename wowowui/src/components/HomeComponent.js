@@ -37,7 +37,7 @@ class Home extends Component{
                     items: data.search,
                     recommendation: data.recommendation
                 })
-                alert(data.recommendation);
+                //alert(data.recommendation);
             })
         }
     }
@@ -69,11 +69,11 @@ class Home extends Component{
                         items: data.search,
                         recommendation: data.recommendation
                     })
-                    alert(JSON.stringify(data.output));
                 })
             }
             else{
                 alert("Must enter keyword!");
+                this.props.history.push('/home');
             }
         }
         else{

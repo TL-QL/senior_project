@@ -60,7 +60,7 @@ homeRouter.route('/:username/:search/:category/:condition/:method/:sort')
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'application/json');
                     //res.json({input: input});
-                    res.json({search: items, recommendation: rec, output:output});
+                    res.json({search: items, recommendation: rec});
                     //res.json({input:JSON.stringify(input), input2: JSON.stringify(input2)});
                 }, (err) => next(err))
                 .catch((err) => next(err));

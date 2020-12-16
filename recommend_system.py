@@ -46,7 +46,7 @@ def get_index(purchase_list):
     return random.randint(0,len(purchase_list)-1)
 
 
-# In[50]:
+# In[57]:
 
 
 def recommend(item_id, num,df_1):
@@ -100,12 +100,13 @@ def col_fil(item_index,num,final_ver_df):
     return Recommend[0:num]
 
 
-# In[55]:
+# In[68]:
 
 
 if __name__ == "__main__":
     obj = sys.argv[1]
-#     obj = '{"username":"TooLazy","items":[{"item_id":"1","description":"It is sofa2. It belongs to category home. Product insurance NO insurance. Detaching Info dvdvdvddcdddddddddddddddddddddddddddddddddddddddddddddddddddd. Care Instruction ccccccccccccccccccccccccccccccccccccc. Description on damages Perfect. No damage","comments":[{"rating":3,"author":"TooLazy"}],"buyer":""},{"item_id":"3","description":"It is Genki textbook. It belongs to category books. Product insurance no insurance. Detaching Info not detachable. Care Instruction just a book. Description on damages almost perfect, some notes being taken","comments":[{"rating":9,"author":"TooLazy"}],"buyer":""},{"item_id":"4","description":"It is Harry Potter and the Sorcerers Stone. It belongs to category books. Product insurance no insurance. Detaching Info not detachable. Care Instruction just a book. Description on damages perfect, no damage","comments":[],"buyer":""},{"item_id":"7","description":"It is iclicker. It belongs to category electronics. Product insurance no insurance. Detaching Info . Care Instruction no batteries included, need to plugin batteries yourself. Description on damages there are light scratches but the item is totally functional","comments":[],"buyer":""},{"item_id":"8","description":"It is HP laptop. It belongs to category electronics. Product insurance No insurance. Detaching Info . Care Instruction charger is included. Description on damages there are scratches on the bottom, and little issues with the fans","comments":[],"buyer":""},{"item_id":"9","description":"It is Iphone 11, 128GB. It belongs to category electronics. Product insurance No insurance. Detaching Info . Care Instruction no charger/USB included. Description on damages there are some sort of light scratches on the back, otherwise, perfect","comments":[],"buyer":""},{"item_id":"11","description":"It is dog outdoor tent. It belongs to category pets. Product insurance no insurance. Detaching Info detachable. Care Instruction . Description on damages there is a hole on left side","comments":[],"buyer":""},{"item_id":"12","description":"It is outdoor pink bike. It belongs to category motors. Product insurance No insurance. Detaching Info No detaching info. Care Instruction . Description on damages perfect but little scratches on the body","comments":[{"rating":6,"author":"TooLazy"},{"rating":5,"author":"TooLazy"},{"rating":1,"author":"TooLazy"},{"rating":9,"author":"Buyer"}],"buyer":"TooLazy"},{"item_id":"13","description":"It is bike. It belongs to category motors. Product insurance NO insurance. Detaching Info . Care Instruction . Description on damages ","comments":[{"rating":8,"author":"TooLazy"}],"buyer":""}]}'
+
+#     obj = '{"username":"TooLazy","items":[{"item_id":"0","description":"It is spongebob. It belongs to category home. Product insurance . Detaching Info . Care Instruction . Description on damages ","comments":[],"buyer":"TooLazy,Buyer1"},{"item_id":"1","description":"It is sofa2. It belongs to category home. Product insurance NO insurance. Detaching Info dvdvdvddcdddddddddddddddddddddddddddddddddddddddddddddddddddd. Care Instruction ccccccccccccccccccccccccccccccccccccc. Description on damages Perfect. No damage","comments":[{"rating":3,"author":"TooLazy"},{"rating":7,"author":"Buyer11"}],"buyer":""},{"item_id":"3","description":"It is Genki textbook. It belongs to category books. Product insurance no insurance. Detaching Info not detachable. Care Instruction just a book. Description on damages almost perfect, some notes being taken","comments":[{"rating":9,"author":"TooLazy"}],"buyer":""},{"item_id":"4","description":"It is Harry Potter and the Sorcerers Stone. It belongs to category books. Product insurance no insurance. Detaching Info not detachable. Care Instruction just a book. Description on damages perfect, no damage","comments":[],"buyer":""},{"item_id":"7","description":"It is iclicker. It belongs to category electronics. Product insurance no insurance. Detaching Info . Care Instruction no batteries included, need to plugin batteries yourself. Description on damages there are light scratches but the item is totally functional","comments":[],"buyer":""},{"item_id":"8","description":"It is HP laptop. It belongs to category electronics. Product insurance No insurance. Detaching Info . Care Instruction charger is included. Description on damages there are scratches on the bottom, and little issues with the fans","comments":[],"buyer":""},{"item_id":"9","description":"It is Iphone 11, 128GB. It belongs to category electronics. Product insurance No insurance. Detaching Info . Care Instruction no charger/USB included. Description on damages there are some sort of light scratches on the back, otherwise, perfect","comments":[],"buyer":""},{"item_id":"11","description":"It is dog outdoor tent. It belongs to category pets. Product insurance no insurance. Detaching Info detachable. Care Instruction . Description on damages there is a hole on left side","comments":[],"buyer":""},{"item_id":"12","description":"It is outdoor pink bike. It belongs to category motors. Product insurance No insurance. Detaching Info No detaching info. Care Instruction . Description on damages perfect but little scratches on the body","comments":[],"buyer":"TooLazy"},{"item_id":"13","description":"It is bike. It belongs to category motors. Product insurance NO insurance. Detaching Info . Care Instruction . Description on damages ","comments":[{"rating":8,"author":"TooLazy"}],"buyer":""},{"item_id":"15","description":"It is bb-8. It belongs to category home. Product insurance . Detaching Info . Care Instruction . Description on damages ","comments":[],"buyer":"Buyer1,Buyer2"},{"item_id":"16","description":"It is bb-88. It belongs to category home. Product insurance . Detaching Info . Care Instruction . Description on damages ","comments":[],"buyer":""}]}'
     data = json.dumps(eval(obj))
     data_list = json.loads(data)
 
@@ -139,7 +140,7 @@ if __name__ == "__main__":
         all_buyer.append(current_author)
         index = index + 1
 
-    df_1["buyer"] = all_buyer
+    df_1["buyer"] = new_buyer
     df_2 = df_1.drop(columns=["comments"])
 
     array_display = df_2.to_numpy()
@@ -194,17 +195,15 @@ if __name__ == "__main__":
                 final_res.append(i)
        
     if len(final_res) is 0:
-        option1, option2, option3 = random.sample(range(0, len(items)-1), 3)
-        final_res = [str(option1),str(option1),str(option3)]
+        while(len(final_res) < 3):
+            option = random.randint(0, len(items) -1)
+            if option not in final_res:
+                final_res.append(str(option))
     testx = final_res
-#     testoutput = json.dumps(testx)
-    
-#     print(gc.get_threshold())
-#     sys.stdout.write(testoutput)
-#     sys.exit(0)
+
     JsonOut = json.dumps(final_res)
     print(JsonOut)
     sys.stdout.flush()
-#     print("success")
+
     
 
